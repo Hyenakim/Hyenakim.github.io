@@ -13,10 +13,10 @@
 
 <meta property="og:description" content="Hugo tranquilpeak theme demo">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Archives">
-<meta name="twitter:title" content="Archives">
-<meta property="og:url" content="https://hyenakim.github.io/archives/">
-<meta property="twitter:url" content="https://hyenakim.github.io/archives/">
+<meta property="og:title" content="deque">
+<meta name="twitter:title" content="deque">
+<meta property="og:url" content="https://hyenakim.github.io/tags/deque/">
+<meta property="twitter:url" content="https://hyenakim.github.io/tags/deque/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
 <meta property="og:description" content="Hugo tranquilpeak theme demo">
 <meta name="twitter:description" content="Hugo tranquilpeak theme demo">
@@ -39,16 +39,16 @@
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg">
 
 
-    <title>Archives</title>
+    <title>deque</title>
 
     <link rel="icon" href="/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://hyenakim.github.io/archives/index.xml">
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://hyenakim.github.io/tags/deque/index.xml">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/archives/">
+    <link rel="canonical" href="https://hyenakim.github.io/tags/deque/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -194,42 +194,224 @@
   </div>
 </nav>
 
+      
+        
+
+      
       <div id="main" data-behavior="1"
         class="
                hasCoverMetaIn
                ">
-        <div id="archives" class="main-content-wrap">
-          <form id="filter-form" action="#">
-            <input name="date" type="text" class="form-control input--xlarge" placeholder="Search date (YYYY/MM/DD)" autofocus="autofocus">
-          </form>
-          <h5 class="archive-result text-color-base text-xlarge" data-message-zero="no post found" data-message-one="1 post found" data-message-other="{n} posts found"></h5>
-<section class="boxes">
+        
+          <section class="postShorten-group main-content-wrap">
+            
+            
+              
   
     
-    <div class="archive archive-year box" data-date="2019">
-      <h4 class="archive-title" style="text-decoration: none;">2019</h4>
       
-        <ul class="archive-posts archive-month" data-date="201905">
-          <h5 class="archive-title" style="text-decoration: none;">May</h5>
-          
-            <li class="archive-post archive-day" data-date="20190527">
-              <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9D%ED%81%90%EB%8C%80%ED%81%AC/">스택,큐,대크</a>
-            </li>
-          
-            <li class="archive-post archive-day" data-date="20190527">
-              <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/array/">Array</a>
-            </li>
-          
-            <li class="archive-post archive-day" data-date="20190527">
-              <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/first-post/">First Post</a>
-            </li>
-          
-        </ul>
+        
       
-    </div>
+    
   
-</section>
-        </div>
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9D%ED%81%90%EB%8C%80%ED%81%AC/">
+          스택,큐,대크
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-05-27T22:03:29&#43;09:00">
+        
+  May 27, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        <h1 id="스택">* 스택</h1>
+
+<p>나중에 들어온게 먼저 나가는 <strong>LIFO</strong>형태의 자료구조</p>
+
+<blockquote>
+<p><strong>LIFO : Last in First out</strong></p>
+</blockquote>
+
+<h3 id="java-라이브러리-스택관련-메서드">java 라이브러리 스택관련 메서드</h3>
+
+<pre><code>Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
+</code></pre>
+
+<ul>
+<li>push(E item)
+
+<ul>
+<li>해당 아이템을 스택의 top에 쌓는다.</li>
+<li>쌓았으면 true, 못쌓았으면 false를 반환한다.</li>
+</ul></li>
+<li>pop()
+
+<ul>
+<li>스택의 맨 위를 삭제하고 반환한다.</li>
+</ul></li>
+<li>peek()
+
+<ul>
+<li>스택의 맨위를 삭제하지 않고 반환한다.</li>
+</ul></li>
+<li>empty()
+
+<ul>
+<li>스택이 비어있으면 true, 아니면 false를 반환한다.</li>
+</ul></li>
+<li>search(Object o)
+
+<ul>
+<li>해당 Object의 위치를 반환한다. top이면 1, 없으면 -1</li>
+</ul></li>
+</ul>
+
+<h1 id="큐">* 큐</h1>
+
+<p>먼저 들어온게 먼저 나가는 <strong>FIFO</strong>형태의 자료구조</p>
+
+<blockquote>
+<p><strong>FIFO : First in First out</strong></p>
+</blockquote>
+
+<h3 id="java-라이브러리-큐관련-메서드">java 라이브러리 큐관련 메서드</h3>
+
+<pre><code>Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
+</code></pre>
+
+<ul>
+<li>offer(E item)
+
+<ul>
+<li>해당 아이템을 큐에 넣는다.</li>
+<li>넣었으면 true, 못넣었으면 false반환한다.</li>
+</ul></li>
+<li>poll()
+
+<ul>
+<li>큐의 맨 앞을 삭제하고 반환한다.</li>
+</ul></li>
+<li>peek()
+
+<ul>
+<li>큐의 맨앞을 삭제하지 않고 반환한다.</li>
+</ul></li>
+<li>isEmpty()
+
+<ul>
+<li>큐가 비어있으면 true, 아니면 false를 반환한다.</li>
+</ul></li>
+</ul>
+
+<h1 id="덱">* 덱</h1>
+
+<p>양쪽에서 삽입 삭제가 가능한 형태의 자료구조
+&gt;사용에따라 스택, 큐가 될 수 있다.</p>
+
+<h3 id="java-라이브러리-덱관련-메서드">java 라이브러리 덱관련 메서드</h3>
+
+<pre><code>Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
+</code></pre>
+
+<ul>
+<li>add(E item)
+
+<ul>
+<li>해당 아이템을 덱에 넣는다.</li>
+<li>addFirst(E item)
+
+<ul>
+<li>덱의 맨 앞에 넣는다.<br /></li>
+</ul></li>
+<li>addLast(E item)
+
+<ul>
+<li>덱의 맨 뒤에 넣는다.</li>
+</ul></li>
+</ul></li>
+<li>poll()
+
+<ul>
+<li>덱의 맨 앞을 삭제하고 반환한다.</li>
+<li>pollFirst()
+
+<ul>
+<li>덱의 맨 앞을 삭제하고 반환한다.<br /></li>
+</ul></li>
+<li>pollLast()
+
+<ul>
+<li>덱의 맨 뒤를 삭제하고 반환한다.</li>
+</ul></li>
+</ul></li>
+<li>peek()
+
+<ul>
+<li>덱의 맨앞을 삭제하지 않고 반환한다.</li>
+<li>peekFirst()
+
+<ul>
+<li>덱의 맨앞을 삭제하지 않고 반환한다.<br /></li>
+</ul></li>
+<li>peekLast()
+
+<ul>
+<li>덱의 맨뒤를 삭제하지 않고 반환한다.</li>
+</ul></li>
+</ul></li>
+<li>isEmpty()
+
+<ul>
+<li>덱이 비어있으면 true, 아니면 false를 반환한다.</li>
+</ul></li>
+</ul>
+      
+      <p>
+        <a href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9D%ED%81%90%EB%8C%80%ED%81%AC/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+            
+            
+
+          </section>
+        
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 HyenaKim. All Rights Reserved
+  </span>
+</footer>
+
       </div>
     </div>
     

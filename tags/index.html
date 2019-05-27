@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="gpsk-Tech Blog">
 <meta property="og:description" content="Hugo tranquilpeak theme demo">
 <meta name="twitter:description" content="Hugo tranquilpeak theme demo">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en-us">
 
 
 <meta name="twitter:card" content="summary">
@@ -34,6 +34,9 @@
 
 
 
+
+  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg">
+  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg">
 
 
     <title>Tags</title>
@@ -78,6 +81,8 @@
     
     
       
+        <img class="header-picture" src="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg" alt="Author&#39;s picture" />
+      
     
     </a>
   
@@ -85,6 +90,14 @@
 
       <nav id="sidebar" data-behavior="1">
   <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">HyenaKim</h4>
+        
+      </div>
     
     <ul class="sidebar-buttons">
       
@@ -190,12 +203,12 @@
 
         <div id="tags-archives" class="main-content-wrap">
           <form id="filter-form" action="#">
-            <input name="tag" type="text" class="form-control input--xlarge" placeholder="" autofocus="autofocus">
+            <input name="tag" type="text" class="form-control input--xlarge" placeholder="Search tag" autofocus="autofocus">
           </form>
           <h4 class="archive-result text-color-base text-xlarge"
-              data-message-zero=""
-              data-message-one=""
-              data-message-other=""></h4>
+              data-message-zero="no tag found"
+              data-message-one="1 tag found"
+              data-message-other="{n} tags found"></h4>
 
             <section>
               
@@ -207,8 +220,20 @@
                   arraylist
                 </a>
               
+                <a class="tag tag--primary tag--small" href="#deque-list" data-tag="deque">
+                  deque
+                </a>
+              
                 <a class="tag tag--primary tag--small" href="#linkedlist-list" data-tag="linkedlist">
                   linkedlist
+                </a>
+              
+                <a class="tag tag--primary tag--small" href="#queue-list" data-tag="queue">
+                  queue
+                </a>
+              
+                <a class="tag tag--primary tag--small" href="#stack-list" data-tag="stack">
+                  stack
                 </a>
               
                 <a class="tag tag--primary tag--small" href="#tag1-list" data-tag="tag1">
@@ -231,12 +256,7 @@
                           Array
                         </a>
                         <span class="archive-post-date"> - 
-  
-  
-  
-  
-    27  2019
-  
+  May 27, 2019
 </span>
                       </li>
                     
@@ -256,12 +276,27 @@
                           Array
                         </a>
                         <span class="archive-post-date"> - 
-  
-  
-  
-  
-    27  2019
-  
+  May 27, 2019
+</span>
+                      </li>
+                    
+                  </ul>
+                </div>
+              
+                <div id="deque-list" class="archive box" data-tag="deque">
+                  <h4 class="archive-title">
+                    <a class="link-unstyled" href="deque">
+                      deque (1)
+                    </a>
+                  </h4>
+                  <ul class="archive-posts">
+                    
+                      <li class="archive-post">
+                        <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9D%ED%81%90%EB%8C%80%ED%81%AC/">
+                          스택,큐,대크
+                        </a>
+                        <span class="archive-post-date"> - 
+  May 27, 2019
 </span>
                       </li>
                     
@@ -281,12 +316,47 @@
                           Array
                         </a>
                         <span class="archive-post-date"> - 
-  
-  
-  
-  
-    27  2019
-  
+  May 27, 2019
+</span>
+                      </li>
+                    
+                  </ul>
+                </div>
+              
+                <div id="queue-list" class="archive box" data-tag="queue">
+                  <h4 class="archive-title">
+                    <a class="link-unstyled" href="queue">
+                      queue (1)
+                    </a>
+                  </h4>
+                  <ul class="archive-posts">
+                    
+                      <li class="archive-post">
+                        <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9D%ED%81%90%EB%8C%80%ED%81%AC/">
+                          스택,큐,대크
+                        </a>
+                        <span class="archive-post-date"> - 
+  May 27, 2019
+</span>
+                      </li>
+                    
+                  </ul>
+                </div>
+              
+                <div id="stack-list" class="archive box" data-tag="stack">
+                  <h4 class="archive-title">
+                    <a class="link-unstyled" href="stack">
+                      stack (1)
+                    </a>
+                  </h4>
+                  <ul class="archive-posts">
+                    
+                      <li class="archive-post">
+                        <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9D%ED%81%90%EB%8C%80%ED%81%AC/">
+                          스택,큐,대크
+                        </a>
+                        <span class="archive-post-date"> - 
+  May 27, 2019
 </span>
                       </li>
                     
@@ -306,12 +376,7 @@
                           First Post
                         </a>
                         <span class="archive-post-date"> - 
-  
-  
-  
-  
-    27  2019
-  
+  May 27, 2019
 </span>
                       </li>
                     
@@ -322,7 +387,7 @@
          </div>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 HyenaKim. 
+    &copy; 2019 HyenaKim. All Rights Reserved
   </span>
 </footer>
 
@@ -333,6 +398,8 @@
     <div id="about-btn-close">
       <i class="fa fa-remove"></i>
     </div>
+    
+      <img id="about-card-picture" src="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg" alt="Author&#39;s picture" />
     
     <h4 id="about-card-name">HyenaKim</h4>
     

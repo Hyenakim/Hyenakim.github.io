@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="gpsk-Tech Blog">
 <meta property="og:description" content="Hugo tranquilpeak theme demo">
 <meta name="twitter:description" content="Hugo tranquilpeak theme demo">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en-us">
 
 
 <meta name="twitter:card" content="summary">
@@ -34,6 +34,9 @@
 
 
 
+
+  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg">
+  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg">
 
 
     <title>LinkedList</title>
@@ -78,6 +81,8 @@
     
     
       
+        <img class="header-picture" src="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg" alt="Author&#39;s picture" />
+      
     
     </a>
   
@@ -85,6 +90,14 @@
 
       <nav id="sidebar" data-behavior="1">
   <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">HyenaKim</h4>
+        
+      </div>
     
     <ul class="sidebar-buttons">
       
@@ -219,19 +232,14 @@
     
       <time itemprop="datePublished" datetime="2019-05-27T14:55:19&#43;09:00">
         
-  
-  
-  
-  
-    27  2019
-  
+  May 27, 2019
 
       </time>
     
     
   
   
-    <span></span>
+    <span>in</span>
     
       <a class="category-link" href="/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
     
@@ -242,14 +250,89 @@
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
       
-        * 배열 연속된 자료를 저장하기 위한 자료구조
-java 배열 선언 int[] array = new int[6];   단점 * 크기가 넘어가면 더 큰 배열을 새로 할당해야 한다. * 길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.
- 위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.
-* 동적 배열 자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조
-java 표준 라이브러리 ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;(); /*원소 추가*/ ArrayList.add(1); ArrayList.
+        <h1 id="배열">* 배열</h1>
+
+<p>연속된 자료를 저장하기 위한 자료구조</p>
+
+<h3 id="java-배열-선언">java 배열 선언</h3>
+
+<pre><code>int[] array = new int[6];
+</code></pre>
+
+<blockquote>
+<p>단점
+* 크기가 넘어가면 더 큰 배열을 새로 할당해야 한다.
+* 길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.</p>
+</blockquote>
+
+<p>위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.</p>
+
+<h1 id="동적-배열">* 동적 배열</h1>
+
+<p>자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조</p>
+
+<h3 id="java-표준-라이브러리">java 표준 라이브러리</h3>
+
+<pre><code>ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;();
+
+/*원소 추가*/
+ArrayList.add(1);
+ArrayList.add(2);
+
+/*원소 삭제*/
+ArrayList.remove(Integer.valueOf(2));
+
+/*원소 찾기*/
+System.out.println(ArrayList.indexOf(1));
+/*
+* 결과 :
+* 0
+* */
+
+</code></pre>
+
+<blockquote>
+<p>특징
+* 삽입시 메모리를 재할당 하여 속도가 느리다.</p>
+</blockquote>
+
+<h1 id="연결-리스트">* 연결 리스트</h1>
+
+<p>연결된 자료의 정보만 담고 있는 자료구조</p>
+
+<h3 id="java-표준-라이브러리-1">java 표준 라이브러리</h3>
+
+<pre><code>LinkedList&lt;Integer&gt; LinkedList = new LinkedList&lt;Integer&gt;();
+
+/*원소 추가*/
+LinkedList.add(1);
+LinkedList.add(2);
+LinkedList.add(3);
+
+/*원소 삭제*/
+LinkedList.remove(Integer.valueOf(2));
+
+/*순서대로 출력*/
+Iterator&lt;Integer&gt; iterator = LinkedList.iterator();
+while(iterator.hasNext())
+{
+  int n = iterator.next();
+  System.out.println(n);
+}
+/*
+* 결과 :
+* 1
+* 3
+* */
+</code></pre>
+
+<blockquote>
+<p>특징
+* 추가/삭제가 빈번하게 일어나는 대용량 데이터 처리가 필요할 때 사용하면 성능이 좋다.</p>
+</blockquote>
       
       <p>
-        <a href="https://hyenakim.github.io/2019/05/array/" class="postShorten-excerpt_link link"></a>
+        <a href="https://hyenakim.github.io/2019/05/array/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>
@@ -264,7 +347,7 @@ java 표준 라이브러리 ArrayList&lt;Integer&gt; ArrayList = new ArrayList&l
         
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 HyenaKim. 
+    &copy; 2019 HyenaKim. All Rights Reserved
   </span>
 </footer>
 
@@ -276,6 +359,8 @@ java 표준 라이브러리 ArrayList&lt;Integer&gt; ArrayList = new ArrayList&l
     <div id="about-btn-close">
       <i class="fa fa-remove"></i>
     </div>
+    
+      <img id="about-card-picture" src="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg" alt="Author&#39;s picture" />
     
     <h4 id="about-card-name">HyenaKim</h4>
     
@@ -295,13 +380,170 @@ java 표준 라이브러리 ArrayList&lt;Integer&gt; ArrayList = new ArrayList&l
       <i class="search-icon fa fa-search"></i>
       <form id="algolia-search-form">
         <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="" />
+          class="form-control input--large search-input" placeholder="Search" />
       </form>
     </div>
     <div class="modal-body">
-      <div class="no-result text-color-light text-center"></div>
+      <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9D%ED%81%90%EB%8C%80%ED%81%AC/">
+                <h3 class="media-heading">스택,큐,대크</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><h1 id="스택">* 스택</h1>
+
+<p>나중에 들어온게 먼저 나가는 <strong>LIFO</strong>형태의 자료구조</p>
+
+<blockquote>
+<p><strong>LIFO : Last in First out</strong></p>
+</blockquote>
+
+<h3 id="java-라이브러리-스택관련-메서드">java 라이브러리 스택관련 메서드</h3>
+
+<pre><code>Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
+</code></pre>
+
+<ul>
+<li>push(E item)
+
+<ul>
+<li>해당 아이템을 스택의 top에 쌓는다.</li>
+<li>쌓았으면 true, 못쌓았으면 false를 반환한다.</li>
+</ul></li>
+<li>pop()
+
+<ul>
+<li>스택의 맨 위를 삭제하고 반환한다.</li>
+</ul></li>
+<li>peek()
+
+<ul>
+<li>스택의 맨위를 삭제하지 않고 반환한다.</li>
+</ul></li>
+<li>empty()
+
+<ul>
+<li>스택이 비어있으면 true, 아니면 false를 반환한다.</li>
+</ul></li>
+<li>search(Object o)
+
+<ul>
+<li>해당 Object의 위치를 반환한다. top이면 1, 없으면 -1</li>
+</ul></li>
+</ul>
+
+<h1 id="큐">* 큐</h1>
+
+<p>먼저 들어온게 먼저 나가는 <strong>FIFO</strong>형태의 자료구조</p>
+
+<blockquote>
+<p><strong>FIFO : First in First out</strong></p>
+</blockquote>
+
+<h3 id="java-라이브러리-큐관련-메서드">java 라이브러리 큐관련 메서드</h3>
+
+<pre><code>Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
+</code></pre>
+
+<ul>
+<li>offer(E item)
+
+<ul>
+<li>해당 아이템을 큐에 넣는다.</li>
+<li>넣었으면 true, 못넣었으면 false반환한다.</li>
+</ul></li>
+<li>poll()
+
+<ul>
+<li>큐의 맨 앞을 삭제하고 반환한다.</li>
+</ul></li>
+<li>peek()
+
+<ul>
+<li>큐의 맨앞을 삭제하지 않고 반환한다.</li>
+</ul></li>
+<li>isEmpty()
+
+<ul>
+<li>큐가 비어있으면 true, 아니면 false를 반환한다.</li>
+</ul></li>
+</ul>
+
+<h1 id="덱">* 덱</h1>
+
+<p>양쪽에서 삽입 삭제가 가능한 형태의 자료구조
+&gt;사용에따라 스택, 큐가 될 수 있다.</p>
+
+<h3 id="java-라이브러리-덱관련-메서드">java 라이브러리 덱관련 메서드</h3>
+
+<pre><code>Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
+</code></pre>
+
+<ul>
+<li>add(E item)
+
+<ul>
+<li>해당 아이템을 덱에 넣는다.</li>
+<li>addFirst(E item)
+
+<ul>
+<li>덱의 맨 앞에 넣는다.<br /></li>
+</ul></li>
+<li>addLast(E item)
+
+<ul>
+<li>덱의 맨 뒤에 넣는다.</li>
+</ul></li>
+</ul></li>
+<li>poll()
+
+<ul>
+<li>덱의 맨 앞을 삭제하고 반환한다.</li>
+<li>pollFirst()
+
+<ul>
+<li>덱의 맨 앞을 삭제하고 반환한다.<br /></li>
+</ul></li>
+<li>pollLast()
+
+<ul>
+<li>덱의 맨 뒤를 삭제하고 반환한다.</li>
+</ul></li>
+</ul></li>
+<li>peek()
+
+<ul>
+<li>덱의 맨앞을 삭제하지 않고 반환한다.</li>
+<li>peekFirst()
+
+<ul>
+<li>덱의 맨앞을 삭제하지 않고 반환한다.<br /></li>
+</ul></li>
+<li>peekLast()
+
+<ul>
+<li>덱의 맨뒤를 삭제하지 않고 반환한다.</li>
+</ul></li>
+</ul></li>
+<li>isEmpty()
+
+<ul>
+<li>덱이 비어있으면 true, 아니면 false를 반환한다.</li>
+</ul></li>
+</ul></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -314,11 +556,86 @@ java 표준 라이브러리 ArrayList&lt;Integer&gt; ArrayList = new ArrayList&l
                   May 5, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">* 배열 연속된 자료를 저장하기 위한 자료구조
-java 배열 선언 int[] array = new int[6];   단점 * 크기가 넘어가면 더 큰 배열을 새로 할당해야 한다. * 길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.
- 위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.
-* 동적 배열 자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조
-java 표준 라이브러리 ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;(); /*원소 추가*/ ArrayList.add(1); ArrayList.</div>
+              <div class="media-content hide-xs font-merryweather"><h1 id="배열">* 배열</h1>
+
+<p>연속된 자료를 저장하기 위한 자료구조</p>
+
+<h3 id="java-배열-선언">java 배열 선언</h3>
+
+<pre><code>int[] array = new int[6];
+</code></pre>
+
+<blockquote>
+<p>단점
+* 크기가 넘어가면 더 큰 배열을 새로 할당해야 한다.
+* 길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.</p>
+</blockquote>
+
+<p>위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.</p>
+
+<h1 id="동적-배열">* 동적 배열</h1>
+
+<p>자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조</p>
+
+<h3 id="java-표준-라이브러리">java 표준 라이브러리</h3>
+
+<pre><code>ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;();
+
+/*원소 추가*/
+ArrayList.add(1);
+ArrayList.add(2);
+
+/*원소 삭제*/
+ArrayList.remove(Integer.valueOf(2));
+
+/*원소 찾기*/
+System.out.println(ArrayList.indexOf(1));
+/*
+* 결과 :
+* 0
+* */
+
+</code></pre>
+
+<blockquote>
+<p>특징
+* 삽입시 메모리를 재할당 하여 속도가 느리다.</p>
+</blockquote>
+
+<h1 id="연결-리스트">* 연결 리스트</h1>
+
+<p>연결된 자료의 정보만 담고 있는 자료구조</p>
+
+<h3 id="java-표준-라이브러리-1">java 표준 라이브러리</h3>
+
+<pre><code>LinkedList&lt;Integer&gt; LinkedList = new LinkedList&lt;Integer&gt;();
+
+/*원소 추가*/
+LinkedList.add(1);
+LinkedList.add(2);
+LinkedList.add(3);
+
+/*원소 삭제*/
+LinkedList.remove(Integer.valueOf(2));
+
+/*순서대로 출력*/
+Iterator&lt;Integer&gt; iterator = LinkedList.iterator();
+while(iterator.hasNext())
+{
+  int n = iterator.next();
+  System.out.println(n);
+}
+/*
+* 결과 :
+* 1
+* 3
+* */
+</code></pre>
+
+<blockquote>
+<p>특징
+* 추가/삭제가 빈번하게 일어나는 대용량 데이터 처리가 필요할 때 사용하면 성능이 좋다.</p>
+</blockquote></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -345,10 +662,10 @@ java 표준 라이브러리 ArrayList&lt;Integer&gt; ArrayList = new ArrayList&l
     </div>
     <div class="modal-footer">
       <p class="results-count text-medium"
-         data-message-zero=""
-         data-message-one=""
-         data-message-other="">
-         2 posts found
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         3 posts found
       </p>
     </div>
   </div>
