@@ -6,10 +6,19 @@
     <description>Recent content in Tags on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 May 2019 22:03:29 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 27 May 2019 22:36:39 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>BitMask</title>
+      <link>https://hyenakim.github.io/tags/bitmask/</link>
+      <pubDate>Mon, 27 May 2019 22:36:39 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/tags/bitmask/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>deque</title>
@@ -62,15 +71,6 @@
       <pubDate>Mon, 27 May 2019 14:55:19 +0900</pubDate>
       
       <guid>https://hyenakim.github.io/tags/linkedlist/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tag1</title>
-      <link>https://hyenakim.github.io/tags/tag1/</link>
-      <pubDate>Mon, 27 May 2019 13:23:03 +0900</pubDate>
-      
-      <guid>https://hyenakim.github.io/tags/tag1/</guid>
       <description></description>
     </item>
     

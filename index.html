@@ -41,7 +41,7 @@
 
     <title>gpsk-Tech Blog</title>
 
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
       <link rel="alternate" type="application/rss+xml" title="RSS" href="https://hyenakim.github.io/index.xml">
     
@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
+    <link rel="stylesheet" href="https://hyenakim.github.io/css/style-nnm2spxvve8onlujjlegkkytaehyadd4ksxc1hyzzq9a2wvtrgbljqyulomn.min.css" />
     
     
 
@@ -71,12 +71,12 @@
       <header id="header" data-behavior="1">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="/">gpsk-Tech Blog</a>
+    <a class="header-title-link" href="https://hyenakim.github.io/">gpsk-Tech Blog</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="/#about">
+         href="https://hyenakim.github.io/#about">
     
     
     
@@ -92,7 +92,7 @@
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="/#about">
+        <a href="https://hyenakim.github.io/#about">
           <img class="sidebar-profile-picture" src="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg" alt="Author&#39;s picture" />
         </a>
         <h4 class="sidebar-profile-name">HyenaKim</h4>
@@ -103,7 +103,7 @@
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/categories">
+      <a class="sidebar-button-link " href="https://hyenakim.github.io/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -113,7 +113,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/tags">
+      <a class="sidebar-button-link " href="https://hyenakim.github.io/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -123,7 +123,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/archives">
+      <a class="sidebar-button-link " href="https://hyenakim.github.io/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -133,7 +133,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/#about">
+      <a class="sidebar-button-link " href="https://hyenakim.github.io/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -143,7 +143,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link open-algolia-search" href="/#search">
+      <a class="sidebar-button-link open-algolia-search" href="https://hyenakim.github.io/#search">
     
       <i class="sidebar-button-icon fa fa-lg fa-search"></i>
       
@@ -153,7 +153,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/">
+      <a class="sidebar-button-link " href="https://hyenakim.github.io/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -181,7 +181,7 @@
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/index.xml">
+      <a class="sidebar-button-link " href="https://hyenakim.github.io/index.xml">
     
       <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
       
@@ -220,6 +220,228 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/">
+          비트마스크(BitMask)
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-05-27T22:36:39&#43;09:00">
+        
+  May 27, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://hyenakim.github.io/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        <h1 id="비트마스크">* 비트마스크</h1>
+
+<p>정수의 이진수 표현을 자료구조로 쓰는 기법</p>
+
+<blockquote>
+<p>장점
+* 빠른 수행시간
+* 간결한 코드
+* 적은 메모리
+* 연관배열을 배열로 대체</p>
+</blockquote>
+
+<h3 id="비트-연산자">비트 연산자</h3>
+
+<h4 id="and">* AND(&amp;)</h4>
+
+<p>해당비트가 모두 켜져있을 때만 켜진다.</p>
+
+<pre><code>    1 1 0 0 (12)
+    1 0 1 0 (10)
+AND -----------
+    1 0 0 0 (8)
+</code></pre>
+
+<h4 id="or">* OR(|)</h4>
+
+<p>해당비트중 하나만 켜져있으면 켜진다.</p>
+
+<pre><code>    1 1 0 0 (12)
+    1 0 1 0 (10)
+OR  -----------
+    1 1 1 0 (14)
+</code></pre>
+
+<h4 id="xor">* XOR(^)</h4>
+
+<p>하나는 켜져있고 하나는 꺼져있을 때만 켜진다.</p>
+
+<pre><code>    1 1 0 0 (12)
+    1 0 1 0 (10)
+XOR -----------
+    0 1 1 0 (6)
+</code></pre>
+
+<h4 id="not">* NOT(~)</h4>
+
+<p>켜져 있는 비트는 끄고, 꺼져 있는 비트는 켠다.</p>
+
+<pre><code>    ~12 = -13 (부호있는 정수)
+</code></pre>
+
+<h4 id="shift">* SHIFT(&lt;&lt;,&gt;&gt;,&gt;&gt;&gt;)</h4>
+
+<ul>
+<li>우측 쉬프트 연산(&gt;&gt;)은 좌측의 정수를 우측에 입력한 정수 만큼 bit 를 이동시킨다.</li>
+<li>좌측 쉬프트 연산(&lt;&lt;)은 남은 부분을 0으로 채운다.</li>
+
+<li><p>(자바) 우측 쉬프트 연산(&gt;&gt;&gt;) 우측으로 이동 후 나머지는 0으로 채운다.</p>
+
+<pre><code>12(1 1 0 0) &gt;&gt; 2 = 3(0 0 1 1)
+12(1 1 0 0) &lt;&lt; 2 = 48(1 1 0 0 0 0)
+</code></pre>
+
+<h4 id="연산자-활용-예제">* 연산자 활용 예제</h4>
+
+<p><em>1. AND(&amp;)와 시프트(&lt;&lt;) 연산을 이용한 십진수에서 이진수 변환 및 출력</em></p>
+
+<pre><code class="language-java">public static void printBinary(int num) {
+      for(int i=31;i&gt;=0;i--) {
+          int bit = (num &amp; 1&lt;&lt;i);
+          if(bit&gt;0)
+              System.out.print(1);
+          else 
+              System.out.print(0);
+      }
+  }
+</code></pre>
+
+<p><em>2. 비트마스킹을 활용한 에라토스테네스의 체</em>
+- 기본 원리</p>
+
+<pre><code class="language-java">Arrays.fill(sieve, (char)255);
+</code></pre>
+
+<p>unsigned char는 부호없는 8비트형식(자바에선 2바이트, 즉 16비트이다)으로 0~255까지의 표현범위를 가진다. 아래의 sieve배열은 에라테네토스테네스의체를 통해 인덱스의 수가 소수인지 아닌지 체크를 한 결과를 담고있다.
+<img src="https://user-images.githubusercontent.com/37864122/55786127-a47ecb00-5aee-11e9-81fb-a45d953f69ae.png" alt="sieve배열" /></p></li>
+
+<li><p>k가 소수인지 아닌지 확인 방법</p>
+
+<pre><code class="language-java">public static boolean isPrime(int k) {
+    return (sieve[k&gt;&gt;&gt;3] &amp; (1&lt;&lt;(k&amp;7))) == 0 ? false : true;
+}
+</code></pre>
+
+<p><strong>1. 인덱스 찾기</strong></p>
+
+<p>시프트 연산(<strong>k&gt;&gt;&gt;3</strong>)으로 숫자 k의 인덱스를 구한다. <strong>k&amp;7</strong>은 2와 같고 <strong>1&lt;&lt;2</strong>은 1을 좌측으로 2번 시프트 한것이므로 00000100가 된다.
+<img src="https://user-images.githubusercontent.com/37864122/55785822-11459580-5aee-11e9-880c-38ea3a6c237f.png" alt="인덱스찾기" />
+<strong>2. 소수 확인</strong></p>
+
+<p>AND(&amp;) 연산자를 사용했을때 소수라면 자기자신이 나온다.
+<img src="https://user-images.githubusercontent.com/37864122/55788573-836ca900-5af3-11e9-963a-1486d936c6ef.png" alt="소수찾기" />
+- k가 소수가 아님을 체크하는 방법</p>
+
+<pre><code class="language-java">public static void setComposite(int k) {
+    sieve[k&gt;&gt;&gt;3] &amp;= ~(1 &lt;&lt; (k&amp;7));
+}
+</code></pre></li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/37864122/55789370-31c51e00-5af5-11e9-97de-7e909ed35f23.png" alt="소수아님기록" />
+전체코드</p>
+
+<pre><code class="language-java">public class 에라토스테네스의체 {
+    public static int LAST_NUM = 20;
+    public static char sieve[] = new char[(LAST_NUM + 7)/8 + 1];
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        //에라토스테네스의 체 구하기
+        eratosthenes();
+        //소수 출력
+        for(int i=0;i&lt;=LAST_NUM;i++)
+            if(isPrime(i))
+                System.out.print(i+&quot; &quot;);
+    }
+    //k가 소수인지 아닌지 반환
+    public static boolean isPrime(int k) {
+        return (sieve[k&gt;&gt;&gt;3] &amp; (1&lt;&lt;(k&amp;7))) == 0 ? false : true;
+    }
+    //k가 소수가 아님을 표시해둠
+    public static void setComposite(int k) {
+        sieve[k&gt;&gt;&gt;3] &amp;= ~(1 &lt;&lt; (k&amp;7));
+    }
+    public static void eratosthenes() {
+        //모든비트를 1로 초기화
+        Arrays.fill(sieve, (char)255);
+        setComposite(0);
+        setComposite(1);
+        for(int i=2;i&lt;=Math.sqrt(LAST_NUM);i++)
+            if(isPrime(i))
+                //i의 배수(j)에 대해 isPrime(j)=false로 둔다.
+                for(int j=i*i;j&lt;=LAST_NUM;j+=i)
+                    setComposite(j);
+    }
+}
+
+</code></pre>
+
+<h3 id="연산자-우선순위">연산자 우선순위</h3>
+
+<ol>
+<li><p>최우선연산자 ( ., [], () )</p></li>
+
+<li><p>단항연산자 ( ++,&ndash;,!,~,+/-   : 부정, bit변환&gt;부호&gt;증감)</p></li>
+
+<li><p>산술연산자 ( *,/,%,+,-,shift) &lt; 시프트연산자 ( &gt;&gt;,&lt;&lt;,&gt;&gt;&gt; ) &gt;</p></li>
+
+<li><p>비교연산자 ( &gt;,&lt;,&gt;=,&lt;=,==,!= )</p></li>
+
+<li><p>비트연산자 ( &amp;,|,,~ )</p></li>
+
+<li><p>논리연산자 (&amp;&amp; , || , !)</p></li>
+
+<li><p>삼항연산자 (조건식) ? :</p></li>
+
+<li><p>대입연산자 =,*=,/=,%=,+=,-=</p></li>
+</ol>
+      
+      <p>
+        <a href="https://hyenakim.github.io/2019/05/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+          
+            
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
           스택(Stack),큐(Queue),데크(Deque)
         </a>
@@ -238,7 +460,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
+      <a class="category-link" href="https://hyenakim.github.io/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
     
   
 
@@ -434,7 +656,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
+      <a class="category-link" href="https://hyenakim.github.io/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
     
   
 
@@ -534,62 +756,6 @@ while(iterator.hasNext())
 </article>
 
           
-            
-  
-    
-      
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/first-post/">
-          First Post
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2019-05-27T13:23:03&#43;09:00">
-        
-  May 27, 2019
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/category">category</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        
-      
-      <p>
-        <a href="https://hyenakim.github.io/2019/05/first-post/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-          
           
 
         </section>
@@ -635,6 +801,189 @@ while(iterator.hasNext())
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/">
+                <h3 class="media-heading">비트마스크(BitMask)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><h1 id="비트마스크">* 비트마스크</h1>
+
+<p>정수의 이진수 표현을 자료구조로 쓰는 기법</p>
+
+<blockquote>
+<p>장점
+* 빠른 수행시간
+* 간결한 코드
+* 적은 메모리
+* 연관배열을 배열로 대체</p>
+</blockquote>
+
+<h3 id="비트-연산자">비트 연산자</h3>
+
+<h4 id="and">* AND(&amp;)</h4>
+
+<p>해당비트가 모두 켜져있을 때만 켜진다.</p>
+
+<pre><code>    1 1 0 0 (12)
+    1 0 1 0 (10)
+AND -----------
+    1 0 0 0 (8)
+</code></pre>
+
+<h4 id="or">* OR(|)</h4>
+
+<p>해당비트중 하나만 켜져있으면 켜진다.</p>
+
+<pre><code>    1 1 0 0 (12)
+    1 0 1 0 (10)
+OR  -----------
+    1 1 1 0 (14)
+</code></pre>
+
+<h4 id="xor">* XOR(^)</h4>
+
+<p>하나는 켜져있고 하나는 꺼져있을 때만 켜진다.</p>
+
+<pre><code>    1 1 0 0 (12)
+    1 0 1 0 (10)
+XOR -----------
+    0 1 1 0 (6)
+</code></pre>
+
+<h4 id="not">* NOT(~)</h4>
+
+<p>켜져 있는 비트는 끄고, 꺼져 있는 비트는 켠다.</p>
+
+<pre><code>    ~12 = -13 (부호있는 정수)
+</code></pre>
+
+<h4 id="shift">* SHIFT(&lt;&lt;,&gt;&gt;,&gt;&gt;&gt;)</h4>
+
+<ul>
+<li>우측 쉬프트 연산(&gt;&gt;)은 좌측의 정수를 우측에 입력한 정수 만큼 bit 를 이동시킨다.</li>
+<li>좌측 쉬프트 연산(&lt;&lt;)은 남은 부분을 0으로 채운다.</li>
+
+<li><p>(자바) 우측 쉬프트 연산(&gt;&gt;&gt;) 우측으로 이동 후 나머지는 0으로 채운다.</p>
+
+<pre><code>12(1 1 0 0) &gt;&gt; 2 = 3(0 0 1 1)
+12(1 1 0 0) &lt;&lt; 2 = 48(1 1 0 0 0 0)
+</code></pre>
+
+<h4 id="연산자-활용-예제">* 연산자 활용 예제</h4>
+
+<p><em>1. AND(&amp;)와 시프트(&lt;&lt;) 연산을 이용한 십진수에서 이진수 변환 및 출력</em></p>
+
+<pre><code class="language-java">public static void printBinary(int num) {
+      for(int i=31;i&gt;=0;i--) {
+          int bit = (num &amp; 1&lt;&lt;i);
+          if(bit&gt;0)
+              System.out.print(1);
+          else 
+              System.out.print(0);
+      }
+  }
+</code></pre>
+
+<p><em>2. 비트마스킹을 활용한 에라토스테네스의 체</em>
+- 기본 원리</p>
+
+<pre><code class="language-java">Arrays.fill(sieve, (char)255);
+</code></pre>
+
+<p>unsigned char는 부호없는 8비트형식(자바에선 2바이트, 즉 16비트이다)으로 0~255까지의 표현범위를 가진다. 아래의 sieve배열은 에라테네토스테네스의체를 통해 인덱스의 수가 소수인지 아닌지 체크를 한 결과를 담고있다.
+<img src="https://user-images.githubusercontent.com/37864122/55786127-a47ecb00-5aee-11e9-81fb-a45d953f69ae.png" alt="sieve배열" /></p></li>
+
+<li><p>k가 소수인지 아닌지 확인 방법</p>
+
+<pre><code class="language-java">public static boolean isPrime(int k) {
+    return (sieve[k&gt;&gt;&gt;3] &amp; (1&lt;&lt;(k&amp;7))) == 0 ? false : true;
+}
+</code></pre>
+
+<p><strong>1. 인덱스 찾기</strong></p>
+
+<p>시프트 연산(<strong>k&gt;&gt;&gt;3</strong>)으로 숫자 k의 인덱스를 구한다. <strong>k&amp;7</strong>은 2와 같고 <strong>1&lt;&lt;2</strong>은 1을 좌측으로 2번 시프트 한것이므로 00000100가 된다.
+<img src="https://user-images.githubusercontent.com/37864122/55785822-11459580-5aee-11e9-880c-38ea3a6c237f.png" alt="인덱스찾기" />
+<strong>2. 소수 확인</strong></p>
+
+<p>AND(&amp;) 연산자를 사용했을때 소수라면 자기자신이 나온다.
+<img src="https://user-images.githubusercontent.com/37864122/55788573-836ca900-5af3-11e9-963a-1486d936c6ef.png" alt="소수찾기" />
+- k가 소수가 아님을 체크하는 방법</p>
+
+<pre><code class="language-java">public static void setComposite(int k) {
+    sieve[k&gt;&gt;&gt;3] &amp;= ~(1 &lt;&lt; (k&amp;7));
+}
+</code></pre></li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/37864122/55789370-31c51e00-5af5-11e9-97de-7e909ed35f23.png" alt="소수아님기록" />
+전체코드</p>
+
+<pre><code class="language-java">public class 에라토스테네스의체 {
+    public static int LAST_NUM = 20;
+    public static char sieve[] = new char[(LAST_NUM + 7)/8 + 1];
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        //에라토스테네스의 체 구하기
+        eratosthenes();
+        //소수 출력
+        for(int i=0;i&lt;=LAST_NUM;i++)
+            if(isPrime(i))
+                System.out.print(i+&quot; &quot;);
+    }
+    //k가 소수인지 아닌지 반환
+    public static boolean isPrime(int k) {
+        return (sieve[k&gt;&gt;&gt;3] &amp; (1&lt;&lt;(k&amp;7))) == 0 ? false : true;
+    }
+    //k가 소수가 아님을 표시해둠
+    public static void setComposite(int k) {
+        sieve[k&gt;&gt;&gt;3] &amp;= ~(1 &lt;&lt; (k&amp;7));
+    }
+    public static void eratosthenes() {
+        //모든비트를 1로 초기화
+        Arrays.fill(sieve, (char)255);
+        setComposite(0);
+        setComposite(1);
+        for(int i=2;i&lt;=Math.sqrt(LAST_NUM);i++)
+            if(isPrime(i))
+                //i의 배수(j)에 대해 isPrime(j)=false로 둔다.
+                for(int j=i*i;j&lt;=LAST_NUM;j+=i)
+                    setComposite(j);
+    }
+}
+
+</code></pre>
+
+<h3 id="연산자-우선순위">연산자 우선순위</h3>
+
+<ol>
+<li><p>최우선연산자 ( ., [], () )</p></li>
+
+<li><p>단항연산자 ( ++,&ndash;,!,~,+/-   : 부정, bit변환&gt;부호&gt;증감)</p></li>
+
+<li><p>산술연산자 ( *,/,%,+,-,shift) &lt; 시프트연산자 ( &gt;&gt;,&lt;&lt;,&gt;&gt;&gt; ) &gt;</p></li>
+
+<li><p>비교연산자 ( &gt;,&lt;,&gt;=,&lt;=,==,!= )</p></li>
+
+<li><p>비트연산자 ( &amp;,|,,~ )</p></li>
+
+<li><p>논리연산자 (&amp;&amp; , || , !)</p></li>
+
+<li><p>삼항연산자 (조건식) ? :</p></li>
+
+<li><p>대입연산자 =,*=,/=,%=,+=,-=</p></li>
+</ol></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -889,23 +1238,6 @@ while(iterator.hasNext())
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/first-post/">
-                <h3 class="media-heading">First Post</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -933,7 +1265,7 @@ while(iterator.hasNext())
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="https://hyenakim.github.io/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script lang="javascript">
