@@ -7,20 +7,358 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="HyenaKim">
-<meta name="keywords" content="">
-<meta name="description" content="Hugo tranquilpeak theme demo">
+<meta name="keywords" content="tech">
+<meta name="description" content="* 배열
+
+연속된 자료를 저장하기 위한 자료구조
+
+java 배열 선언
+
+int[] array = new int[6];
 
 
-<meta property="og:description" content="Hugo tranquilpeak theme demo">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tag1">
-<meta name="twitter:title" content="tag1">
-<meta property="og:url" content="https://hyenakim.github.io/tags/tag1/">
-<meta property="twitter:url" content="https://hyenakim.github.io/tags/tag1/">
+
+단점
+* 크기가 넘어가면 더 큰 배열을 새로 할당해야 한다.
+* 길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.
+
+
+위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.
+
+* 동적 배열
+
+자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조
+
+java 표준 라이브러리
+
+ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;();
+
+/*원소 추가*/
+ArrayList.add(1);
+ArrayList.add(2);
+
+/*원소 삭제*/
+ArrayList.remove(Integer.valueOf(2));
+
+/*원소 찾기*/
+System.out.println(ArrayList.indexOf(1));
+/*
+* 결과 :
+* 0
+* */
+
+
+
+
+특징
+* 삽입시 메모리를 재할당 하여 속도가 느리다.
+
+
+* 연결 리스트
+
+연결된 자료의 정보만 담고 있는 자료구조
+
+java 표준 라이브러리
+
+LinkedList&lt;Integer&gt; LinkedList = new LinkedList&lt;Integer&gt;();
+
+/*원소 추가*/
+LinkedList.add(1);
+LinkedList.add(2);
+LinkedList.add(3);
+
+/*원소 삭제*/
+LinkedList.remove(Integer.valueOf(2));
+
+/*순서대로 출력*/
+Iterator&lt;Integer&gt; iterator = LinkedList.iterator();
+while(iterator.hasNext())
+{
+  int n = iterator.next();
+  System.out.println(n);
+}
+/*
+* 결과 :
+* 1
+* 3
+* */
+
+
+
+특징
+* 추가/삭제가 빈번하게 일어나는 대용량 데이터 처리가 필요할 때 사용하면 성능이 좋다.
+">
+
+
+<meta property="og:description" content="* 배열
+
+연속된 자료를 저장하기 위한 자료구조
+
+java 배열 선언
+
+int[] array = new int[6];
+
+
+
+단점
+* 크기가 넘어가면 더 큰 배열을 새로 할당해야 한다.
+* 길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.
+
+
+위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.
+
+* 동적 배열
+
+자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조
+
+java 표준 라이브러리
+
+ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;();
+
+/*원소 추가*/
+ArrayList.add(1);
+ArrayList.add(2);
+
+/*원소 삭제*/
+ArrayList.remove(Integer.valueOf(2));
+
+/*원소 찾기*/
+System.out.println(ArrayList.indexOf(1));
+/*
+* 결과 :
+* 0
+* */
+
+
+
+
+특징
+* 삽입시 메모리를 재할당 하여 속도가 느리다.
+
+
+* 연결 리스트
+
+연결된 자료의 정보만 담고 있는 자료구조
+
+java 표준 라이브러리
+
+LinkedList&lt;Integer&gt; LinkedList = new LinkedList&lt;Integer&gt;();
+
+/*원소 추가*/
+LinkedList.add(1);
+LinkedList.add(2);
+LinkedList.add(3);
+
+/*원소 삭제*/
+LinkedList.remove(Integer.valueOf(2));
+
+/*순서대로 출력*/
+Iterator&lt;Integer&gt; iterator = LinkedList.iterator();
+while(iterator.hasNext())
+{
+  int n = iterator.next();
+  System.out.println(n);
+}
+/*
+* 결과 :
+* 1
+* 3
+* */
+
+
+
+특징
+* 추가/삭제가 빈번하게 일어나는 대용량 데이터 처리가 필요할 때 사용하면 성능이 좋다.
+">
+<meta property="og:type" content="article">
+<meta property="og:title" content="배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)">
+<meta name="twitter:title" content="배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)">
+<meta property="og:url" content="https://hyenakim.github.io/2019/05/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/">
+<meta property="twitter:url" content="https://hyenakim.github.io/2019/05/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="Hugo tranquilpeak theme demo">
-<meta name="twitter:description" content="Hugo tranquilpeak theme demo">
+<meta property="og:description" content="* 배열
+
+연속된 자료를 저장하기 위한 자료구조
+
+java 배열 선언
+
+int[] array = new int[6];
+
+
+
+단점
+* 크기가 넘어가면 더 큰 배열을 새로 할당해야 한다.
+* 길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.
+
+
+위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.
+
+* 동적 배열
+
+자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조
+
+java 표준 라이브러리
+
+ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;();
+
+/*원소 추가*/
+ArrayList.add(1);
+ArrayList.add(2);
+
+/*원소 삭제*/
+ArrayList.remove(Integer.valueOf(2));
+
+/*원소 찾기*/
+System.out.println(ArrayList.indexOf(1));
+/*
+* 결과 :
+* 0
+* */
+
+
+
+
+특징
+* 삽입시 메모리를 재할당 하여 속도가 느리다.
+
+
+* 연결 리스트
+
+연결된 자료의 정보만 담고 있는 자료구조
+
+java 표준 라이브러리
+
+LinkedList&lt;Integer&gt; LinkedList = new LinkedList&lt;Integer&gt;();
+
+/*원소 추가*/
+LinkedList.add(1);
+LinkedList.add(2);
+LinkedList.add(3);
+
+/*원소 삭제*/
+LinkedList.remove(Integer.valueOf(2));
+
+/*순서대로 출력*/
+Iterator&lt;Integer&gt; iterator = LinkedList.iterator();
+while(iterator.hasNext())
+{
+  int n = iterator.next();
+  System.out.println(n);
+}
+/*
+* 결과 :
+* 1
+* 3
+* */
+
+
+
+특징
+* 추가/삭제가 빈번하게 일어나는 대용량 데이터 처리가 필요할 때 사용하면 성능이 좋다.
+">
+<meta name="twitter:description" content="* 배열
+
+연속된 자료를 저장하기 위한 자료구조
+
+java 배열 선언
+
+int[] array = new int[6];
+
+
+
+단점
+* 크기가 넘어가면 더 큰 배열을 새로 할당해야 한다.
+* 길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.
+
+
+위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.
+
+* 동적 배열
+
+자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조
+
+java 표준 라이브러리
+
+ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;();
+
+/*원소 추가*/
+ArrayList.add(1);
+ArrayList.add(2);
+
+/*원소 삭제*/
+ArrayList.remove(Integer.valueOf(2));
+
+/*원소 찾기*/
+System.out.println(ArrayList.indexOf(1));
+/*
+* 결과 :
+* 0
+* */
+
+
+
+
+특징
+* 삽입시 메모리를 재할당 하여 속도가 느리다.
+
+
+* 연결 리스트
+
+연결된 자료의 정보만 담고 있는 자료구조
+
+java 표준 라이브러리
+
+LinkedList&lt;Integer&gt; LinkedList = new LinkedList&lt;Integer&gt;();
+
+/*원소 추가*/
+LinkedList.add(1);
+LinkedList.add(2);
+LinkedList.add(3);
+
+/*원소 삭제*/
+LinkedList.remove(Integer.valueOf(2));
+
+/*순서대로 출력*/
+Iterator&lt;Integer&gt; iterator = LinkedList.iterator();
+while(iterator.hasNext())
+{
+  int n = iterator.next();
+  System.out.println(n);
+}
+/*
+* 결과 :
+* 1
+* 3
+* */
+
+
+
+특징
+* 추가/삭제가 빈번하게 일어나는 대용량 데이터 처리가 필요할 때 사용하면 성능이 좋다.
+">
 <meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2019-05-27T14:55:19">
+  
+  
+    <meta property="article:modified_time" content="2019-05-27T14:55:19">
+  
+  
+  
+    
+      <meta property="article:section" content="자료구조">
+    
+  
+  
+    
+      <meta property="article:tag" content="Array">
+    
+      <meta property="article:tag" content="ArrayList">
+    
+      <meta property="article:tag" content="LinkedList">
+    
+  
 
 
 <meta name="twitter:card" content="summary">
@@ -39,16 +377,14 @@
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg">
 
 
-    <title>tag1</title>
+    <title>배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)</title>
 
     <link rel="icon" href="/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://hyenakim.github.io/tags/tag1/index.xml">
-    
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/tags/tag1/">
+    <link rel="canonical" href="https://hyenakim.github.io/2019/05/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -68,7 +404,7 @@
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">gpsk-Tech Blog</a>
@@ -88,7 +424,7 @@
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -195,42 +531,24 @@
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
   
-    
-      
-        
-      
-    
+    <h1 class="post-title" itemprop="headline">
+      배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/first-post/">
-          First Post
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-05-27T13:23:03&#43;09:00">
+      <time itemprop="datePublished" datetime="2019-05-27T14:55:19&#43;09:00">
         
   May 27, 2019
 
@@ -241,31 +559,167 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/category">category</a>
+      <a class="category-link" href="/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
     
   
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      
-        
-      
-      <p>
-        <a href="https://hyenakim.github.io/2019/05/first-post/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <h1 id="배열">* 배열</h1>
+
+<p>연속된 자료를 저장하기 위한 자료구조</p>
+
+<h3 id="java-배열-선언">java 배열 선언</h3>
+
+<pre><code>int[] array = new int[6];
+</code></pre>
+
+<blockquote>
+<p>단점
+* 크기가 넘어가면 더 큰 배열을 새로 할당해야 한다.
+* 길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.</p>
+</blockquote>
+
+<p>위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.</p>
+
+<h1 id="동적-배열">* 동적 배열</h1>
+
+<p>자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조</p>
+
+<h3 id="java-표준-라이브러리">java 표준 라이브러리</h3>
+
+<pre><code>ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;();
+
+/*원소 추가*/
+ArrayList.add(1);
+ArrayList.add(2);
+
+/*원소 삭제*/
+ArrayList.remove(Integer.valueOf(2));
+
+/*원소 찾기*/
+System.out.println(ArrayList.indexOf(1));
+/*
+* 결과 :
+* 0
+* */
+
+</code></pre>
+
+<blockquote>
+<p>특징
+* 삽입시 메모리를 재할당 하여 속도가 느리다.</p>
+</blockquote>
+
+<h1 id="연결-리스트">* 연결 리스트</h1>
+
+<p>연결된 자료의 정보만 담고 있는 자료구조</p>
+
+<h3 id="java-표준-라이브러리-1">java 표준 라이브러리</h3>
+
+<pre><code>LinkedList&lt;Integer&gt; LinkedList = new LinkedList&lt;Integer&gt;();
+
+/*원소 추가*/
+LinkedList.add(1);
+LinkedList.add(2);
+LinkedList.add(3);
+
+/*원소 삭제*/
+LinkedList.remove(Integer.valueOf(2));
+
+/*순서대로 출력*/
+Iterator&lt;Integer&gt; iterator = LinkedList.iterator();
+while(iterator.hasNext())
+{
+  int n = iterator.next();
+  System.out.println(n);
+}
+/*
+* 결과 :
+* 1
+* 3
+* */
+</code></pre>
+
+<blockquote>
+<p>특징
+* 추가/삭제가 빈번하게 일어나는 대용량 데이터 처리가 필요할 때 사용하면 성능이 좋다.</p>
+</blockquote>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/array/">Array</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/arraylist/">ArrayList</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/linkedlist/">LinkedList</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
   
-</article>
-
-            
-            
-
-          </section>
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/%EC%8A%A4%ED%83%9D%ED%81%90%EB%8C%80%ED%81%AC/" data-tooltip="스택,큐,대크">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/first-post/" data-tooltip="First Post">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2019 HyenaKim. All Rights Reserved
@@ -273,6 +727,60 @@
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/%EC%8A%A4%ED%83%9D%ED%81%90%EB%8C%80%ED%81%AC/" data-tooltip="스택,큐,대크">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/first-post/" data-tooltip="First Post">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -636,6 +1144,10 @@ $(document).ready(function() {
 });
 </script>
 
+
+  
+    
+  
 
 
 
