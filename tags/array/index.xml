@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>gpsk-Tech Blog</title>
-    <link>https://hyenakim.github.io/</link>
-    <description>Recent content on gpsk-Tech Blog</description>
+    <title>Array on gpsk-Tech Blog</title>
+    <link>https://hyenakim.github.io/tags/array/</link>
+    <description>Recent content in Array on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
     <lastBuildDate>Mon, 27 May 2019 14:55:19 +0900</lastBuildDate>
     
-	<atom:link href="https://hyenakim.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hyenakim.github.io/tags/array/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,15 +22,6 @@ java 배열 선언 int[] array = new int[6];   단점 * 크기가 넘어가면 �
  위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.
 * 동적 배열 자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조
 java 표준 라이브러리 ArrayList&amp;lt;Integer&amp;gt; ArrayList = new ArrayList&amp;lt;&amp;gt;(); /*원소 추가*/ ArrayList.add(1); ArrayList.</description>
-    </item>
-    
-    <item>
-      <title>First Post</title>
-      <link>https://hyenakim.github.io/2019/05/first-post/</link>
-      <pubDate>Mon, 27 May 2019 13:23:03 +0900</pubDate>
-      
-      <guid>https://hyenakim.github.io/2019/05/first-post/</guid>
-      <description></description>
     </item>
     
   </channel>
