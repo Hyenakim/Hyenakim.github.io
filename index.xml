@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gpsk-Tech Blog</title>
+    <link>https://hyenakim.github.io/</link>
+    <description>Recent content on gpsk-Tech Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Mon, 27 May 2019 13:23:03 +0900</lastBuildDate>
+    
+	<atom:link href="https://hyenakim.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>First Post</title>
+      <link>https://hyenakim.github.io/2019/05/first-post/</link>
+      <pubDate>Mon, 27 May 2019 13:23:03 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/2019/05/first-post/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
