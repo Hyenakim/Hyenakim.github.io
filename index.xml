@@ -25,12 +25,12 @@
 
 &lt;p&gt;이분탐색을 이용한 binary search는 이전 장에서 설명했으므로, 이번장에선 활용문제를 풀어보도록 하자.&lt;/p&gt;
 
-&lt;p&gt;이전 장 링크 : &lt;a href=&#34;https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/&#34;&gt;이진탐색(binary search)과 이분탐색(parametric search)_(1)&lt;/a&gt;{: target=&amp;rdquo;_blank&amp;rdquo; }&lt;/p&gt;
+&lt;p&gt;이전 장 링크 : &lt;a href=&#34;https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/&#34;&gt;이진탐색(binary search)과 이분탐색(parametric search)_(1)&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4 id=&#34;랜선-자르기&#34;&gt;랜선 자르기&lt;/h4&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;문제 링크 : &lt;a href=&#34;https://www.acmicpc.net/problem/1654&#34; title=&#34;https://www.acmicpc.net/problem/1654&#34;&gt;백준1654 랜선자르기&lt;/a&gt;{: target=&amp;rdquo;_blank&amp;rdquo; }&lt;/p&gt;
+&lt;p&gt;문제 링크 : &lt;a href=&#34;https://www.acmicpc.net/problem/1654&#34; title=&#34;https://www.acmicpc.net/problem/1654&#34;&gt;백준1654 랜선자르기&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/37864122/58620684-ab61d700-8302-11e9-9c66-5f2309a1fc25.png&#34; alt=&#34;랜선자르기1&#34; /&gt;
 &lt;img src=&#34;https://user-images.githubusercontent.com/37864122/58620695-b583d580-8302-11e9-8b9c-ea87391d92fd.png&#34; alt=&#34;랜선자르기2&#34; /&gt;&lt;/p&gt;
