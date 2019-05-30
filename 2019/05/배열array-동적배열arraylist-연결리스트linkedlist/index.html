@@ -896,9 +896,11 @@ while(iterator.hasNext())
 
 <h5 id="풀이-가능한-랜선의-길이-0부터-2-31-1까지-정렬-되어있다고-하자-우리는-0부터-2-31-1로-정렬된-배열에서-이분탐색을-이용해-최종길이를-찾을-수-있다-가능한-길이-중-최대길이를-구하는-문제이므로-앞에-이진탐색의-upper-bound로-풀-수-있다">풀이 : 가능한 랜선의 길이 0부터 2^31-1까지 정렬 되어있다고 하자. 우리는 0부터 2^31-1로 정렬된 배열에서 이분탐색을 이용해 최종길이를 찾을 수 있다. <strong>가능한 길이 중 최대길이를 구하는 문제이므로 앞에 이진탐색의 upper_bound로 풀 수 있다.</strong></h5>
 
-<p>랜선 길이의 최대값이 1000이라고 하면 아래 그림과 같이 중간값을 decision에 대입해 가능한 답이 되는지 판단 후, 만족하면 중간값보다 더 큰 값도 가능한지 탐색한다. 만족하지 못하고 false가 나오면 랜선의 길이가 더 작아야 한다는 의미이므로 탐색범위를 왼쪽 절반으로 줄인다.</p>
+<p>이진탐색하는 과정을 좀더 자세하게 알아보자. 랜선 길이의 최대값이 1000이라고 하면 아래 그림과 같이 중간값을 decision에 대입해 가능한 답이 되는지 판단 후, 만족하면 중간값보다 더 큰 값도 가능한지 탐색한다. 만족하지 못하고 false가 나오면 랜선의 길이가 더 작아야 한다는 의미이므로 탐색범위를 왼쪽 절반으로 줄인다.</p>
 
 <p><img src="https://user-images.githubusercontent.com/37864122/58627280-ca1b9a00-8311-11e9-8213-9eb47829300a.png" alt="랜선자르기3" /></p>
+
+<p>위의 탐색과정을 하는 함수 optimize()를 구현해 준다.</p>
 
 <pre><code>//랜선 n개를 만들 수 있는 최대 길이 반환
 static long optimize(){
@@ -1016,7 +1018,9 @@ public class 랜선자르기 {
 1번의 경우 upper_bound, 2번의 경우 lower_bound라 할때 결과는 다음과 같다.
 <img src="https://user-images.githubusercontent.com/37864122/58617496-3a6af100-82fb-11e9-9f45-091e9886505c.png" alt="이진탐색2" /></p>
 
-<p>1번의 경우</p>
+<p>먼저 upper_bound를 구현해보자. 인자로 졍렬된 배열 array, 찾고싶은 값 k, 인덱스의 시작lo와 끝값hi을 넣어준다.
+while문을 돌면서 lo가 hi와 같거나 커지기 전까지 lo 또는 hi를 움직이면서 범위를 줄여나간다. upper_bound는 같은 값이
+있어도 제일 큰 인덱스를 반환해야 하므로 k보다 큰값이 나오기 전까지 lo를 옮겨 오른쪽을 계속 탐색하게 한다.</p>
 
 <pre><code>public static int upper_bound(int[] array,int k,int lo,int hi) {
         int mid;
@@ -1029,7 +1033,8 @@ public class 랜선자르기 {
     }
 </code></pre>
 
-<p>2번의 경우</p>
+<p>lower_bound도 같은 방식으로 구현한다. upper_bound와 차이점은 lower_bound는 k와 같은 값이 나와도 왼쪽으로 이동하여
+k보다 작은값이 나올때까지 탐색한다.</p>
 
 <pre><code>public static int lower_bound(int[] array,int k, int lo,int hi) {
         int mid;
