@@ -107,6 +107,7 @@ public class 랜선자르기 {
         }
         return n &amp;lt;= count;
     }
+    //랜선 n개를 만들 수 있는 최대 길이 반환
     static long optimize(){
         long lo = 0;
         long hi = Integer.MAX_VALUE;
