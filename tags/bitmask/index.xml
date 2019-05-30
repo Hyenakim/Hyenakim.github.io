@@ -22,11 +22,14 @@
 &lt;p&gt;정수의 이진수 표현을 자료구조로 쓰는 기법&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;장점
-* 빠른 수행시간
-* 간결한 코드
-* 적은 메모리
-* 연관배열을 배열로 대체&lt;/p&gt;
+&lt;p&gt;장점&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;빠른 수행시간&lt;/li&gt;
+&lt;li&gt;간결한 코드&lt;/li&gt;
+&lt;li&gt;적은 메모리&lt;/li&gt;
+&lt;li&gt;연관배열을 배열로 대체&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&#34;비트-연산자&#34;&gt;비트 연산자&lt;/h3&gt;

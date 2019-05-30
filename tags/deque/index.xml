@@ -98,8 +98,11 @@
 
 &lt;h1 id=&#34;덱&#34;&gt;* 덱&lt;/h1&gt;
 
-&lt;p&gt;양쪽에서 삽입 삭제가 가능한 형태의 자료구조
-&amp;gt;사용에따라 스택, 큐가 될 수 있다.&lt;/p&gt;
+&lt;p&gt;양쪽에서 삽입 삭제가 가능한 형태의 자료구조&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;사용에따라 스택, 큐가 될 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&#34;java-라이브러리-덱관련-메서드&#34;&gt;java 라이브러리 덱관련 메서드&lt;/h3&gt;
 
