@@ -1314,7 +1314,7 @@ static long optimize(){
 <p>&#10067; 자주 찾는 질문 &#10067;</p>
 
 <ul>
-<li><p><strong>hi++:를 하는 이유</strong><br />
+<li><p><strong>hi++;를 하는 이유</strong><br />
 &#10140; 가능한 랜선의 길이는 0~2^31-1까지다. Integer.MAX_VALUE는 2^31-1인데 mid를 구하는 과정에서 나누기2를 하면 2^31-1이 절대 답이 될 수 없게 된다. (lo는 hi보다 항상 작기 때문에) 따라서 2^31-1이 답이 될 경우를 생각해 hi++;를 해주고 시작한다.</p>
 
 <ul>
@@ -1325,7 +1325,7 @@ static long optimize(){
 <li><p><strong>int가 아닌 long을 사용하는 이유</strong><br />
 &#10140; 위에서 hi++를 하면 int형 범위를 넘어버리기 때문에 long으로 선언해야 한다.</p></li>
 
-<li><p><strong>return lo-1인 이유</strong><br />
+<li><p><strong>return lo-1;인 이유</strong><br />
 &#10140; 앞장에서 구현한 upper_bound에선 그냥 lo를 반환하였다. 찾는 값의 <strong>다음 인덱스</strong>를 반환했기 때문이다. 하지만 여기서는 찾는 값의 인덱스를 반환해야 하므로 lo-1을 반환해준다.</p></li>
 </ul>
 
