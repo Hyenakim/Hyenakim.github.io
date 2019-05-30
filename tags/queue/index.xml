@@ -6,17 +6,17 @@
     <description>Recent content in queue on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 May 2019 22:03:29 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 21 Mar 2019 22:03:29 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/tags/queue/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>스택(Stack),큐(Queue),데크(Deque)</title>
-      <link>https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/</link>
-      <pubDate>Mon, 27 May 2019 22:03:29 +0900</pubDate>
+      <link>https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/</link>
+      <pubDate>Thu, 21 Mar 2019 22:03:29 +0900</pubDate>
       
-      <guid>https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/</guid>
+      <guid>https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/</guid>
       <description>&lt;h1 id=&#34;스택&#34;&gt;* 스택&lt;/h1&gt;
 
 &lt;p&gt;나중에 들어온게 먼저 나가는 &lt;strong&gt;LIFO&lt;/strong&gt;형태의 자료구조&lt;/p&gt;

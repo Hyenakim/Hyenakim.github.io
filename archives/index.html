@@ -220,16 +220,26 @@
               <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/">이진탐색(binary search)과 이분탐색(parametric search)_(1)</a>
             </li>
           
-            <li class="archive-post archive-day" data-date="20190527">
-              <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/">비트마스크(BitMask)</a>
+        </ul>
+      
+        <ul class="archive-posts archive-month" data-date="201904">
+          <h5 class="archive-title" style="text-decoration: none;">April</h5>
+          
+            <li class="archive-post archive-day" data-date="20190409">
+              <a class="archive-post-title" href="https://hyenakim.github.io/2019/04/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/">비트마스크(BitMask)</a>
             </li>
           
-            <li class="archive-post archive-day" data-date="20190527">
-              <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">스택(Stack),큐(Queue),데크(Deque)</a>
+        </ul>
+      
+        <ul class="archive-posts archive-month" data-date="201903">
+          <h5 class="archive-title" style="text-decoration: none;">March</h5>
+          
+            <li class="archive-post archive-day" data-date="20190329">
+              <a class="archive-post-title" href="https://hyenakim.github.io/2019/03/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/">배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)</a>
             </li>
           
-            <li class="archive-post archive-day" data-date="20190527">
-              <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/">배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)</a>
+            <li class="archive-post archive-day" data-date="20190321">
+              <a class="archive-post-title" href="https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">스택(Stack),큐(Queue),데크(Deque)</a>
             </li>
           
         </ul>
@@ -529,12 +539,12 @@ public class 이분탐색 {
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/">
+              <a class="link-unstyled" href="https://hyenakim.github.io/2019/04/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/">
                 <h3 class="media-heading">비트마스크(BitMask)</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  May 5, 2019
+                  Apr 4, 2019
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"><h1 id="비트마스크">* 비트마스크</h1>
@@ -715,12 +725,117 @@ XOR -----------
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
+              <a class="link-unstyled" href="https://hyenakim.github.io/2019/03/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/">
+                <h3 class="media-heading">배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><h1 id="배열">* 배열</h1>
+
+<p>연속된 자료를 저장하기 위한 자료구조</p>
+
+<h3 id="java-배열-선언">java 배열 선언</h3>
+
+<pre><code>int[] array = new int[6];
+</code></pre>
+
+<blockquote>
+<p>단점</p>
+
+<ul>
+<li>크기가 넘어가면 더 큰 배열을 새로 할당해야 한다.</li>
+<li>길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.</li>
+</ul>
+</blockquote>
+
+<p>위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.</p>
+
+<h1 id="동적-배열">* 동적 배열</h1>
+
+<p>자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조</p>
+
+<h3 id="java-표준-라이브러리">java 표준 라이브러리</h3>
+
+<pre><code>ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;();
+
+/*원소 추가*/
+ArrayList.add(1);
+ArrayList.add(2);
+
+/*원소 삭제*/
+ArrayList.remove(Integer.valueOf(2));
+
+/*원소 찾기*/
+System.out.println(ArrayList.indexOf(1));
+/*
+* 결과 :
+* 0
+* */
+
+</code></pre>
+
+<blockquote>
+<p>특징</p>
+
+<ul>
+<li>삽입시 메모리를 재할당 하여 속도가 느리다.</li>
+</ul>
+</blockquote>
+
+<h1 id="연결-리스트">* 연결 리스트</h1>
+
+<p>연결된 자료의 정보만 담고 있는 자료구조</p>
+
+<h3 id="java-표준-라이브러리-1">java 표준 라이브러리</h3>
+
+<pre><code>LinkedList&lt;Integer&gt; LinkedList = new LinkedList&lt;Integer&gt;();
+
+/*원소 추가*/
+LinkedList.add(1);
+LinkedList.add(2);
+LinkedList.add(3);
+
+/*원소 삭제*/
+LinkedList.remove(Integer.valueOf(2));
+
+/*순서대로 출력*/
+Iterator&lt;Integer&gt; iterator = LinkedList.iterator();
+while(iterator.hasNext())
+{
+  int n = iterator.next();
+  System.out.println(n);
+}
+/*
+* 결과 :
+* 1
+* 3
+* */
+</code></pre>
+
+<blockquote>
+<p>특징</p>
+
+<ul>
+<li>추가/삭제가 빈번하게 일어나는 대용량 데이터 처리가 필요할 때 사용하면 성능이 좋다.</li>
+</ul>
+</blockquote></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
                 <h3 class="media-heading">스택(Stack),큐(Queue),데크(Deque)</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  May 5, 2019
+                  Mar 3, 2019
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"><h1 id="스택">* 스택</h1>
@@ -867,111 +982,6 @@ XOR -----------
 <li>덱이 비어있으면 true, 아니면 false를 반환한다.</li>
 </ul></li>
 </ul></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/">
-                <h3 class="media-heading">배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><h1 id="배열">* 배열</h1>
-
-<p>연속된 자료를 저장하기 위한 자료구조</p>
-
-<h3 id="java-배열-선언">java 배열 선언</h3>
-
-<pre><code>int[] array = new int[6];
-</code></pre>
-
-<blockquote>
-<p>단점</p>
-
-<ul>
-<li>크기가 넘어가면 더 큰 배열을 새로 할당해야 한다.</li>
-<li>길이가 n인 배열 중간에 원소를 삽입/삭제할 경우 O(n)의 시간이 걸린다.</li>
-</ul>
-</blockquote>
-
-<p>위의 단점을 해결하기 위해 동적배열과 연결리스트라는 자료구조를 사용한다.</p>
-
-<h1 id="동적-배열">* 동적 배열</h1>
-
-<p>자료의 크기가 변함에 따라 배열의 크기도 변하는 자료구조</p>
-
-<h3 id="java-표준-라이브러리">java 표준 라이브러리</h3>
-
-<pre><code>ArrayList&lt;Integer&gt; ArrayList = new ArrayList&lt;&gt;();
-
-/*원소 추가*/
-ArrayList.add(1);
-ArrayList.add(2);
-
-/*원소 삭제*/
-ArrayList.remove(Integer.valueOf(2));
-
-/*원소 찾기*/
-System.out.println(ArrayList.indexOf(1));
-/*
-* 결과 :
-* 0
-* */
-
-</code></pre>
-
-<blockquote>
-<p>특징</p>
-
-<ul>
-<li>삽입시 메모리를 재할당 하여 속도가 느리다.</li>
-</ul>
-</blockquote>
-
-<h1 id="연결-리스트">* 연결 리스트</h1>
-
-<p>연결된 자료의 정보만 담고 있는 자료구조</p>
-
-<h3 id="java-표준-라이브러리-1">java 표준 라이브러리</h3>
-
-<pre><code>LinkedList&lt;Integer&gt; LinkedList = new LinkedList&lt;Integer&gt;();
-
-/*원소 추가*/
-LinkedList.add(1);
-LinkedList.add(2);
-LinkedList.add(3);
-
-/*원소 삭제*/
-LinkedList.remove(Integer.valueOf(2));
-
-/*순서대로 출력*/
-Iterator&lt;Integer&gt; iterator = LinkedList.iterator();
-while(iterator.hasNext())
-{
-  int n = iterator.next();
-  System.out.println(n);
-}
-/*
-* 결과 :
-* 1
-* 3
-* */
-</code></pre>
-
-<blockquote>
-<p>특징</p>
-
-<ul>
-<li>추가/삭제가 빈번하게 일어나는 대용량 데이터 처리가 필요할 때 사용하면 성능이 좋다.</li>
-</ul>
-</blockquote></div>
             </div>
             <div style="clear:both;"></div>
             <hr>

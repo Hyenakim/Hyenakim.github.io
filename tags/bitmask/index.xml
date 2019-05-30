@@ -6,17 +6,17 @@
     <description>Recent content in BitMask on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 May 2019 22:36:39 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 09 Apr 2019 22:36:39 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/tags/bitmask/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>비트마스크(BitMask)</title>
-      <link>https://hyenakim.github.io/2019/05/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/</link>
-      <pubDate>Mon, 27 May 2019 22:36:39 +0900</pubDate>
+      <link>https://hyenakim.github.io/2019/04/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/</link>
+      <pubDate>Tue, 09 Apr 2019 22:36:39 +0900</pubDate>
       
-      <guid>https://hyenakim.github.io/2019/05/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/</guid>
+      <guid>https://hyenakim.github.io/2019/04/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/</guid>
       <description>&lt;h1 id=&#34;비트마스크&#34;&gt;* 비트마스크&lt;/h1&gt;
 
 &lt;p&gt;정수의 이진수 표현을 자료구조로 쓰는 기법&lt;/p&gt;

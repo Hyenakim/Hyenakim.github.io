@@ -8,461 +8,611 @@
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="HyenaKim">
 <meta name="keywords" content="tech">
-<meta name="description" content="* 이진탐색과 이분탐색(2)
+<meta name="description" content="* 스택
 
-이분탐색
-
-이분탐색은 탐색기법중 하나로, 원하는 탐색범위를 두 부분으로 분할해서 원하는 값을 찾는 방식이다. 그렇기 때문에 전부를 탐색하는 경우 O(n)에 비해 이분탐색은 O(logn)의 시간으로 단축시킬 수 있다.
-
-이분탐색을 이용한 binary search는 이전 장에서 설명했으므로, 이번장에선 활용문제를 풀어보도록 하자.
-
-이전 장 링크 : 이진탐색(binary search)과 이분탐색(parametric search)_(1)
-
-랜선 자르기
+나중에 들어온게 먼저 나가는 LIFO형태의 자료구조
 
 
-문제 링크 : 백준1654 랜선자르기
+LIFO : Last in First out
+
+
+java 라이브러리 스택관련 메서드
+
+Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
 
 
 
-
-요약  : 주어진 k개의 랜선으로 n개의 랜선을 만들고 싶다. 이떄 만둘 수 있는 최대 랜선의 길이를 구해라.
-
-
-풀이 : 가능한 랜선의 길이 0부터 2^31-1까지 정렬 되어있다고 하자. 우리는 0부터 2^31-1로 정렬된 배열에서 이분탐색을 이용해 최종길이를 찾을 수 있다. 가능한 길이 중 최대길이를 구하는 문제이므로 앞에 이진탐색의 upper_bound로 풀 수 있다.
-
-이진탐색하는 과정을 좀더 자세하게 알아보자. 랜선 길이의 최대값이 1000이라고 하면 아래 그림과 같이 중간값을 decision에 대입해 가능한 답이 되는지 판단 후, 만족하면 중간값보다 더 큰 값도 가능한지 탐색한다. 만족하지 못하고 false가 나오면 랜선의 길이가 더 작아야 한다는 의미이므로 탐색범위를 왼쪽 절반으로 줄인다.
+push(E item)
 
 
+해당 아이템을 스택의 top에 쌓는다.
+쌓았으면 true, 못쌓았으면 false를 반환한다.
 
-위의 탐색과정을 하는 함수 optimize()를 구현해 준다.
-
-//랜선 n개를 만들 수 있는 최대 길이 반환
-static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi&#43;&#43;;
-        while(lo&lt;hi){
-            long mid = (lo&#43;hi)/2;
-            if(decision(mid)) lo = mid &#43; 1;//가능하면 더 긴것도 해보기
-            else hi = mid;  //불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
+pop()
 
 
-&#10067; 자주 찾는 질문 &#10067;
+스택의 맨 위를 삭제하고 반환한다.
+
+peek()
 
 
-hi&#43;&#43;;를 하는 이유
-&#10140; 가능한 랜선의 길이는 0~2^31-1까지다. Integer.MAX_VALUE는 2^31-1인데 mid를 구하는 과정에서 나누기2를 하면 2^31-1이 절대 답이 될 수 없게 된다. (lo는 hi보다 항상 작기 때문에) 따라서 2^31-1이 답이 될 경우를 생각해 hi&#43;&#43;;를 해주고 시작한다.
+스택의 맨위를 삭제하지 않고 반환한다.
+
+empty()
 
 
-그럼 hi = Integer.MAX_VALUE &#43; 1; 하면 안되나요?
-&#10140; 연산자 우선순위에 의해 (산술연산자가 대입연산자 보다 우위) Integer.MAX_VALUE&#43;1가 먼저 계산되는데, Integer.MAX_VALUE&#43;1은 오버플로우가 되어 Integer.MIN_VALUE와 같게된다.
+스택이 비어있으면 true, 아니면 false를 반환한다.
+
+search(Object o)
 
 
-int가 아닌 long을 사용하는 이유
-&#10140; 위에서 hi&#43;&#43;를 하면 int형 범위를 넘어버리기 때문에 long으로 선언해야 한다.
-
-return lo-1;인 이유
-&#10140; 앞장에서 구현한 upper_bound에선 그냥 lo를 반환하였다. 찾는 값의 다음 인덱스를 반환했기 때문이다. 하지만 여기서는 찾는 값의 인덱스를 반환해야 하므로 lo-1을 반환해준다.
+해당 Object의 위치를 반환한다. top이면 1, 없으면 -1
 
 
-전체코드 :
 
-import java.io.*;
-import java.util.StringTokenizer;
+* 큐
 
-public class 랜선자르기 {
-    static int k;
-    static int n;
-    static long len[];
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        // TODO Auto-generated method stub
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
-        st = new StringTokenizer(br.readLine());
-        k = Integer.parseInt(st.nextToken());
-        n = Integer.parseInt(st.nextToken());
-        len = new long[k];
-        for(int i=0;i&lt;k;i&#43;&#43;){
-            len[i] = Integer.parseInt(br.readLine());
-        }
-        System.out.println(optimize());
-    }
-    //mid길이로 n개의 랜선을 만들 수 있는지 반환
-    static boolean decision(long mid){
-        int count = 0;
-        for(int i=0;i&lt;k;i&#43;&#43;){
-            count &#43;= len[i]/mid;
-        }
-        return n &lt;= count;
-    }
-    //랜선 n개를 만들 수 있는 최대 길이 반환
-    static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi&#43;&#43;;
-        while(lo&lt;hi){
-            long mid = (lo&#43;hi)/2;
-            if(decision(mid)) lo = mid &#43; 1;//가능하면 더 긴것도 가능한지 해보기
-            else hi=mid;//불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
-}
+먼저 들어온게 먼저 나가는 FIFO형태의 자료구조
+
+
+FIFO : First in First out
+
+
+java 라이브러리 큐관련 메서드
+
+Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
+
+
+
+offer(E item)
+
+
+해당 아이템을 큐에 넣는다.
+넣었으면 true, 못넣었으면 false반환한다.
+
+poll()
+
+
+큐의 맨 앞을 삭제하고 반환한다.
+
+peek()
+
+
+큐의 맨앞을 삭제하지 않고 반환한다.
+
+isEmpty()
+
+
+큐가 비어있으면 true, 아니면 false를 반환한다.
+
+
+
+* 덱
+
+양쪽에서 삽입 삭제가 가능한 형태의 자료구조
+
+
+사용에따라 스택, 큐가 될 수 있다.
+
+
+java 라이브러리 덱관련 메서드
+
+Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
+
+
+
+add(E item)
+
+
+해당 아이템을 덱에 넣는다.
+addFirst(E item)
+
+
+덱의 맨 앞에 넣는다.
+
+addLast(E item)
+
+
+덱의 맨 뒤에 넣는다.
+
+
+poll()
+
+
+덱의 맨 앞을 삭제하고 반환한다.
+pollFirst()
+
+
+덱의 맨 앞을 삭제하고 반환한다.
+
+pollLast()
+
+
+덱의 맨 뒤를 삭제하고 반환한다.
+
+
+peek()
+
+
+덱의 맨앞을 삭제하지 않고 반환한다.
+peekFirst()
+
+
+덱의 맨앞을 삭제하지 않고 반환한다.
+
+peekLast()
+
+
+덱의 맨뒤를 삭제하지 않고 반환한다.
+
+
+isEmpty()
+
+
+덱이 비어있으면 true, 아니면 false를 반환한다.
 
 ">
 
 
-<meta property="og:description" content="* 이진탐색과 이분탐색(2)
+<meta property="og:description" content="* 스택
 
-이분탐색
-
-이분탐색은 탐색기법중 하나로, 원하는 탐색범위를 두 부분으로 분할해서 원하는 값을 찾는 방식이다. 그렇기 때문에 전부를 탐색하는 경우 O(n)에 비해 이분탐색은 O(logn)의 시간으로 단축시킬 수 있다.
-
-이분탐색을 이용한 binary search는 이전 장에서 설명했으므로, 이번장에선 활용문제를 풀어보도록 하자.
-
-이전 장 링크 : 이진탐색(binary search)과 이분탐색(parametric search)_(1)
-
-랜선 자르기
+나중에 들어온게 먼저 나가는 LIFO형태의 자료구조
 
 
-문제 링크 : 백준1654 랜선자르기
+LIFO : Last in First out
+
+
+java 라이브러리 스택관련 메서드
+
+Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
 
 
 
-
-요약  : 주어진 k개의 랜선으로 n개의 랜선을 만들고 싶다. 이떄 만둘 수 있는 최대 랜선의 길이를 구해라.
-
-
-풀이 : 가능한 랜선의 길이 0부터 2^31-1까지 정렬 되어있다고 하자. 우리는 0부터 2^31-1로 정렬된 배열에서 이분탐색을 이용해 최종길이를 찾을 수 있다. 가능한 길이 중 최대길이를 구하는 문제이므로 앞에 이진탐색의 upper_bound로 풀 수 있다.
-
-이진탐색하는 과정을 좀더 자세하게 알아보자. 랜선 길이의 최대값이 1000이라고 하면 아래 그림과 같이 중간값을 decision에 대입해 가능한 답이 되는지 판단 후, 만족하면 중간값보다 더 큰 값도 가능한지 탐색한다. 만족하지 못하고 false가 나오면 랜선의 길이가 더 작아야 한다는 의미이므로 탐색범위를 왼쪽 절반으로 줄인다.
+push(E item)
 
 
+해당 아이템을 스택의 top에 쌓는다.
+쌓았으면 true, 못쌓았으면 false를 반환한다.
 
-위의 탐색과정을 하는 함수 optimize()를 구현해 준다.
-
-//랜선 n개를 만들 수 있는 최대 길이 반환
-static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi&#43;&#43;;
-        while(lo&lt;hi){
-            long mid = (lo&#43;hi)/2;
-            if(decision(mid)) lo = mid &#43; 1;//가능하면 더 긴것도 해보기
-            else hi = mid;  //불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
+pop()
 
 
-&#10067; 자주 찾는 질문 &#10067;
+스택의 맨 위를 삭제하고 반환한다.
+
+peek()
 
 
-hi&#43;&#43;;를 하는 이유
-&#10140; 가능한 랜선의 길이는 0~2^31-1까지다. Integer.MAX_VALUE는 2^31-1인데 mid를 구하는 과정에서 나누기2를 하면 2^31-1이 절대 답이 될 수 없게 된다. (lo는 hi보다 항상 작기 때문에) 따라서 2^31-1이 답이 될 경우를 생각해 hi&#43;&#43;;를 해주고 시작한다.
+스택의 맨위를 삭제하지 않고 반환한다.
+
+empty()
 
 
-그럼 hi = Integer.MAX_VALUE &#43; 1; 하면 안되나요?
-&#10140; 연산자 우선순위에 의해 (산술연산자가 대입연산자 보다 우위) Integer.MAX_VALUE&#43;1가 먼저 계산되는데, Integer.MAX_VALUE&#43;1은 오버플로우가 되어 Integer.MIN_VALUE와 같게된다.
+스택이 비어있으면 true, 아니면 false를 반환한다.
+
+search(Object o)
 
 
-int가 아닌 long을 사용하는 이유
-&#10140; 위에서 hi&#43;&#43;를 하면 int형 범위를 넘어버리기 때문에 long으로 선언해야 한다.
-
-return lo-1;인 이유
-&#10140; 앞장에서 구현한 upper_bound에선 그냥 lo를 반환하였다. 찾는 값의 다음 인덱스를 반환했기 때문이다. 하지만 여기서는 찾는 값의 인덱스를 반환해야 하므로 lo-1을 반환해준다.
+해당 Object의 위치를 반환한다. top이면 1, 없으면 -1
 
 
-전체코드 :
 
-import java.io.*;
-import java.util.StringTokenizer;
+* 큐
 
-public class 랜선자르기 {
-    static int k;
-    static int n;
-    static long len[];
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        // TODO Auto-generated method stub
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
-        st = new StringTokenizer(br.readLine());
-        k = Integer.parseInt(st.nextToken());
-        n = Integer.parseInt(st.nextToken());
-        len = new long[k];
-        for(int i=0;i&lt;k;i&#43;&#43;){
-            len[i] = Integer.parseInt(br.readLine());
-        }
-        System.out.println(optimize());
-    }
-    //mid길이로 n개의 랜선을 만들 수 있는지 반환
-    static boolean decision(long mid){
-        int count = 0;
-        for(int i=0;i&lt;k;i&#43;&#43;){
-            count &#43;= len[i]/mid;
-        }
-        return n &lt;= count;
-    }
-    //랜선 n개를 만들 수 있는 최대 길이 반환
-    static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi&#43;&#43;;
-        while(lo&lt;hi){
-            long mid = (lo&#43;hi)/2;
-            if(decision(mid)) lo = mid &#43; 1;//가능하면 더 긴것도 가능한지 해보기
-            else hi=mid;//불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
-}
+먼저 들어온게 먼저 나가는 FIFO형태의 자료구조
+
+
+FIFO : First in First out
+
+
+java 라이브러리 큐관련 메서드
+
+Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
+
+
+
+offer(E item)
+
+
+해당 아이템을 큐에 넣는다.
+넣었으면 true, 못넣었으면 false반환한다.
+
+poll()
+
+
+큐의 맨 앞을 삭제하고 반환한다.
+
+peek()
+
+
+큐의 맨앞을 삭제하지 않고 반환한다.
+
+isEmpty()
+
+
+큐가 비어있으면 true, 아니면 false를 반환한다.
+
+
+
+* 덱
+
+양쪽에서 삽입 삭제가 가능한 형태의 자료구조
+
+
+사용에따라 스택, 큐가 될 수 있다.
+
+
+java 라이브러리 덱관련 메서드
+
+Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
+
+
+
+add(E item)
+
+
+해당 아이템을 덱에 넣는다.
+addFirst(E item)
+
+
+덱의 맨 앞에 넣는다.
+
+addLast(E item)
+
+
+덱의 맨 뒤에 넣는다.
+
+
+poll()
+
+
+덱의 맨 앞을 삭제하고 반환한다.
+pollFirst()
+
+
+덱의 맨 앞을 삭제하고 반환한다.
+
+pollLast()
+
+
+덱의 맨 뒤를 삭제하고 반환한다.
+
+
+peek()
+
+
+덱의 맨앞을 삭제하지 않고 반환한다.
+peekFirst()
+
+
+덱의 맨앞을 삭제하지 않고 반환한다.
+
+peekLast()
+
+
+덱의 맨뒤를 삭제하지 않고 반환한다.
+
+
+isEmpty()
+
+
+덱이 비어있으면 true, 아니면 false를 반환한다.
 
 ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="이진탐색(binary search)과 이분탐색(parametric search)_(2)">
-<meta name="twitter:title" content="이진탐색(binary search)과 이분탐색(parametric search)_(2)">
-<meta property="og:url" content="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_2/">
-<meta property="twitter:url" content="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_2/">
+<meta property="og:title" content="스택(Stack),큐(Queue),데크(Deque)">
+<meta name="twitter:title" content="스택(Stack),큐(Queue),데크(Deque)">
+<meta property="og:url" content="https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
+<meta property="twitter:url" content="https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="* 이진탐색과 이분탐색(2)
+<meta property="og:description" content="* 스택
 
-이분탐색
-
-이분탐색은 탐색기법중 하나로, 원하는 탐색범위를 두 부분으로 분할해서 원하는 값을 찾는 방식이다. 그렇기 때문에 전부를 탐색하는 경우 O(n)에 비해 이분탐색은 O(logn)의 시간으로 단축시킬 수 있다.
-
-이분탐색을 이용한 binary search는 이전 장에서 설명했으므로, 이번장에선 활용문제를 풀어보도록 하자.
-
-이전 장 링크 : 이진탐색(binary search)과 이분탐색(parametric search)_(1)
-
-랜선 자르기
+나중에 들어온게 먼저 나가는 LIFO형태의 자료구조
 
 
-문제 링크 : 백준1654 랜선자르기
+LIFO : Last in First out
+
+
+java 라이브러리 스택관련 메서드
+
+Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
 
 
 
-
-요약  : 주어진 k개의 랜선으로 n개의 랜선을 만들고 싶다. 이떄 만둘 수 있는 최대 랜선의 길이를 구해라.
-
-
-풀이 : 가능한 랜선의 길이 0부터 2^31-1까지 정렬 되어있다고 하자. 우리는 0부터 2^31-1로 정렬된 배열에서 이분탐색을 이용해 최종길이를 찾을 수 있다. 가능한 길이 중 최대길이를 구하는 문제이므로 앞에 이진탐색의 upper_bound로 풀 수 있다.
-
-이진탐색하는 과정을 좀더 자세하게 알아보자. 랜선 길이의 최대값이 1000이라고 하면 아래 그림과 같이 중간값을 decision에 대입해 가능한 답이 되는지 판단 후, 만족하면 중간값보다 더 큰 값도 가능한지 탐색한다. 만족하지 못하고 false가 나오면 랜선의 길이가 더 작아야 한다는 의미이므로 탐색범위를 왼쪽 절반으로 줄인다.
+push(E item)
 
 
+해당 아이템을 스택의 top에 쌓는다.
+쌓았으면 true, 못쌓았으면 false를 반환한다.
 
-위의 탐색과정을 하는 함수 optimize()를 구현해 준다.
-
-//랜선 n개를 만들 수 있는 최대 길이 반환
-static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi&#43;&#43;;
-        while(lo&lt;hi){
-            long mid = (lo&#43;hi)/2;
-            if(decision(mid)) lo = mid &#43; 1;//가능하면 더 긴것도 해보기
-            else hi = mid;  //불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
+pop()
 
 
-&#10067; 자주 찾는 질문 &#10067;
+스택의 맨 위를 삭제하고 반환한다.
+
+peek()
 
 
-hi&#43;&#43;;를 하는 이유
-&#10140; 가능한 랜선의 길이는 0~2^31-1까지다. Integer.MAX_VALUE는 2^31-1인데 mid를 구하는 과정에서 나누기2를 하면 2^31-1이 절대 답이 될 수 없게 된다. (lo는 hi보다 항상 작기 때문에) 따라서 2^31-1이 답이 될 경우를 생각해 hi&#43;&#43;;를 해주고 시작한다.
+스택의 맨위를 삭제하지 않고 반환한다.
+
+empty()
 
 
-그럼 hi = Integer.MAX_VALUE &#43; 1; 하면 안되나요?
-&#10140; 연산자 우선순위에 의해 (산술연산자가 대입연산자 보다 우위) Integer.MAX_VALUE&#43;1가 먼저 계산되는데, Integer.MAX_VALUE&#43;1은 오버플로우가 되어 Integer.MIN_VALUE와 같게된다.
+스택이 비어있으면 true, 아니면 false를 반환한다.
+
+search(Object o)
 
 
-int가 아닌 long을 사용하는 이유
-&#10140; 위에서 hi&#43;&#43;를 하면 int형 범위를 넘어버리기 때문에 long으로 선언해야 한다.
-
-return lo-1;인 이유
-&#10140; 앞장에서 구현한 upper_bound에선 그냥 lo를 반환하였다. 찾는 값의 다음 인덱스를 반환했기 때문이다. 하지만 여기서는 찾는 값의 인덱스를 반환해야 하므로 lo-1을 반환해준다.
+해당 Object의 위치를 반환한다. top이면 1, 없으면 -1
 
 
-전체코드 :
 
-import java.io.*;
-import java.util.StringTokenizer;
+* 큐
 
-public class 랜선자르기 {
-    static int k;
-    static int n;
-    static long len[];
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        // TODO Auto-generated method stub
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
-        st = new StringTokenizer(br.readLine());
-        k = Integer.parseInt(st.nextToken());
-        n = Integer.parseInt(st.nextToken());
-        len = new long[k];
-        for(int i=0;i&lt;k;i&#43;&#43;){
-            len[i] = Integer.parseInt(br.readLine());
-        }
-        System.out.println(optimize());
-    }
-    //mid길이로 n개의 랜선을 만들 수 있는지 반환
-    static boolean decision(long mid){
-        int count = 0;
-        for(int i=0;i&lt;k;i&#43;&#43;){
-            count &#43;= len[i]/mid;
-        }
-        return n &lt;= count;
-    }
-    //랜선 n개를 만들 수 있는 최대 길이 반환
-    static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi&#43;&#43;;
-        while(lo&lt;hi){
-            long mid = (lo&#43;hi)/2;
-            if(decision(mid)) lo = mid &#43; 1;//가능하면 더 긴것도 가능한지 해보기
-            else hi=mid;//불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
-}
+먼저 들어온게 먼저 나가는 FIFO형태의 자료구조
+
+
+FIFO : First in First out
+
+
+java 라이브러리 큐관련 메서드
+
+Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
+
+
+
+offer(E item)
+
+
+해당 아이템을 큐에 넣는다.
+넣었으면 true, 못넣었으면 false반환한다.
+
+poll()
+
+
+큐의 맨 앞을 삭제하고 반환한다.
+
+peek()
+
+
+큐의 맨앞을 삭제하지 않고 반환한다.
+
+isEmpty()
+
+
+큐가 비어있으면 true, 아니면 false를 반환한다.
+
+
+
+* 덱
+
+양쪽에서 삽입 삭제가 가능한 형태의 자료구조
+
+
+사용에따라 스택, 큐가 될 수 있다.
+
+
+java 라이브러리 덱관련 메서드
+
+Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
+
+
+
+add(E item)
+
+
+해당 아이템을 덱에 넣는다.
+addFirst(E item)
+
+
+덱의 맨 앞에 넣는다.
+
+addLast(E item)
+
+
+덱의 맨 뒤에 넣는다.
+
+
+poll()
+
+
+덱의 맨 앞을 삭제하고 반환한다.
+pollFirst()
+
+
+덱의 맨 앞을 삭제하고 반환한다.
+
+pollLast()
+
+
+덱의 맨 뒤를 삭제하고 반환한다.
+
+
+peek()
+
+
+덱의 맨앞을 삭제하지 않고 반환한다.
+peekFirst()
+
+
+덱의 맨앞을 삭제하지 않고 반환한다.
+
+peekLast()
+
+
+덱의 맨뒤를 삭제하지 않고 반환한다.
+
+
+isEmpty()
+
+
+덱이 비어있으면 true, 아니면 false를 반환한다.
 
 ">
-<meta name="twitter:description" content="* 이진탐색과 이분탐색(2)
+<meta name="twitter:description" content="* 스택
 
-이분탐색
-
-이분탐색은 탐색기법중 하나로, 원하는 탐색범위를 두 부분으로 분할해서 원하는 값을 찾는 방식이다. 그렇기 때문에 전부를 탐색하는 경우 O(n)에 비해 이분탐색은 O(logn)의 시간으로 단축시킬 수 있다.
-
-이분탐색을 이용한 binary search는 이전 장에서 설명했으므로, 이번장에선 활용문제를 풀어보도록 하자.
-
-이전 장 링크 : 이진탐색(binary search)과 이분탐색(parametric search)_(1)
-
-랜선 자르기
+나중에 들어온게 먼저 나가는 LIFO형태의 자료구조
 
 
-문제 링크 : 백준1654 랜선자르기
+LIFO : Last in First out
+
+
+java 라이브러리 스택관련 메서드
+
+Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
 
 
 
-
-요약  : 주어진 k개의 랜선으로 n개의 랜선을 만들고 싶다. 이떄 만둘 수 있는 최대 랜선의 길이를 구해라.
-
-
-풀이 : 가능한 랜선의 길이 0부터 2^31-1까지 정렬 되어있다고 하자. 우리는 0부터 2^31-1로 정렬된 배열에서 이분탐색을 이용해 최종길이를 찾을 수 있다. 가능한 길이 중 최대길이를 구하는 문제이므로 앞에 이진탐색의 upper_bound로 풀 수 있다.
-
-이진탐색하는 과정을 좀더 자세하게 알아보자. 랜선 길이의 최대값이 1000이라고 하면 아래 그림과 같이 중간값을 decision에 대입해 가능한 답이 되는지 판단 후, 만족하면 중간값보다 더 큰 값도 가능한지 탐색한다. 만족하지 못하고 false가 나오면 랜선의 길이가 더 작아야 한다는 의미이므로 탐색범위를 왼쪽 절반으로 줄인다.
+push(E item)
 
 
+해당 아이템을 스택의 top에 쌓는다.
+쌓았으면 true, 못쌓았으면 false를 반환한다.
 
-위의 탐색과정을 하는 함수 optimize()를 구현해 준다.
-
-//랜선 n개를 만들 수 있는 최대 길이 반환
-static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi&#43;&#43;;
-        while(lo&lt;hi){
-            long mid = (lo&#43;hi)/2;
-            if(decision(mid)) lo = mid &#43; 1;//가능하면 더 긴것도 해보기
-            else hi = mid;  //불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
+pop()
 
 
-&#10067; 자주 찾는 질문 &#10067;
+스택의 맨 위를 삭제하고 반환한다.
+
+peek()
 
 
-hi&#43;&#43;;를 하는 이유
-&#10140; 가능한 랜선의 길이는 0~2^31-1까지다. Integer.MAX_VALUE는 2^31-1인데 mid를 구하는 과정에서 나누기2를 하면 2^31-1이 절대 답이 될 수 없게 된다. (lo는 hi보다 항상 작기 때문에) 따라서 2^31-1이 답이 될 경우를 생각해 hi&#43;&#43;;를 해주고 시작한다.
+스택의 맨위를 삭제하지 않고 반환한다.
+
+empty()
 
 
-그럼 hi = Integer.MAX_VALUE &#43; 1; 하면 안되나요?
-&#10140; 연산자 우선순위에 의해 (산술연산자가 대입연산자 보다 우위) Integer.MAX_VALUE&#43;1가 먼저 계산되는데, Integer.MAX_VALUE&#43;1은 오버플로우가 되어 Integer.MIN_VALUE와 같게된다.
+스택이 비어있으면 true, 아니면 false를 반환한다.
+
+search(Object o)
 
 
-int가 아닌 long을 사용하는 이유
-&#10140; 위에서 hi&#43;&#43;를 하면 int형 범위를 넘어버리기 때문에 long으로 선언해야 한다.
-
-return lo-1;인 이유
-&#10140; 앞장에서 구현한 upper_bound에선 그냥 lo를 반환하였다. 찾는 값의 다음 인덱스를 반환했기 때문이다. 하지만 여기서는 찾는 값의 인덱스를 반환해야 하므로 lo-1을 반환해준다.
+해당 Object의 위치를 반환한다. top이면 1, 없으면 -1
 
 
-전체코드 :
 
-import java.io.*;
-import java.util.StringTokenizer;
+* 큐
 
-public class 랜선자르기 {
-    static int k;
-    static int n;
-    static long len[];
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        // TODO Auto-generated method stub
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
-        st = new StringTokenizer(br.readLine());
-        k = Integer.parseInt(st.nextToken());
-        n = Integer.parseInt(st.nextToken());
-        len = new long[k];
-        for(int i=0;i&lt;k;i&#43;&#43;){
-            len[i] = Integer.parseInt(br.readLine());
-        }
-        System.out.println(optimize());
-    }
-    //mid길이로 n개의 랜선을 만들 수 있는지 반환
-    static boolean decision(long mid){
-        int count = 0;
-        for(int i=0;i&lt;k;i&#43;&#43;){
-            count &#43;= len[i]/mid;
-        }
-        return n &lt;= count;
-    }
-    //랜선 n개를 만들 수 있는 최대 길이 반환
-    static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi&#43;&#43;;
-        while(lo&lt;hi){
-            long mid = (lo&#43;hi)/2;
-            if(decision(mid)) lo = mid &#43; 1;//가능하면 더 긴것도 가능한지 해보기
-            else hi=mid;//불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
-}
+먼저 들어온게 먼저 나가는 FIFO형태의 자료구조
+
+
+FIFO : First in First out
+
+
+java 라이브러리 큐관련 메서드
+
+Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
+
+
+
+offer(E item)
+
+
+해당 아이템을 큐에 넣는다.
+넣었으면 true, 못넣었으면 false반환한다.
+
+poll()
+
+
+큐의 맨 앞을 삭제하고 반환한다.
+
+peek()
+
+
+큐의 맨앞을 삭제하지 않고 반환한다.
+
+isEmpty()
+
+
+큐가 비어있으면 true, 아니면 false를 반환한다.
+
+
+
+* 덱
+
+양쪽에서 삽입 삭제가 가능한 형태의 자료구조
+
+
+사용에따라 스택, 큐가 될 수 있다.
+
+
+java 라이브러리 덱관련 메서드
+
+Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
+
+
+
+add(E item)
+
+
+해당 아이템을 덱에 넣는다.
+addFirst(E item)
+
+
+덱의 맨 앞에 넣는다.
+
+addLast(E item)
+
+
+덱의 맨 뒤에 넣는다.
+
+
+poll()
+
+
+덱의 맨 앞을 삭제하고 반환한다.
+pollFirst()
+
+
+덱의 맨 앞을 삭제하고 반환한다.
+
+pollLast()
+
+
+덱의 맨 뒤를 삭제하고 반환한다.
+
+
+peek()
+
+
+덱의 맨앞을 삭제하지 않고 반환한다.
+peekFirst()
+
+
+덱의 맨앞을 삭제하지 않고 반환한다.
+
+peekLast()
+
+
+덱의 맨뒤를 삭제하지 않고 반환한다.
+
+
+isEmpty()
+
+
+덱이 비어있으면 true, 아니면 false를 반환한다.
 
 ">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2019-05-30T19:50:55">
+    <meta property="article:published_time" content="2019-03-21T22:03:29">
   
   
-    <meta property="article:modified_time" content="2019-05-30T19:50:55">
+    <meta property="article:modified_time" content="2019-03-21T22:03:29">
   
-  
-  
-    
-      <meta property="article:section" content="알고리즘">
-    
   
   
     
-      <meta property="article:tag" content="binarysearch">
+      <meta property="article:section" content="자료구조">
     
-      <meta property="article:tag" content="parametricsearch">
+  
+  
+    
+      <meta property="article:tag" content="stack">
+    
+      <meta property="article:tag" content="queue">
+    
+      <meta property="article:tag" content="deque">
     
   
 
@@ -483,14 +633,14 @@ public class 랜선자르기 {
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg">
 
 
-    <title>이진탐색(binary search)과 이분탐색(parametric search)_(2)</title>
+    <title>스택(Stack),큐(Queue),데크(Deque)</title>
 
     <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_2/">
+    <link rel="canonical" href="https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -648,15 +798,15 @@ public class 랜선자르기 {
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      이진탐색(binary search)과 이분탐색(parametric search)_(2)
+      스택(Stack),큐(Queue),데크(Deque)
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-05-30T19:50:55&#43;09:00">
+      <time itemprop="datePublished" datetime="2019-03-21T22:03:29&#43;09:00">
         
-  May 30, 2019
+  March 21, 2019
 
       </time>
     
@@ -665,7 +815,7 @@ public class 랜선자르기 {
   
     <span>in</span>
     
-      <a class="category-link" href="https://hyenakim.github.io/categories/%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98">알고리즘</a>
+      <a class="category-link" href="https://hyenakim.github.io/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
     
   
 
@@ -675,113 +825,150 @@ public class 랜선자르기 {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <h1 id="이진탐색과-이분탐색-2">* 이진탐색과 이분탐색(2)</h1>
+              <h1 id="스택">* 스택</h1>
 
-<h3 id="이분탐색">이분탐색</h3>
-
-<p>이분탐색은 탐색기법중 하나로, 원하는 탐색범위를 두 부분으로 분할해서 원하는 값을 찾는 방식이다. 그렇기 때문에 전부를 탐색하는 경우 O(n)에 비해 이분탐색은 O(logn)의 시간으로 단축시킬 수 있다.</p>
-
-<p>이분탐색을 이용한 binary search는 이전 장에서 설명했으므로, 이번장에선 활용문제를 풀어보도록 하자.</p>
-
-<p>이전 장 링크 : <a href="http://localhost:1313/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/">이진탐색(binary search)과 이분탐색(parametric search)_(1)</a></p>
-
-<h4 id="랜선-자르기">랜선 자르기</h4>
+<p>나중에 들어온게 먼저 나가는 <strong>LIFO</strong>형태의 자료구조</p>
 
 <blockquote>
-<p>문제 링크 : <a href="https://www.acmicpc.net/problem/1654" title="https://www.acmicpc.net/problem/1654">백준1654 랜선자르기</a></p>
-
-<p><img src="https://user-images.githubusercontent.com/37864122/58620684-ab61d700-8302-11e9-9c66-5f2309a1fc25.png" alt="랜선자르기1" />
-<img src="https://user-images.githubusercontent.com/37864122/58620695-b583d580-8302-11e9-8b9c-ea87391d92fd.png" alt="랜선자르기2" /></p>
-
-<p><strong>요약  : 주어진 k개의 랜선으로 n개의 랜선을 만들고 싶다. 이떄 만둘 수 있는 최대 랜선의 길이를 구해라.</strong></p>
+<p><strong>LIFO : Last in First out</strong></p>
 </blockquote>
 
-<h5 id="풀이-가능한-랜선의-길이-0부터-2-31-1까지-정렬-되어있다고-하자-우리는-0부터-2-31-1로-정렬된-배열에서-이분탐색을-이용해-최종길이를-찾을-수-있다-가능한-길이-중-최대길이를-구하는-문제이므로-앞에-이진탐색의-upper-bound로-풀-수-있다">풀이 : 가능한 랜선의 길이 0부터 2^31-1까지 정렬 되어있다고 하자. 우리는 0부터 2^31-1로 정렬된 배열에서 이분탐색을 이용해 최종길이를 찾을 수 있다. <strong>가능한 길이 중 최대길이를 구하는 문제이므로 앞에 이진탐색의 upper_bound로 풀 수 있다.</strong></h5>
+<h3 id="java-라이브러리-스택관련-메서드">java 라이브러리 스택관련 메서드</h3>
 
-<p>이진탐색하는 과정을 좀더 자세하게 알아보자. 랜선 길이의 최대값이 1000이라고 하면 아래 그림과 같이 중간값을 decision에 대입해 가능한 답이 되는지 판단 후, 만족하면 중간값보다 더 큰 값도 가능한지 탐색한다. 만족하지 못하고 false가 나오면 랜선의 길이가 더 작아야 한다는 의미이므로 탐색범위를 왼쪽 절반으로 줄인다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/37864122/58627280-ca1b9a00-8311-11e9-8213-9eb47829300a.png" alt="랜선자르기3" /></p>
-
-<p>위의 탐색과정을 하는 함수 optimize()를 구현해 준다.</p>
-
-<pre><code>//랜선 n개를 만들 수 있는 최대 길이 반환
-static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi++;
-        while(lo&lt;hi){
-            long mid = (lo+hi)/2;
-            if(decision(mid)) lo = mid + 1;//가능하면 더 긴것도 해보기
-            else hi = mid;  //불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
+<pre><code>Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
 </code></pre>
 
-<p>&#10067; 자주 찾는 질문 &#10067;</p>
+<ul>
+<li>push(E item)
 
 <ul>
-<li><p><strong>hi++;를 하는 이유</strong><br />
-&#10140; 가능한 랜선의 길이는 0~2^31-1까지다. Integer.MAX_VALUE는 2^31-1인데 mid를 구하는 과정에서 나누기2를 하면 2^31-1이 절대 답이 될 수 없게 된다. (lo는 hi보다 항상 작기 때문에) 따라서 2^31-1이 답이 될 경우를 생각해 hi++;를 해주고 시작한다.</p>
-
-<ul>
-<li>그럼 <strong>hi = Integer.MAX_VALUE + 1; 하면 안되나요?</strong><br />
-&#10140; 연산자 우선순위에 의해 (산술연산자가 대입연산자 보다 우위) Integer.MAX_VALUE+1가 먼저 계산되는데, Integer.MAX_VALUE+1은 오버플로우가 되어 Integer.MIN_VALUE와 같게된다.</li>
+<li>해당 아이템을 스택의 top에 쌓는다.</li>
+<li>쌓았으면 true, 못쌓았으면 false를 반환한다.</li>
 </ul></li>
+<li>pop()
 
-<li><p><strong>int가 아닌 long을 사용하는 이유</strong><br />
-&#10140; 위에서 hi++를 하면 int형 범위를 넘어버리기 때문에 long으로 선언해야 한다.</p></li>
+<ul>
+<li>스택의 맨 위를 삭제하고 반환한다.</li>
+</ul></li>
+<li>peek()
 
-<li><p><strong>return lo-1;인 이유</strong><br />
-&#10140; 앞장에서 구현한 upper_bound에선 그냥 lo를 반환하였다. 찾는 값의 <strong>다음 인덱스</strong>를 반환했기 때문이다. 하지만 여기서는 찾는 값의 인덱스를 반환해야 하므로 lo-1을 반환해준다.</p></li>
+<ul>
+<li>스택의 맨위를 삭제하지 않고 반환한다.</li>
+</ul></li>
+<li>empty()
+
+<ul>
+<li>스택이 비어있으면 true, 아니면 false를 반환한다.</li>
+</ul></li>
+<li>search(Object o)
+
+<ul>
+<li>해당 Object의 위치를 반환한다. top이면 1, 없으면 -1</li>
+</ul></li>
 </ul>
 
-<p>전체코드 :</p>
+<h1 id="큐">* 큐</h1>
 
-<pre><code>import java.io.*;
-import java.util.StringTokenizer;
+<p>먼저 들어온게 먼저 나가는 <strong>FIFO</strong>형태의 자료구조</p>
 
-public class 랜선자르기 {
-    static int k;
-    static int n;
-    static long len[];
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        // TODO Auto-generated method stub
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
-        st = new StringTokenizer(br.readLine());
-        k = Integer.parseInt(st.nextToken());
-        n = Integer.parseInt(st.nextToken());
-        len = new long[k];
-        for(int i=0;i&lt;k;i++){
-            len[i] = Integer.parseInt(br.readLine());
-        }
-        System.out.println(optimize());
-    }
-    //mid길이로 n개의 랜선을 만들 수 있는지 반환
-    static boolean decision(long mid){
-        int count = 0;
-        for(int i=0;i&lt;k;i++){
-            count += len[i]/mid;
-        }
-        return n &lt;= count;
-    }
-    //랜선 n개를 만들 수 있는 최대 길이 반환
-    static long optimize(){
-        long lo = 0;
-        long hi = Integer.MAX_VALUE;
-        hi++;
-        while(lo&lt;hi){
-            long mid = (lo+hi)/2;
-            if(decision(mid)) lo = mid + 1;//가능하면 더 긴것도 가능한지 해보기
-            else hi=mid;//불가능하면 더 짧은거 해보기
-        }
-        return lo-1;
-    }
-}
+<blockquote>
+<p><strong>FIFO : First in First out</strong></p>
+</blockquote>
 
+<h3 id="java-라이브러리-큐관련-메서드">java 라이브러리 큐관련 메서드</h3>
+
+<pre><code>Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
 </code></pre>
+
+<ul>
+<li>offer(E item)
+
+<ul>
+<li>해당 아이템을 큐에 넣는다.</li>
+<li>넣었으면 true, 못넣었으면 false반환한다.</li>
+</ul></li>
+<li>poll()
+
+<ul>
+<li>큐의 맨 앞을 삭제하고 반환한다.</li>
+</ul></li>
+<li>peek()
+
+<ul>
+<li>큐의 맨앞을 삭제하지 않고 반환한다.</li>
+</ul></li>
+<li>isEmpty()
+
+<ul>
+<li>큐가 비어있으면 true, 아니면 false를 반환한다.</li>
+</ul></li>
+</ul>
+
+<h1 id="덱">* 덱</h1>
+
+<p>양쪽에서 삽입 삭제가 가능한 형태의 자료구조</p>
+
+<blockquote>
+<p>사용에따라 스택, 큐가 될 수 있다.</p>
+</blockquote>
+
+<h3 id="java-라이브러리-덱관련-메서드">java 라이브러리 덱관련 메서드</h3>
+
+<pre><code>Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
+</code></pre>
+
+<ul>
+<li>add(E item)
+
+<ul>
+<li>해당 아이템을 덱에 넣는다.</li>
+<li>addFirst(E item)
+
+<ul>
+<li>덱의 맨 앞에 넣는다.<br /></li>
+</ul></li>
+<li>addLast(E item)
+
+<ul>
+<li>덱의 맨 뒤에 넣는다.</li>
+</ul></li>
+</ul></li>
+<li>poll()
+
+<ul>
+<li>덱의 맨 앞을 삭제하고 반환한다.</li>
+<li>pollFirst()
+
+<ul>
+<li>덱의 맨 앞을 삭제하고 반환한다.<br /></li>
+</ul></li>
+<li>pollLast()
+
+<ul>
+<li>덱의 맨 뒤를 삭제하고 반환한다.</li>
+</ul></li>
+</ul></li>
+<li>peek()
+
+<ul>
+<li>덱의 맨앞을 삭제하지 않고 반환한다.</li>
+<li>peekFirst()
+
+<ul>
+<li>덱의 맨앞을 삭제하지 않고 반환한다.<br /></li>
+</ul></li>
+<li>peekLast()
+
+<ul>
+<li>덱의 맨뒤를 삭제하지 않고 반환한다.</li>
+</ul></li>
+</ul></li>
+<li>isEmpty()
+
+<ul>
+<li>덱이 비어있으면 true, 아니면 false를 반환한다.</li>
+</ul></li>
+</ul>
               
             </div>
           </div>
@@ -793,9 +980,11 @@ public class 랜선자르기 {
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/binarysearch/">binarysearch</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/stack/">stack</a>
 
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/parametricsearch/">parametricsearch</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/queue/">queue</a>
+
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/deque/">deque</a>
 
                   </div>
                 
@@ -808,7 +997,7 @@ public class 랜선자르기 {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/03/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/" data-tooltip="배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -816,7 +1005,7 @@ public class 랜선자르기 {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/" data-tooltip="이진탐색(binary search)과 이분탐색(parametric search)_(1)">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -866,7 +1055,7 @@ public class 랜선자르기 {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/03/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/" data-tooltip="배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -874,7 +1063,7 @@ public class 랜선자르기 {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/" data-tooltip="이진탐색(binary search)과 이분탐색(parametric search)_(1)">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
