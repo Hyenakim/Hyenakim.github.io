@@ -6,10 +6,28 @@
     <description>Recent content in Tags on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 May 2019 22:36:39 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 30 May 2019 17:17:36 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>BinarySearch</title>
+      <link>https://hyenakim.github.io/tags/binarysearch/</link>
+      <pubDate>Thu, 30 May 2019 17:17:36 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/tags/binarysearch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ParametricSearch</title>
+      <link>https://hyenakim.github.io/tags/parametricsearch/</link>
+      <pubDate>Thu, 30 May 2019 17:17:36 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/tags/parametricsearch/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>BitMask</title>

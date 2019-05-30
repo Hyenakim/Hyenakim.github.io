@@ -13,10 +13,10 @@
 
 <meta property="og:description" content="Hugo tranquilpeak theme demo">
 <meta property="og:type" content="website">
-<meta property="og:title" content="stack">
-<meta name="twitter:title" content="stack">
-<meta property="og:url" content="https://hyenakim.github.io/tags/stack/">
-<meta property="twitter:url" content="https://hyenakim.github.io/tags/stack/">
+<meta property="og:title" content="ParametricSearch">
+<meta name="twitter:title" content="ParametricSearch">
+<meta property="og:url" content="https://hyenakim.github.io/tags/parametricsearch/">
+<meta property="twitter:url" content="https://hyenakim.github.io/tags/parametricsearch/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
 <meta property="og:description" content="Hugo tranquilpeak theme demo">
 <meta name="twitter:description" content="Hugo tranquilpeak theme demo">
@@ -39,16 +39,16 @@
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg">
 
 
-    <title>stack</title>
+    <title>ParametricSearch</title>
 
     <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://hyenakim.github.io/tags/stack/index.xml">
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://hyenakim.github.io/tags/parametricsearch/index.xml">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/tags/stack/">
+    <link rel="canonical" href="https://hyenakim.github.io/tags/parametricsearch/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -223,16 +223,16 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
-          스택(Stack),큐(Queue),데크(Deque)
+        <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/">
+          이진탐색(binary search)과 이분탐색(parametric search)_(1)
         </a>
       </h1>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-05-27T22:03:29&#43;09:00">
+      <time itemprop="datePublished" datetime="2019-05-30T17:17:36&#43;09:00">
         
-  May 27, 2019
+  May 30, 2019
 
       </time>
     
@@ -241,7 +241,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="https://hyenakim.github.io/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
+      <a class="category-link" href="https://hyenakim.github.io/categories/%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98">알고리즘</a>
     
   
 
@@ -250,153 +250,113 @@
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
       
-        <h1 id="스택">* 스택</h1>
-
-<p>나중에 들어온게 먼저 나가는 <strong>LIFO</strong>형태의 자료구조</p>
+        <h1 id="이진탐색과-이분탐색-1">* 이진탐색과 이분탐색(1)</h1>
 
 <blockquote>
-<p><strong>LIFO : Last in First out</strong></p>
+<p>이진탐색(binary search) : 이분탐색의 일종으로, <strong>정렬된</strong> 범위 내에서 원하는 값 찾기</p>
+
+<p>이분탐색(parametric search) : 탐색범위를 두 부분으로 분할하여 원하는 값 찾기</p>
 </blockquote>
 
-<h3 id="java-라이브러리-스택관련-메서드">java 라이브러리 스택관련 메서드</h3>
+<h3 id="이진탐색">이진탐색</h3>
 
-<pre><code>Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
+<p>이진탐색을 구현하는 방법은 2가지로 나눌 수 있다.
+1. 찾는 값이 여러개일 경우 높은 인텍스 출력
+2. 찾는 값이 여러개일 경우 낮은 인덱스 출력</p>
+
+<p>예를들어 정렬된 배열 1 2 3 3 3 4 5 6 에서 3을 찾는다 하자.
+<img src="https://user-images.githubusercontent.com/37864122/58617381-f0820b00-82fa-11e9-8ccf-6169f5ac610a.png" alt="이진탐색1" />
+1번의 경우 upper_bound, 2번의 경우 lower_bound라 할때 결과는 다음과 같다.
+<img src="https://user-images.githubusercontent.com/37864122/58617496-3a6af100-82fb-11e9-9f45-091e9886505c.png" alt="이진탐색2" /></p>
+
+<pre><code>public static int upper_bound(int[] array,int k,int lo,int hi) {
+        int mid;
+        while(lo&lt;hi) {
+            mid = (lo+hi)/2;
+            if(array[mid]&lt;=k) lo = mid+1; //k와 같은 값이 나오면 오른쪽으로 이동
+            else hi = mid;
+        }
+        return lo;
+    }
 </code></pre>
 
-<ul>
-<li>push(E item)
+<p>2번의 경우</p>
 
-<ul>
-<li>해당 아이템을 스택의 top에 쌓는다.</li>
-<li>쌓았으면 true, 못쌓았으면 false를 반환한다.</li>
-</ul></li>
-<li>pop()
-
-<ul>
-<li>스택의 맨 위를 삭제하고 반환한다.</li>
-</ul></li>
-<li>peek()
-
-<ul>
-<li>스택의 맨위를 삭제하지 않고 반환한다.</li>
-</ul></li>
-<li>empty()
-
-<ul>
-<li>스택이 비어있으면 true, 아니면 false를 반환한다.</li>
-</ul></li>
-<li>search(Object o)
-
-<ul>
-<li>해당 Object의 위치를 반환한다. top이면 1, 없으면 -1</li>
-</ul></li>
-</ul>
-
-<h1 id="큐">* 큐</h1>
-
-<p>먼저 들어온게 먼저 나가는 <strong>FIFO</strong>형태의 자료구조</p>
-
-<blockquote>
-<p><strong>FIFO : First in First out</strong></p>
-</blockquote>
-
-<h3 id="java-라이브러리-큐관련-메서드">java 라이브러리 큐관련 메서드</h3>
-
-<pre><code>Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
+<pre><code>public static int lower_bound(int[] array,int k, int lo,int hi) {
+        int mid;
+        while(lo&lt;hi) {
+            mid = (lo+hi)/2;
+            if(array[mid]&lt;k) lo = mid+1;    
+            else hi = mid; //k보다 크거나 같으면 왼쪽으로 이동
+        }
+        return lo;
+    }
 </code></pre>
 
-<ul>
-<li>offer(E item)
+<p>전체코드:</p>
 
-<ul>
-<li>해당 아이템을 큐에 넣는다.</li>
-<li>넣었으면 true, 못넣었으면 false반환한다.</li>
-</ul></li>
-<li>poll()
+<pre><code>import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
-<ul>
-<li>큐의 맨 앞을 삭제하고 반환한다.</li>
-</ul></li>
-<li>peek()
+public class 이분탐색 {
 
-<ul>
-<li>큐의 맨앞을 삭제하지 않고 반환한다.</li>
-</ul></li>
-<li>isEmpty()
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        // TODO Auto-generated method stub
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
+        int n = Integer.parseInt(br.readLine());    //arr의 길이
+        int arr[] = new int[n];                     //정렬된 배열
+        st = new StringTokenizer(br.readLine());
+        for(int i=0;i&lt;n;i++)
+            arr[i] = Integer.parseInt(st.nextToken());
+        int input = Integer.parseInt(br.readLine());
+        bw.write(&quot;upper_bound : &quot;+upper_bound(arr,input,0,arr.length));
+        bw.write(&quot;\n&quot;);
+        bw.write(&quot;lower_bound : &quot;+lower_bound(arr,input,0,arr.length));
+        bw.close();
+    }
+    /*
+    * array - 정렬된 배열
+    * k - 찾고자 하는 값
+    * lo - 범위 내 제일 낮은 인덱스
+    * hi - 범위 내 제일 높은 인덱스
+    * */
+    //정렬된 배열 array에서 k가 들어갈 수 있는 인덱스 중 높은 인덱스 반환
+    public static int upper_bound(int[] array,int k,int lo,int hi) {
+        int mid;
+        while(lo&lt;hi) {
+            mid = (lo+hi)/2;
+            if(array[mid]&lt;=k) lo = mid+1; //k와 같은 값이 나오면 오른쪽으로 이동
+            else hi = mid;
+        }
+        return lo;
+    }
+    //정렬된 배열 array에서 k가 들어갈 수 있는 인덱스 중 낮은 인덱스 반환
+    public static int lower_bound(int[] array,int k, int lo,int hi) {
+        int mid;
+        while(lo&lt;hi) {
+            mid = (lo+hi)/2;
+            if(array[mid]&lt;k) lo = mid+1; //k보다 크거나 같으면 왼쪽으로 이동
+            else hi = mid;
+        }
+        return lo;
+    }
+}
 
-<ul>
-<li>큐가 비어있으면 true, 아니면 false를 반환한다.</li>
-</ul></li>
-</ul>
-
-<h1 id="덱">* 덱</h1>
-
-<p>양쪽에서 삽입 삭제가 가능한 형태의 자료구조</p>
-
-<blockquote>
-<p>사용에따라 스택, 큐가 될 수 있다.</p>
-</blockquote>
-
-<h3 id="java-라이브러리-덱관련-메서드">java 라이브러리 덱관련 메서드</h3>
-
-<pre><code>Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
 </code></pre>
 
-<ul>
-<li>add(E item)
+<p>결과 :
+<img src="https://user-images.githubusercontent.com/37864122/58618108-bc0f4e80-82fc-11e9-82f8-76f2263080c4.png" alt="이진탐색3" /></p>
 
-<ul>
-<li>해당 아이템을 덱에 넣는다.</li>
-<li>addFirst(E item)
-
-<ul>
-<li>덱의 맨 앞에 넣는다.<br /></li>
-</ul></li>
-<li>addLast(E item)
-
-<ul>
-<li>덱의 맨 뒤에 넣는다.</li>
-</ul></li>
-</ul></li>
-<li>poll()
-
-<ul>
-<li>덱의 맨 앞을 삭제하고 반환한다.</li>
-<li>pollFirst()
-
-<ul>
-<li>덱의 맨 앞을 삭제하고 반환한다.<br /></li>
-</ul></li>
-<li>pollLast()
-
-<ul>
-<li>덱의 맨 뒤를 삭제하고 반환한다.</li>
-</ul></li>
-</ul></li>
-<li>peek()
-
-<ul>
-<li>덱의 맨앞을 삭제하지 않고 반환한다.</li>
-<li>peekFirst()
-
-<ul>
-<li>덱의 맨앞을 삭제하지 않고 반환한다.<br /></li>
-</ul></li>
-<li>peekLast()
-
-<ul>
-<li>덱의 맨뒤를 삭제하지 않고 반환한다.</li>
-</ul></li>
-</ul></li>
-<li>isEmpty()
-
-<ul>
-<li>덱이 비어있으면 true, 아니면 false를 반환한다.</li>
-</ul></li>
-</ul>
+<p>이진탐색을 직접 구현해봤으니 다음 장에선 이분탐색을 활용한 알고리즘 문제를 풀어보자!</p>
       
       <p>
-        <a href="https://hyenakim.github.io/2019/05/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/" class="postShorten-excerpt_link link">Continue reading</a>
+        <a href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>

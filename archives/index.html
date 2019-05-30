@@ -212,6 +212,10 @@
         <ul class="archive-posts archive-month" data-date="201905">
           <h5 class="archive-title" style="text-decoration: none;">May</h5>
           
+            <li class="archive-post archive-day" data-date="20190530">
+              <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/">이진탐색(binary search)과 이분탐색(parametric search)_(1)</a>
+            </li>
+          
             <li class="archive-post archive-day" data-date="20190527">
               <a class="archive-post-title" href="https://hyenakim.github.io/2019/05/%EB%B9%84%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%ACbitmask/">비트마스크(BitMask)</a>
             </li>
@@ -266,6 +270,126 @@
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_1/">
+                <h3 class="media-heading">이진탐색(binary search)과 이분탐색(parametric search)_(1)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><h1 id="이진탐색과-이분탐색-1">* 이진탐색과 이분탐색(1)</h1>
+
+<blockquote>
+<p>이진탐색(binary search) : 이분탐색의 일종으로, <strong>정렬된</strong> 범위 내에서 원하는 값 찾기</p>
+
+<p>이분탐색(parametric search) : 탐색범위를 두 부분으로 분할하여 원하는 값 찾기</p>
+</blockquote>
+
+<h3 id="이진탐색">이진탐색</h3>
+
+<p>이진탐색을 구현하는 방법은 2가지로 나눌 수 있다.
+1. 찾는 값이 여러개일 경우 높은 인텍스 출력
+2. 찾는 값이 여러개일 경우 낮은 인덱스 출력</p>
+
+<p>예를들어 정렬된 배열 1 2 3 3 3 4 5 6 에서 3을 찾는다 하자.
+<img src="https://user-images.githubusercontent.com/37864122/58617381-f0820b00-82fa-11e9-8ccf-6169f5ac610a.png" alt="이진탐색1" />
+1번의 경우 upper_bound, 2번의 경우 lower_bound라 할때 결과는 다음과 같다.
+<img src="https://user-images.githubusercontent.com/37864122/58617496-3a6af100-82fb-11e9-9f45-091e9886505c.png" alt="이진탐색2" /></p>
+
+<pre><code>public static int upper_bound(int[] array,int k,int lo,int hi) {
+        int mid;
+        while(lo&lt;hi) {
+            mid = (lo+hi)/2;
+            if(array[mid]&lt;=k) lo = mid+1; //k와 같은 값이 나오면 오른쪽으로 이동
+            else hi = mid;
+        }
+        return lo;
+    }
+</code></pre>
+
+<p>2번의 경우</p>
+
+<pre><code>public static int lower_bound(int[] array,int k, int lo,int hi) {
+        int mid;
+        while(lo&lt;hi) {
+            mid = (lo+hi)/2;
+            if(array[mid]&lt;k) lo = mid+1;    
+            else hi = mid; //k보다 크거나 같으면 왼쪽으로 이동
+        }
+        return lo;
+    }
+</code></pre>
+
+<p>전체코드:</p>
+
+<pre><code>import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class 이분탐색 {
+
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        // TODO Auto-generated method stub
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st;
+        int n = Integer.parseInt(br.readLine());    //arr의 길이
+        int arr[] = new int[n];                     //정렬된 배열
+        st = new StringTokenizer(br.readLine());
+        for(int i=0;i&lt;n;i++)
+            arr[i] = Integer.parseInt(st.nextToken());
+        int input = Integer.parseInt(br.readLine());
+        bw.write(&quot;upper_bound : &quot;+upper_bound(arr,input,0,arr.length));
+        bw.write(&quot;\n&quot;);
+        bw.write(&quot;lower_bound : &quot;+lower_bound(arr,input,0,arr.length));
+        bw.close();
+    }
+    /*
+    * array - 정렬된 배열
+    * k - 찾고자 하는 값
+    * lo - 범위 내 제일 낮은 인덱스
+    * hi - 범위 내 제일 높은 인덱스
+    * */
+    //정렬된 배열 array에서 k가 들어갈 수 있는 인덱스 중 높은 인덱스 반환
+    public static int upper_bound(int[] array,int k,int lo,int hi) {
+        int mid;
+        while(lo&lt;hi) {
+            mid = (lo+hi)/2;
+            if(array[mid]&lt;=k) lo = mid+1; //k와 같은 값이 나오면 오른쪽으로 이동
+            else hi = mid;
+        }
+        return lo;
+    }
+    //정렬된 배열 array에서 k가 들어갈 수 있는 인덱스 중 낮은 인덱스 반환
+    public static int lower_bound(int[] array,int k, int lo,int hi) {
+        int mid;
+        while(lo&lt;hi) {
+            mid = (lo+hi)/2;
+            if(array[mid]&lt;k) lo = mid+1; //k보다 크거나 같으면 왼쪽으로 이동
+            else hi = mid;
+        }
+        return lo;
+    }
+}
+
+</code></pre>
+
+<p>결과 :
+<img src="https://user-images.githubusercontent.com/37864122/58618108-bc0f4e80-82fc-11e9-82f8-76f2263080c4.png" alt="이진탐색3" /></p>
+
+<p>이진탐색을 직접 구현해봤으니 다음 장에선 이분탐색을 활용한 알고리즘 문제를 풀어보자!</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -725,7 +849,7 @@ while(iterator.hasNext())
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         3 posts found
+         4 posts found
       </p>
     </div>
   </div>
