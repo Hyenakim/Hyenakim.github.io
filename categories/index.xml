@@ -6,10 +6,19 @@
     <description>Recent content in Categories on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 May 2019 19:50:55 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 31 May 2019 14:37:23 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>자료구조</title>
+      <link>https://hyenakim.github.io/categories/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/</link>
+      <pubDate>Fri, 31 May 2019 14:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/categories/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>알고리즘</title>
@@ -17,15 +26,6 @@
       <pubDate>Thu, 30 May 2019 19:50:55 +0900</pubDate>
       
       <guid>https://hyenakim.github.io/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>자료구조</title>
-      <link>https://hyenakim.github.io/categories/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/</link>
-      <pubDate>Tue, 09 Apr 2019 22:36:39 +0900</pubDate>
-      
-      <guid>https://hyenakim.github.io/categories/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/</guid>
       <description></description>
     </item>
     
