@@ -3,19 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hyenakim.github.io/tags/binarysearch/</loc>
-    <lastmod>2019-05-30T19:50:55+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://hyenakim.github.io/categories/</loc>
-    <lastmod>2019-05-30T19:50:55+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://hyenakim.github.io/tags/parametricsearch/</loc>
     <lastmod>2019-05-30T19:50:55+09:00</lastmod>
     <priority>0</priority>
   </url>
@@ -33,7 +21,19 @@
   </url>
   
   <url>
+    <loc>https://hyenakim.github.io/tags/binarysearch/</loc>
+    <lastmod>2019-05-30T19:50:55+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://hyenakim.github.io/</loc>
+    <lastmod>2019-05-30T19:50:55+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://hyenakim.github.io/tags/parametricsearch/</loc>
     <lastmod>2019-05-30T19:50:55+09:00</lastmod>
     <priority>0</priority>
   </url>
