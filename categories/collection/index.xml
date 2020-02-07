@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Java on gpsk-Tech Blog</title>
-    <link>https://hyenakim.github.io/tags/java/</link>
-    <description>Recent content in Java on gpsk-Tech Blog</description>
+    <title>Collection on gpsk-Tech Blog</title>
+    <link>https://hyenakim.github.io/categories/collection/</link>
+    <description>Recent content in Collection on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 31 May 2019 14:37:23 +0900</lastBuildDate>
     
-	<atom:link href="https://hyenakim.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://hyenakim.github.io/categories/collection/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
