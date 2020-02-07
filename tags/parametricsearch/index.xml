@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ParametricSearch on gpsk-Tech Blog</title>
+    <title>parametricsearch on gpsk-Tech Blog</title>
     <link>https://hyenakim.github.io/tags/parametricsearch/</link>
-    <description>Recent content in ParametricSearch on gpsk-Tech Blog</description>
+    <description>Recent content in parametricsearch on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 30 May 2019 19:50:55 +0900</lastBuildDate>
@@ -17,11 +17,9 @@
       <pubDate>Thu, 30 May 2019 19:50:55 +0900</pubDate>
       
       <guid>https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_2/</guid>
-      <description>&lt;h1 id=&#34;이진탐색과-이분탐색-2&#34;&gt;* 이진탐색과 이분탐색(2)&lt;/h1&gt;
+      <description>&lt;h3 id=&#34;이분탐색&#34;&gt;이분탐색&lt;/h3&gt;
 
-&lt;h3 id=&#34;이분탐색&#34;&gt;이분탐색&lt;/h3&gt;
-
-&lt;p&gt;이분탐색은 탐색기법중 하나로, 원하는 탐색범위를 두 부분으로 분할해서 원하는 값을 찾는 방식이다. 그렇기 때문에 전부를 탐색하는 경우 O(n)에 비해 이분탐색은 O(logn)의 시간으로 단축시킬 수 있다.&lt;/p&gt;</description>
+&lt;p&gt;이분탐색은 탐색기법중 하나로, 원하는 탐색범위를 두 부분으로 분할해서 원하는 값을 찾는 방식이다.&lt;/p&gt;</description>
     </item>
     
     <item>
