@@ -8,611 +8,37 @@
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="HyenaKim">
 <meta name="keywords" content="tech">
-<meta name="description" content="* 스택
+<meta name="description" content="">
 
-나중에 들어온게 먼저 나가는 LIFO형태의 자료구조
 
-
-LIFO : Last in First out
-
-
-java 라이브러리 스택관련 메서드
-
-Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
-
-
-
-push(E item)
-
-
-해당 아이템을 스택의 top에 쌓는다.
-쌓았으면 true, 못쌓았으면 false를 반환한다.
-
-pop()
-
-
-스택의 맨 위를 삭제하고 반환한다.
-
-peek()
-
-
-스택의 맨위를 삭제하지 않고 반환한다.
-
-empty()
-
-
-스택이 비어있으면 true, 아니면 false를 반환한다.
-
-search(Object o)
-
-
-해당 Object의 위치를 반환한다. top이면 1, 없으면 -1
-
-
-
-* 큐
-
-먼저 들어온게 먼저 나가는 FIFO형태의 자료구조
-
-
-FIFO : First in First out
-
-
-java 라이브러리 큐관련 메서드
-
-Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
-
-
-
-offer(E item)
-
-
-해당 아이템을 큐에 넣는다.
-넣었으면 true, 못넣었으면 false반환한다.
-
-poll()
-
-
-큐의 맨 앞을 삭제하고 반환한다.
-
-peek()
-
-
-큐의 맨앞을 삭제하지 않고 반환한다.
-
-isEmpty()
-
-
-큐가 비어있으면 true, 아니면 false를 반환한다.
-
-
-
-* 덱
-
-양쪽에서 삽입 삭제가 가능한 형태의 자료구조
-
-
-사용에따라 스택, 큐가 될 수 있다.
-
-
-java 라이브러리 덱관련 메서드
-
-Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
-
-
-
-add(E item)
-
-
-해당 아이템을 덱에 넣는다.
-addFirst(E item)
-
-
-덱의 맨 앞에 넣는다.
-
-addLast(E item)
-
-
-덱의 맨 뒤에 넣는다.
-
-
-poll()
-
-
-덱의 맨 앞을 삭제하고 반환한다.
-pollFirst()
-
-
-덱의 맨 앞을 삭제하고 반환한다.
-
-pollLast()
-
-
-덱의 맨 뒤를 삭제하고 반환한다.
-
-
-peek()
-
-
-덱의 맨앞을 삭제하지 않고 반환한다.
-peekFirst()
-
-
-덱의 맨앞을 삭제하지 않고 반환한다.
-
-peekLast()
-
-
-덱의 맨뒤를 삭제하지 않고 반환한다.
-
-
-isEmpty()
-
-
-덱이 비어있으면 true, 아니면 false를 반환한다.
-
-">
-
-
-<meta property="og:description" content="* 스택
-
-나중에 들어온게 먼저 나가는 LIFO형태의 자료구조
-
-
-LIFO : Last in First out
-
-
-java 라이브러리 스택관련 메서드
-
-Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
-
-
-
-push(E item)
-
-
-해당 아이템을 스택의 top에 쌓는다.
-쌓았으면 true, 못쌓았으면 false를 반환한다.
-
-pop()
-
-
-스택의 맨 위를 삭제하고 반환한다.
-
-peek()
-
-
-스택의 맨위를 삭제하지 않고 반환한다.
-
-empty()
-
-
-스택이 비어있으면 true, 아니면 false를 반환한다.
-
-search(Object o)
-
-
-해당 Object의 위치를 반환한다. top이면 1, 없으면 -1
-
-
-
-* 큐
-
-먼저 들어온게 먼저 나가는 FIFO형태의 자료구조
-
-
-FIFO : First in First out
-
-
-java 라이브러리 큐관련 메서드
-
-Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
-
-
-
-offer(E item)
-
-
-해당 아이템을 큐에 넣는다.
-넣었으면 true, 못넣었으면 false반환한다.
-
-poll()
-
-
-큐의 맨 앞을 삭제하고 반환한다.
-
-peek()
-
-
-큐의 맨앞을 삭제하지 않고 반환한다.
-
-isEmpty()
-
-
-큐가 비어있으면 true, 아니면 false를 반환한다.
-
-
-
-* 덱
-
-양쪽에서 삽입 삭제가 가능한 형태의 자료구조
-
-
-사용에따라 스택, 큐가 될 수 있다.
-
-
-java 라이브러리 덱관련 메서드
-
-Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
-
-
-
-add(E item)
-
-
-해당 아이템을 덱에 넣는다.
-addFirst(E item)
-
-
-덱의 맨 앞에 넣는다.
-
-addLast(E item)
-
-
-덱의 맨 뒤에 넣는다.
-
-
-poll()
-
-
-덱의 맨 앞을 삭제하고 반환한다.
-pollFirst()
-
-
-덱의 맨 앞을 삭제하고 반환한다.
-
-pollLast()
-
-
-덱의 맨 뒤를 삭제하고 반환한다.
-
-
-peek()
-
-
-덱의 맨앞을 삭제하지 않고 반환한다.
-peekFirst()
-
-
-덱의 맨앞을 삭제하지 않고 반환한다.
-
-peekLast()
-
-
-덱의 맨뒤를 삭제하지 않고 반환한다.
-
-
-isEmpty()
-
-
-덱이 비어있으면 true, 아니면 false를 반환한다.
-
-">
+<meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="스택(Stack),큐(Queue),데크(Deque)">
-<meta name="twitter:title" content="스택(Stack),큐(Queue),데크(Deque)">
-<meta property="og:url" content="https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
-<meta property="twitter:url" content="https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
+<meta property="og:title" content="[Java] Iterator와 ListIterator">
+<meta name="twitter:title" content="[Java] Iterator와 ListIterator">
+<meta property="og:url" content="https://hyenakim.github.io/2019/05/java-iterator%EC%99%80-listiterator/">
+<meta property="twitter:url" content="https://hyenakim.github.io/2019/05/java-iterator%EC%99%80-listiterator/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="* 스택
-
-나중에 들어온게 먼저 나가는 LIFO형태의 자료구조
-
-
-LIFO : Last in First out
-
-
-java 라이브러리 스택관련 메서드
-
-Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
-
-
-
-push(E item)
-
-
-해당 아이템을 스택의 top에 쌓는다.
-쌓았으면 true, 못쌓았으면 false를 반환한다.
-
-pop()
-
-
-스택의 맨 위를 삭제하고 반환한다.
-
-peek()
-
-
-스택의 맨위를 삭제하지 않고 반환한다.
-
-empty()
-
-
-스택이 비어있으면 true, 아니면 false를 반환한다.
-
-search(Object o)
-
-
-해당 Object의 위치를 반환한다. top이면 1, 없으면 -1
-
-
-
-* 큐
-
-먼저 들어온게 먼저 나가는 FIFO형태의 자료구조
-
-
-FIFO : First in First out
-
-
-java 라이브러리 큐관련 메서드
-
-Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
-
-
-
-offer(E item)
-
-
-해당 아이템을 큐에 넣는다.
-넣었으면 true, 못넣었으면 false반환한다.
-
-poll()
-
-
-큐의 맨 앞을 삭제하고 반환한다.
-
-peek()
-
-
-큐의 맨앞을 삭제하지 않고 반환한다.
-
-isEmpty()
-
-
-큐가 비어있으면 true, 아니면 false를 반환한다.
-
-
-
-* 덱
-
-양쪽에서 삽입 삭제가 가능한 형태의 자료구조
-
-
-사용에따라 스택, 큐가 될 수 있다.
-
-
-java 라이브러리 덱관련 메서드
-
-Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
-
-
-
-add(E item)
-
-
-해당 아이템을 덱에 넣는다.
-addFirst(E item)
-
-
-덱의 맨 앞에 넣는다.
-
-addLast(E item)
-
-
-덱의 맨 뒤에 넣는다.
-
-
-poll()
-
-
-덱의 맨 앞을 삭제하고 반환한다.
-pollFirst()
-
-
-덱의 맨 앞을 삭제하고 반환한다.
-
-pollLast()
-
-
-덱의 맨 뒤를 삭제하고 반환한다.
-
-
-peek()
-
-
-덱의 맨앞을 삭제하지 않고 반환한다.
-peekFirst()
-
-
-덱의 맨앞을 삭제하지 않고 반환한다.
-
-peekLast()
-
-
-덱의 맨뒤를 삭제하지 않고 반환한다.
-
-
-isEmpty()
-
-
-덱이 비어있으면 true, 아니면 false를 반환한다.
-
-">
-<meta name="twitter:description" content="* 스택
-
-나중에 들어온게 먼저 나가는 LIFO형태의 자료구조
-
-
-LIFO : Last in First out
-
-
-java 라이브러리 스택관련 메서드
-
-Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
-
-
-
-push(E item)
-
-
-해당 아이템을 스택의 top에 쌓는다.
-쌓았으면 true, 못쌓았으면 false를 반환한다.
-
-pop()
-
-
-스택의 맨 위를 삭제하고 반환한다.
-
-peek()
-
-
-스택의 맨위를 삭제하지 않고 반환한다.
-
-empty()
-
-
-스택이 비어있으면 true, 아니면 false를 반환한다.
-
-search(Object o)
-
-
-해당 Object의 위치를 반환한다. top이면 1, 없으면 -1
-
-
-
-* 큐
-
-먼저 들어온게 먼저 나가는 FIFO형태의 자료구조
-
-
-FIFO : First in First out
-
-
-java 라이브러리 큐관련 메서드
-
-Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
-
-
-
-offer(E item)
-
-
-해당 아이템을 큐에 넣는다.
-넣었으면 true, 못넣었으면 false반환한다.
-
-poll()
-
-
-큐의 맨 앞을 삭제하고 반환한다.
-
-peek()
-
-
-큐의 맨앞을 삭제하지 않고 반환한다.
-
-isEmpty()
-
-
-큐가 비어있으면 true, 아니면 false를 반환한다.
-
-
-
-* 덱
-
-양쪽에서 삽입 삭제가 가능한 형태의 자료구조
-
-
-사용에따라 스택, 큐가 될 수 있다.
-
-
-java 라이브러리 덱관련 메서드
-
-Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
-
-
-
-add(E item)
-
-
-해당 아이템을 덱에 넣는다.
-addFirst(E item)
-
-
-덱의 맨 앞에 넣는다.
-
-addLast(E item)
-
-
-덱의 맨 뒤에 넣는다.
-
-
-poll()
-
-
-덱의 맨 앞을 삭제하고 반환한다.
-pollFirst()
-
-
-덱의 맨 앞을 삭제하고 반환한다.
-
-pollLast()
-
-
-덱의 맨 뒤를 삭제하고 반환한다.
-
-
-peek()
-
-
-덱의 맨앞을 삭제하지 않고 반환한다.
-peekFirst()
-
-
-덱의 맨앞을 삭제하지 않고 반환한다.
-
-peekLast()
-
-
-덱의 맨뒤를 삭제하지 않고 반환한다.
-
-
-isEmpty()
-
-
-덱이 비어있으면 true, 아니면 false를 반환한다.
-
-">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2019-03-21T22:03:29">
+    <meta property="article:published_time" content="2019-05-30T19:50:55">
   
   
-    <meta property="article:modified_time" content="2019-03-21T22:03:29">
+    <meta property="article:modified_time" content="2019-05-30T19:50:55">
   
-  
-  
-    
-      <meta property="article:section" content="자료구조">
-    
   
   
     
-      <meta property="article:tag" content="stack">
+      <meta property="article:section" content="Java / Collection 프레임워크">
     
-      <meta property="article:tag" content="queue">
+  
+  
     
-      <meta property="article:tag" content="deque">
+      <meta property="article:tag" content="Java">
+    
+      <meta property="article:tag" content="Collection">
     
   
 
@@ -633,14 +59,14 @@ isEmpty()
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/58422394-69038480-80cd-11e9-9f96-3b54da604459.jpg">
 
 
-    <title>스택(Stack),큐(Queue),데크(Deque)</title>
+    <title>[Java] Iterator와 ListIterator</title>
 
     <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/2019/03/%EC%8A%A4%ED%83%9Dstack%ED%81%90queue%EB%8D%B0%ED%81%ACdeque/">
+    <link rel="canonical" href="https://hyenakim.github.io/2019/05/java-iterator%EC%99%80-listiterator/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -798,15 +224,15 @@ isEmpty()
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      스택(Stack),큐(Queue),데크(Deque)
+      [Java] Iterator와 ListIterator
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2019-03-21T22:03:29&#43;09:00">
+      <time itemprop="datePublished" datetime="2019-05-30T19:50:55&#43;09:00">
         
-  March 21, 2019
+  May 30, 2019
 
       </time>
     
@@ -815,7 +241,7 @@ isEmpty()
   
     <span>in</span>
     
-      <a class="category-link" href="https://hyenakim.github.io/categories/%ec%9e%90%eb%a3%8c%ea%b5%ac%ec%a1%b0">자료구조</a>
+      <a class="category-link" href="https://hyenakim.github.io/categories/java-/-collection-%ed%94%84%eb%a0%88%ec%9e%84%ec%9b%8c%ed%81%ac">Java / Collection 프레임워크</a>
     
   
 
@@ -825,150 +251,7 @@ isEmpty()
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <h1 id="스택">* 스택</h1>
-
-<p>나중에 들어온게 먼저 나가는 <strong>LIFO</strong>형태의 자료구조</p>
-
-<blockquote>
-<p><strong>LIFO : Last in First out</strong></p>
-</blockquote>
-
-<h3 id="java-라이브러리-스택관련-메서드">java 라이브러리 스택관련 메서드</h3>
-
-<pre><code>Stack&lt;Integer&gt; stack = new Stack&lt;Integer&gt;();
-</code></pre>
-
-<ul>
-<li>push(E item)
-
-<ul>
-<li>해당 아이템을 스택의 top에 쌓는다.</li>
-<li>쌓았으면 true, 못쌓았으면 false를 반환한다.</li>
-</ul></li>
-<li>pop()
-
-<ul>
-<li>스택의 맨 위를 삭제하고 반환한다.</li>
-</ul></li>
-<li>peek()
-
-<ul>
-<li>스택의 맨위를 삭제하지 않고 반환한다.</li>
-</ul></li>
-<li>empty()
-
-<ul>
-<li>스택이 비어있으면 true, 아니면 false를 반환한다.</li>
-</ul></li>
-<li>search(Object o)
-
-<ul>
-<li>해당 Object의 위치를 반환한다. top이면 1, 없으면 -1</li>
-</ul></li>
-</ul>
-
-<h1 id="큐">* 큐</h1>
-
-<p>먼저 들어온게 먼저 나가는 <strong>FIFO</strong>형태의 자료구조</p>
-
-<blockquote>
-<p><strong>FIFO : First in First out</strong></p>
-</blockquote>
-
-<h3 id="java-라이브러리-큐관련-메서드">java 라이브러리 큐관련 메서드</h3>
-
-<pre><code>Queue&lt;Integer&gt; q = new LinkedList&lt;Integer&gt;();
-</code></pre>
-
-<ul>
-<li>offer(E item)
-
-<ul>
-<li>해당 아이템을 큐에 넣는다.</li>
-<li>넣었으면 true, 못넣었으면 false반환한다.</li>
-</ul></li>
-<li>poll()
-
-<ul>
-<li>큐의 맨 앞을 삭제하고 반환한다.</li>
-</ul></li>
-<li>peek()
-
-<ul>
-<li>큐의 맨앞을 삭제하지 않고 반환한다.</li>
-</ul></li>
-<li>isEmpty()
-
-<ul>
-<li>큐가 비어있으면 true, 아니면 false를 반환한다.</li>
-</ul></li>
-</ul>
-
-<h1 id="덱">* 덱</h1>
-
-<p>양쪽에서 삽입 삭제가 가능한 형태의 자료구조</p>
-
-<blockquote>
-<p>사용에따라 스택, 큐가 될 수 있다.</p>
-</blockquote>
-
-<h3 id="java-라이브러리-덱관련-메서드">java 라이브러리 덱관련 메서드</h3>
-
-<pre><code>Deque&lt;Integer&gt; deque = new ArrayDeque&lt;Integer&gt;();
-</code></pre>
-
-<ul>
-<li>add(E item)
-
-<ul>
-<li>해당 아이템을 덱에 넣는다.</li>
-<li>addFirst(E item)
-
-<ul>
-<li>덱의 맨 앞에 넣는다.<br /></li>
-</ul></li>
-<li>addLast(E item)
-
-<ul>
-<li>덱의 맨 뒤에 넣는다.</li>
-</ul></li>
-</ul></li>
-<li>poll()
-
-<ul>
-<li>덱의 맨 앞을 삭제하고 반환한다.</li>
-<li>pollFirst()
-
-<ul>
-<li>덱의 맨 앞을 삭제하고 반환한다.<br /></li>
-</ul></li>
-<li>pollLast()
-
-<ul>
-<li>덱의 맨 뒤를 삭제하고 반환한다.</li>
-</ul></li>
-</ul></li>
-<li>peek()
-
-<ul>
-<li>덱의 맨앞을 삭제하지 않고 반환한다.</li>
-<li>peekFirst()
-
-<ul>
-<li>덱의 맨앞을 삭제하지 않고 반환한다.<br /></li>
-</ul></li>
-<li>peekLast()
-
-<ul>
-<li>덱의 맨뒤를 삭제하지 않고 반환한다.</li>
-</ul></li>
-</ul></li>
-<li>isEmpty()
-
-<ul>
-<li>덱이 비어있으면 true, 아니면 false를 반환한다.</li>
-</ul></li>
-</ul>
+              
               
             </div>
           </div>
@@ -980,11 +263,9 @@ isEmpty()
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/stack/">stack</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/java/">Java</a>
 
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/queue/">queue</a>
-
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/deque/">deque</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/collection/">Collection</a>
 
                   </div>
                 
@@ -997,7 +278,7 @@ isEmpty()
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/03/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/" data-tooltip="배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89%ED%8A%B8%EB%A6%ACbinary-search-tree/" data-tooltip="이진탐색트리(binary search tree)">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -1005,7 +286,7 @@ isEmpty()
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_2/" data-tooltip="이진탐색(binary search)과 이분탐색(parametric search)_(2)">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -1055,7 +336,7 @@ isEmpty()
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/03/%EB%B0%B0%EC%97%B4array-%EB%8F%99%EC%A0%81%EB%B0%B0%EC%97%B4arraylist-%EC%97%B0%EA%B2%B0%EB%A6%AC%EC%8A%A4%ED%8A%B8linkedlist/" data-tooltip="배열(Array), 동적배열(ArrayList), 연결리스트(LinkedList)">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89%ED%8A%B8%EB%A6%ACbinary-search-tree/" data-tooltip="이진탐색트리(binary search tree)">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -1063,7 +344,7 @@ isEmpty()
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2019/05/%EC%9D%B4%EC%A7%84%ED%83%90%EC%83%89binary-search%EA%B3%BC-%EC%9D%B4%EB%B6%84%ED%83%90%EC%83%89parametric-search_2/" data-tooltip="이진탐색(binary search)과 이분탐색(parametric search)_(2)">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>

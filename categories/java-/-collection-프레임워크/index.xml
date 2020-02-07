@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java / Collection 프레임워크 on gpsk-Tech Blog</title>
+    <link>https://hyenakim.github.io/categories/java-/-collection-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC/</link>
+    <description>Recent content in Java / Collection 프레임워크 on gpsk-Tech Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 May 2019 19:50:55 +0900</lastBuildDate>
+    
+	<atom:link href="https://hyenakim.github.io/categories/java-/-collection-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[Java] Iterator와 ListIterator</title>
+      <link>https://hyenakim.github.io/2019/05/java-iterator%EC%99%80-listiterator/</link>
+      <pubDate>Thu, 30 May 2019 19:50:55 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/2019/05/java-iterator%EC%99%80-listiterator/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
