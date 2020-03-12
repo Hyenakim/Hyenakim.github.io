@@ -8,18 +8,18 @@
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.3-SNAPSHOT">
 <meta name="author" content="HyenaKim">
 <meta name="keywords" content="tech">
-<meta name="description" content="">
+<meta name="description" content="자바의 컬렉션 프레임워크에서 iterator 인터페이스는 컬렉션에 저장된 요소를 가져오는 방법 중 하나이다.">
 
 
-<meta property="og:description" content="">
+<meta property="og:description" content="자바의 컬렉션 프레임워크에서 iterator 인터페이스는 컬렉션에 저장된 요소를 가져오는 방법 중 하나이다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Java] Iterator와 ListIterator">
 <meta name="twitter:title" content="[Java] Iterator와 ListIterator">
 <meta property="og:url" content="https://hyenakim.github.io/2020/02/java-iterator%EC%99%80-listiterator/">
 <meta property="twitter:url" content="https://hyenakim.github.io/2020/02/java-iterator%EC%99%80-listiterator/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="">
-<meta name="twitter:description" content="">
+<meta property="og:description" content="자바의 컬렉션 프레임워크에서 iterator 인터페이스는 컬렉션에 저장된 요소를 가져오는 방법 중 하나이다.">
+<meta name="twitter:description" content="자바의 컬렉션 프레임워크에서 iterator 인터페이스는 컬렉션에 저장된 요소를 가져오는 방법 중 하나이다.">
 <meta property="og:locale" content="en-us">
 
   
@@ -258,7 +258,53 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              
+              <p>자바의 컬렉션 프레임워크에서 iterator 인터페이스는 컬렉션에 저장된 요소를 가져오는 방법 중 하나이다.</p>
+
+<h1 id="iterator">* Iterator</h1>
+
+<h3 id="iterator로-리스트-요소-출력하기">Iterator로 리스트 요소 출력하기</h3>
+
+<pre><code>LinkedList&lt;Integer&gt; lnkList = new LinkedList&lt;Integer&gt;();
+
+lnkList.add(4);
+lnkList.add(2);
+lnkList.add(3);
+lnkList.add(1);
+
+ 
+Iterator&lt;Integer&gt; iter = lnkList.iterator();
+while (iter.hasNext()) {
+    System.out.print(iter.next() + &quot; &quot;);
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>메소드</th>
+<th align="center">의미</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>boolean hasNext()</code></td>
+<td align="center">다음 요소가 있으면 true, 없으면 false반환</td>
+</tr>
+
+<tr>
+<td><code>E next()</code></td>
+<td align="center">다음 요소를 반환한다</td>
+</tr>
+
+<tr>
+<td><code>default void remove()</code></td>
+<td align="center">요소를 삭제한다</td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="listiterator">* ListIterator</h1>
               
             </div>
           </div>
@@ -442,7 +488,7 @@
                   Feb 2, 2020
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"></div>
+              <div class="media-content hide-xs font-merryweather"><p>자바의 컬렉션 프레임워크에서 iterator 인터페이스는 컬렉션에 저장된 요소를 가져오는 방법 중 하나이다.</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
