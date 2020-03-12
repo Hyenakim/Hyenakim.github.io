@@ -262,19 +262,20 @@
 
 <h1 id="iterator">* Iterator</h1>
 
+<p>자바의 컬렉션 프레임워크에서 iterator 인터페이스는 컬렉션에 저장된 요소를 가져오는 방법 중 하나이다.</p>
+
 <h3 id="iterator로-리스트-요소-출력하기">Iterator로 리스트 요소 출력하기</h3>
 
-<pre><code>LinkedList&lt;Integer&gt; lnkList = new LinkedList&lt;Integer&gt;();
+<pre><code class="language-java">LinkedList&lt;Integer&gt; ll = new LinkedList&lt;Integer&gt;();
 
 lnkList.add(4);
 lnkList.add(2);
 lnkList.add(3);
 lnkList.add(1);
-
  
-Iterator&lt;Integer&gt; iter = lnkList.iterator();
-while (iter.hasNext()) {
-    System.out.print(iter.next() + &quot; &quot;);
+Iterator&lt;Integer&gt; it = ll.iterator();
+while (it.hasNext()) {
+    System.out.print(it.next() + &quot; &quot;);
 }
 </code></pre>
 
@@ -288,23 +289,100 @@ while (iter.hasNext()) {
 
 <tbody>
 <tr>
-<td><code>boolean hasNext()</code></td>
+<td>boolean hasNext()</td>
 <td align="center">다음 요소가 있으면 true, 없으면 false반환</td>
 </tr>
 
 <tr>
-<td><code>E next()</code></td>
+<td>E next()</td>
 <td align="center">다음 요소를 반환한다</td>
 </tr>
 
 <tr>
-<td><code>default void remove()</code></td>
+<td>default void remove()</td>
 <td align="center">요소를 삭제한다</td>
 </tr>
 </tbody>
 </table>
 
+<p>리스트 요소를 변경하지 않고 값만 읽는다면 Enhanced For문을 사용하는 것이 좋다. 코드가 명확하고 버그를 예방할 수 있기 때문이다.</p>
+
+<pre><code class="language-java">for(Integer i : ll)
+    System.out.print(i + &quot; &quot;);
+</code></pre>
+
 <h1 id="listiterator">* ListIterator</h1>
+
+<p>ListIterator 인터페이스는 컬렉션 요소의 대체, 추가 그리고 인덱스 검색 등을 위한 작업에서 양방향으로 이동하는 것을 지원한다.</p>
+
+<pre><code class="language-java">LinkedList&lt;Integer&gt; ll = new LinkedList&lt;Integer&gt;();
+
+lnkList.add(4);
+lnkList.add(2);
+lnkList.add(3);
+lnkList.add(1);
+
+ListIterator&lt;Integer&gt; it = ll.listIterator();
+while (it.hasPrevious()) {
+    System.out.print(it.previous() + &quot; &quot;);
+}
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>메소드</th>
+<th align="center">의미</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>void add(E e)</td>
+<td align="center">해당 리스트(list)에 전달된 요소를 추가함. (선택적 기능)</td>
+</tr>
+
+<tr>
+<td>boolean hasNext()</td>
+<td align="center">다음 요소가 있으면 true, 없으면 false 반환</td>
+</tr>
+
+<tr>
+<td>boolean hasPrevious()</td>
+<td align="center">리스트를 역방향으로 순회할 때 다음 요소를 가지고 있으면 true, 없으면 false를 반환</td>
+</tr>
+
+<tr>
+<td>E next()</td>
+<td align="center">리스트의 다음 요소를 반환하고, 커서(cursor)의 위치를 순방향으로 이동시킴</td>
+</tr>
+
+<tr>
+<td>int nextIndex()</td>
+<td align="center">다음 next() 메소드를 호출하면 반환될 요소의 인덱스를 반환</td>
+</tr>
+
+<tr>
+<td>E previous()</td>
+<td align="center">리스트의 이전 요소를 반환하고, 커서(cursor)의 위치를 역방향으로 이동시킴</td>
+</tr>
+
+<tr>
+<td>int previousIndex()</td>
+<td align="center">다음 previous() 메소드를 호출하면 반환될 요소의 인덱스를 반환</td>
+</tr>
+
+<tr>
+<td>void remove()</td>
+<td align="center">next()나 previous() 메소드에 의해 반환된 가장 마지막 요소를 리스트에서 제거(선택적 기능)</td>
+</tr>
+
+<tr>
+<td>void set(E e)</td>
+<td align="center">next()나 previous() 메소드에 의해 반환된 가장 마지막 요소를 전달된 객체로 대체 (선택적 기능)</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
