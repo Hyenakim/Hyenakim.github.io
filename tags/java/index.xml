@@ -6,17 +6,26 @@
     <description>Recent content in Java on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Feb 2020 09:37:23 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2020 09:37:23 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>[Java] Iterator와 ListIterator</title>
-      <link>https://hyenakim.github.io/2020/02/java-iterator%EC%99%80-listiterator/</link>
+      <title>Java 시작하기</title>
+      <link>https://hyenakim.github.io/2020/05/java-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/</link>
+      <pubDate>Sun, 24 May 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/05/java-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/</guid>
+      <description>&lt;p&gt;#자바 #JVM #JDK #Java SE&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Iterator와 ListIterator</title>
+      <link>https://hyenakim.github.io/2020/02/iterator%EC%99%80-listiterator/</link>
       <pubDate>Fri, 07 Feb 2020 09:37:23 +0900</pubDate>
       
-      <guid>https://hyenakim.github.io/2020/02/java-iterator%EC%99%80-listiterator/</guid>
+      <guid>https://hyenakim.github.io/2020/02/iterator%EC%99%80-listiterator/</guid>
       <description>&lt;p&gt;자바의 컬렉션 프레임워크에서 iterator 인터페이스는 컬렉션에 저장된 요소를 가져오는 방법 중 하나이다.&lt;/p&gt;</description>
     </item>
     

@@ -6,10 +6,19 @@
     <description>Recent content in Tags on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Feb 2020 09:37:23 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2020 09:37:23 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java</title>
+      <link>https://hyenakim.github.io/tags/java/</link>
+      <pubDate>Sun, 24 May 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/tags/java/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Collection</title>
@@ -17,15 +26,6 @@
       <pubDate>Fri, 07 Feb 2020 09:37:23 +0900</pubDate>
       
       <guid>https://hyenakim.github.io/tags/collection/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://hyenakim.github.io/tags/java/</link>
-      <pubDate>Fri, 07 Feb 2020 09:37:23 +0900</pubDate>
-      
-      <guid>https://hyenakim.github.io/tags/java/</guid>
       <description></description>
     </item>
     
