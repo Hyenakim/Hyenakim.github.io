@@ -6,7 +6,7 @@
     <description>Recent content in Java on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 May 2020 09:37:23 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 24 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Java 시작하기</title>
       <link>https://hyenakim.github.io/2020/05/java-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/</link>
-      <pubDate>Sun, 24 May 2020 09:37:23 +0900</pubDate>
+      <pubDate>Sun, 24 May 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hyenakim.github.io/2020/05/java-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/</guid>
       <description>&lt;p&gt;#자바 #JVM #JDK #Java SE&lt;/p&gt;</description>
