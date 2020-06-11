@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>Iterator와 ListIterator</title>
-      <link>https://hyenakim.github.io/2020/06/iterator%EC%99%80-listiterator/</link>
+      <title>메모리 사용 영역</title>
+      <link>https://hyenakim.github.io/2020/06/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%98%81%EC%97%AD/</link>
       <pubDate>Thu, 11 Jun 2020 00:37:23 +0900</pubDate>
       
-      <guid>https://hyenakim.github.io/2020/06/iterator%EC%99%80-listiterator/</guid>
+      <guid>https://hyenakim.github.io/2020/06/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%98%81%EC%97%AD/</guid>
       <description>&lt;p&gt;#메소드영역 #힘역역 #JVM스택영역&lt;/p&gt;</description>
     </item>
     
