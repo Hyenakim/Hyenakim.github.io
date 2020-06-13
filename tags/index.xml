@@ -6,10 +6,28 @@
     <description>Recent content in Tags on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Jun 2020 00:37:23 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2020 09:37:23 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AddressSpace</title>
+      <link>https://hyenakim.github.io/tags/addressspace/</link>
+      <pubDate>Fri, 12 Jun 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/tags/addressspace/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MemoryVirtualization</title>
+      <link>https://hyenakim.github.io/tags/memoryvirtualization/</link>
+      <pubDate>Fri, 12 Jun 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/tags/memoryvirtualization/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Java</title>
@@ -39,7 +57,7 @@
     </item>
     
     <item>
-      <title>binarysearch</title>
+      <title>BinarySearch</title>
       <link>https://hyenakim.github.io/tags/binarysearch/</link>
       <pubDate>Thu, 30 May 2019 19:50:55 +0900</pubDate>
       
@@ -48,7 +66,7 @@
     </item>
     
     <item>
-      <title>parametricsearch</title>
+      <title>ParametricSearch</title>
       <link>https://hyenakim.github.io/tags/parametricsearch/</link>
       <pubDate>Thu, 30 May 2019 19:50:55 +0900</pubDate>
       

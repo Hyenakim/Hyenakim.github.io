@@ -8,35 +8,37 @@
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Hyena Kim">
 <meta name="keywords" content="tech">
-<meta name="description" content="#메소드영역 #힙역역 #JVM스택영역">
+<meta name="description" content="#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터">
 
 
-<meta property="og:description" content="#메소드영역 #힙역역 #JVM스택영역">
+<meta property="og:description" content="#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터">
 <meta property="og:type" content="article">
-<meta property="og:title" content="메모리 사용 영역">
-<meta name="twitter:title" content="메모리 사용 영역">
-<meta property="og:url" content="https://hyenakim.github.io/2020/06/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%98%81%EC%97%AD/">
-<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%98%81%EC%97%AD/">
+<meta property="og:title" content="8. Address Space">
+<meta name="twitter:title" content="8. Address Space">
+<meta property="og:url" content="https://hyenakim.github.io/2020/06/8.-address-space/">
+<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/8.-address-space/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="#메소드영역 #힙역역 #JVM스택영역">
-<meta name="twitter:description" content="#메소드영역 #힙역역 #JVM스택영역">
+<meta property="og:description" content="#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터">
+<meta name="twitter:description" content="#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2020-06-11T00:37:23">
+    <meta property="article:published_time" content="2020-06-12T09:37:23">
   
   
-    <meta property="article:modified_time" content="2020-06-11T00:37:23">
+    <meta property="article:modified_time" content="2020-06-12T09:37:23">
   
-  
-  
-    
-      <meta property="article:section" content="Java">
-    
   
   
     
-      <meta property="article:tag" content="Java">
+      <meta property="article:section" content="운영체제">
+    
+  
+  
+    
+      <meta property="article:tag" content="MemoryVirtualization">
+    
+      <meta property="article:tag" content="AddressSpace">
     
   
 
@@ -49,8 +51,8 @@
 
 
 
-  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/84361317-6efbd300-ac06-11ea-8210-6c7fd894a4b5.png">
-  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/84361317-6efbd300-ac06-11ea-8210-6c7fd894a4b5.png">
+  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/84557814-05e0a080-ad69-11ea-8ed4-4dae86b76bb3.png">
+  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/84557814-05e0a080-ad69-11ea-8ed4-4dae86b76bb3.png">
 
 
 
@@ -60,14 +62,14 @@
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/77986659-a589b780-7352-11ea-88f5-9efefad42fba.png">
 
 
-    <title>메모리 사용 영역</title>
+    <title>8. Address Space</title>
 
     <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/2020/06/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%98%81%EC%97%AD/">
+    <link rel="canonical" href="https://hyenakim.github.io/2020/06/8.-address-space/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -225,15 +227,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      메모리 사용 영역
+      8. Address Space
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-06-11T00:37:23&#43;09:00">
+      <time itemprop="datePublished" datetime="2020-06-12T09:37:23&#43;09:00">
         
-  June 11, 2020
+  June 12, 2020
 
       </time>
     
@@ -242,7 +244,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="https://hyenakim.github.io/categories/java">Java</a>
+      <a class="category-link" href="https://hyenakim.github.io/categories/%ec%9a%b4%ec%98%81%ec%b2%b4%ec%a0%9c">운영체제</a>
     
   
 
@@ -252,32 +254,150 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>#메소드영역 #힙역역 #JVM스택영역</p>
+              <p>#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터</p>
 
-<h2 id="메모리-사용-영역">메모리 사용 영역</h2>
+<h2 id="8-address-spaces">8. Address Spaces</h2>
 
-<p>java.exe로 JVM이 시작되면 JVM은 운영체제에서 할당받은 메모리 영역을 다음과 같이 세부 영역으로 구분하여 사용한다.</p>
+<p>초기 컴퓨터는 사용자에게 간단한 개념(abstraction)을 제공했다.낮은 번지에는 OS를 올리고, 높은 번지에는 응용프로세스가 실행할 수 있는 메모리 공간을 할당하는 방식으로.. 이경우엔 하나의 프로세스만 사용할 수 있다. 그런데 시간이 지나면서 다음 2가지 이유로 좀 더 발전되었다.</p>
 
-<p><img src="https://user-images.githubusercontent.com/37864122/84361317-6efbd300-ac06-11ea-8210-6c7fd894a4b5.png" alt="데이터영역" /></p>
+<p><strong>1. 멀티프로그래밍</strong></p>
 
-<h3 id="메소드-영역">🔗 메소드 영역</h3>
+<p>여러개의 프로세스를 동시에 실행시키는 멀티프로그래밍 환경이 등장했다. 동시에 존재하고, OS가 프로세스간에 자원을 분배하므로 CPU 이용률을 높인다.대표적인 예로 Time Sharing이 있다.</p>
 
-<p>특정 클래스가 사용되면 클래스파일 (*.class)를 읽어 클래스별로 런타임 상수풀, 필드 데이터, 메소드 데이터, 메소드 코드, 생성자 코드 등을 분류해서 저장한다. <strong>메소드영역은 JVM이 시작할 때 생성되고 모든 스레드가 공유하는 영역이다.</strong></p>
+<p><strong>2. Time Sharing</strong></p>
 
-<h3 id="힙-영역">🔗 힙 영역</h3>
+<p>Round Robin 알고리즘으로 Time Sharing이 일어난다. 그런데 물리메모리가 하나의 프로세스만 가질 수 있다면(왼쪽이미지), OS는 메모리를 차지하고 있던 프로세스의 컨텍스트 정보를 모두 디스크에 저장하고 실행시킬 프로세스의 컨텍스트를 디스크에서 가져와 메모리에 올려야하는 큰 오버헤드가 발생한다. 물리메모리 안에 여러프로세스가 공존하는 구조를 생각할 수 있다.(오른쪽이미지)</p>
 
-<p>객체와 배열이 생성되는 영역이다. 참조하는 변수나 필드가 없다면 JVM은 쓰레기 수집기를 실행시켜 쓰레기 객체를 힙영역에서 제거한다.</p>
+<p>⚠️ Protection Issue
+여러 프로그램이 메모리에 동시에 존재하다보니(오른쪽이미지) 보호가 중요한 문제가 된다. ex) 프로세스C가 B메모리에 접근하려는 경우</p>
 
-<h3 id="스택-영역">🔗 스택 영역</h3>
+<p><img src="https://user-images.githubusercontent.com/37864122/84557814-05e0a080-ad69-11ea-8ed4-4dae86b76bb3.png" alt="Early System" /> ➡️➡️➡️➡️➡️ <img src="https://user-images.githubusercontent.com/37864122/84557827-1f81e800-ad69-11ea-9634-c43d1ed68b2d.png" alt="Next System" /></p>
 
-<p>JVM 스택 영역은 각 스레드마다 하나씩 존재해 스레드가 시작될 때 할당된다. 메소드를 호출할 때마다 프레임을 추가(push)하고 메소드가 종료되면 프레임을 제거(pop)한다. 프레임 내부에는 <strong>로컬 변수 스택</strong>이 있는데 기본 타입 변수와 참조 타입 변수가 추가(push), 제거(pop)된다.</p>
+<h3 id="address-space-정의">🔗 Address Space 정의</h3>
 
-<h3 id="기본-타입와-참조-타입">💡 기본 타입와 참조 타입</h3>
+<p>위의 Protection Issue를 해결하기 위해 응용프로그램이 물리메모리에 자기가 어디있는지 몰라도 가상적으로 갖는다고 추상화(abstraction)를 제공해 주기 개념이다.</p>
 
-<p>기본 타입 변수는 byte, char, short, int, long, boolean 등 이고 변수안에 실제 값을 저장한다.</p>
+<p><img src="https://user-images.githubusercontent.com/37864122/84557791-daf64c80-ad68-11ea-9b87-19480b1d05e8.png" alt="image" /></p>
 
-<p>참조 타입 변수는 배열, 열거, 클래스, 인터페이스  이 있고 변수안에 메모리의 번지를 값으로 갖는다.
-<img src="https://user-images.githubusercontent.com/37864122/84361385-8c30a180-ac06-11ea-90ca-c3e3bbd74368.png" alt="기본타입참조타입" /></p>
+<h3 id="os가-해야할-일">🔗 OS가 해야할 일</h3>
+
+<p>가상 메모리를 구현해야하는 OS는 어떤 목표를 가져야 할까. 3가지로 나눌 수 있다.
+- 투명성</p>
+
+<pre><code>실행중인 프로그램이 자기가 물리메모리 전체를 소유한 것 마냥 느낄 수 있게 해야한다.
+</code></pre>
+
+<ul>
+<li><p>효율성</p>
+
+<p>가상화를 할때 너무 많은 메모리를 사용하면 안된다. 그러면서도 너무 느리게 실행되서도 안된다. 그래서 다음에 얘기할 TLB 같은 하드웨어의 지원을 받아야 한다.</p></li>
+
+<li><p>보호</p>
+
+<p>OS자신도 그렇고 프로세스들을 보호해야한다.</p></li>
+</ul>
+
+<blockquote>
+<p>📌 스택과 힙</p>
+
+<p>스택은 함수가 호출될떄 지역변수를 할당할때 컴파일러가 조작한다. 응용프로그램을 짤때 스택을 조작하진 않는다.
+콜이나 리턴으로 함수를 호출, 반환할때 내부적으로 스택을 조작하기 위한 어셈블리 코드를 컴파일러가 넣어준다.
+마찬가지로 지역변수도 메모리가 할당 될때 컴파일러가 스택을 조작한다.</p>
+
+<p>힙의 경우는 malloc이라던지 명시적인 메모리 할당 함수를 통해 메모리에 할당한다.</p>
+</blockquote>
+
+<h3 id="주소-변환">🔗 주소 변환</h3>
+
+<p>여러개의 프로세스가 메모리 자원을 공유하고, OS가 context switch하면서 0번지부터 max까지 자기공간이 있다고 생각하지만 OS가 내부적으로 많은 일을 해야한다.</p>
+
+<p>프로그램 내부에서는 다 가상주소에 접근하는 거고 실제 물리메모리로 변환해야한다. 그걸 OS가 하는것이다. 메모리를 접근할때마다 주소변환이 일어나야하는데, 사실 하드웨어가 주어지는 메카니즘에 의해 변환된다. 그렇다고 하드웨어가 다 해주는게 아니라 도구만 제공해주고 자료구조와 레지스터 세팅은 OS에의해 이루어진다.
+- 유연하게 사용되어야 한다. 코드 스택 힙 메모리 영역들에 대해 하나의 address space가 지원되어야 한다.
+- 메모리 스페이스는 해당 프로세스만 안전하게 접근하게 해야한다.
+- 이 외에 OS에 필요한 자료구조 등을 효율적으로 해야한다.</p>
+
+<p>간단하게 만들어보자. 그 전에 3가지 가정이 필요하다.
+1. 한프로세스에 대한 어드레스는 물리적으로 연속되어 있음
+2. 너무 크지않다.
+3. 모든 프로세스의 스페이스는 같은 크기</p>
+
+<h3 id="동적-재배치">🔗 동적 재배치</h3>
+
+<p>각각 address space를 위한 슬롯(한 프로세스가 사용하는 메모리 공간)들의 시작위치가 바뀔 수 있다. 이때 필요한 하드웨어의 도움은 base와 bound 레지스터다. base는 각각의 address space마다 시작점을, bound는 끝지점을 저장한다. 유효한 address space의 시작점부터 끝지점을 명시해 줄 수 있는 레지스터다.</p>
+
+<pre><code>physical address = virtual address + base
+</code></pre>
+
+<p>bound address space의 끝지점 이니까 메모리 가상주소가 bound보다 크거나 음수면 보호를 어긴다고 판단할 수 있다.</p>
+
+<h3 id="요약">✏️ 요약</h3>
+
+<table>
+<thead>
+<tr>
+<th>하드웨어 요구사항</th>
+<th>내용</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>특권모드</td>
+<td>사용자 모드 프로세스가 특권 연산을 실행하는 것을 방지하기 위해 필요</td>
+</tr>
+
+<tr>
+<td>베이스/바운드 레지스터</td>
+<td>주소 변환과 범위 검사를 지원</td>
+</tr>
+
+<tr>
+<td>가상 주소 변환, 범위 검사 능력</td>
+<td>주소 변환과 범위 검사를 위한 회로</td>
+</tr>
+
+<tr>
+<td>베이스/바운드 갱신 특권 명령어</td>
+<td>프로그램 시작 전에 OS가 베이스와 바운드 레지스터 값을 지정할 수 있어야 한다 (context switch, 프로세스 생성될때 사용)</td>
+</tr>
+
+<tr>
+<td>예외 핸들러 등록을 위한 특권 명령어</td>
+<td>OS가 예외처리 코드를 하드웨어에게 알려줄 수 있어야 한다</td>
+</tr>
+
+<tr>
+<td>예외 발생 기능</td>
+<td>프로세스가 특권 명령 실행을 시도하거나 범위를 벗어난 메모리 접근을 시도할때 예외를 발생시킨다</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>OS 요구사항</th>
+<th>내용</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>메모리 관리</td>
+<td>새 프로세스 메모리 할당에 필요, 종료 프로세스로부터 메모리 회수, 빈 공간 리스트를 통한 일반적인 메모리 관리</td>
+</tr>
+
+<tr>
+<td>베이스/바운드 레지스터</td>
+<td>문맥 교환 시 올바른 베이스, 바운드 설정</td>
+</tr>
+
+<tr>
+<td>가상 주소 변환, 범위 검사 능력</td>
+<td>예외 발생할때 실행할 코드</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
@@ -289,7 +409,9 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/java/">Java</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/memoryvirtualization/">MemoryVirtualization</a>
+
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/addressspace/">AddressSpace</a>
 
                   </div>
                 
@@ -302,7 +424,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/05/java-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/" data-tooltip="Java 시작하기">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%98%81%EC%97%AD/" data-tooltip="메모리 사용 영역">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -310,7 +432,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/8.-address-space/" data-tooltip="8. Address Space">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -360,7 +482,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/05/java-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/" data-tooltip="Java 시작하기">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%98%81%EC%97%AD/" data-tooltip="메모리 사용 영역">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -368,7 +490,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/8.-address-space/" data-tooltip="8. Address Space">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
