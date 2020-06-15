@@ -8,25 +8,25 @@
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Hyena Kim">
 <meta name="keywords" content="tech">
-<meta name="description" content="#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터">
+<meta name="description" content="#세그먼트 #세그멘테이션">
 
 
-<meta property="og:description" content="#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터">
+<meta property="og:description" content="#세그먼트 #세그멘테이션">
 <meta property="og:type" content="article">
-<meta property="og:title" content="8. Address Space">
-<meta name="twitter:title" content="8. Address Space">
-<meta property="og:url" content="https://hyenakim.github.io/2020/06/8.-address-space/">
-<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/8.-address-space/">
+<meta property="og:title" content="9. Segmentation">
+<meta name="twitter:title" content="9. Segmentation">
+<meta property="og:url" content="https://hyenakim.github.io/2020/06/9.-segmentation/">
+<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/9.-segmentation/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터">
-<meta name="twitter:description" content="#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터">
+<meta property="og:description" content="#세그먼트 #세그멘테이션">
+<meta name="twitter:description" content="#세그먼트 #세그멘테이션">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2020-06-12T09:37:23">
+    <meta property="article:published_time" content="2020-06-15T09:37:23">
   
   
-    <meta property="article:modified_time" content="2020-06-12T09:37:23">
+    <meta property="article:modified_time" content="2020-06-15T09:37:23">
   
   
   
@@ -36,9 +36,9 @@
   
   
     
-      <meta property="article:tag" content="MemoryVirtualization">
+      <meta property="article:tag" content="Segment">
     
-      <meta property="article:tag" content="AddressSpace">
+      <meta property="article:tag" content="Segmentation">
     
   
 
@@ -51,8 +51,8 @@
 
 
 
-  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/84564518-465a1180-ad9d-11ea-8264-5c5a48cb46c2.png">
-  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/84564518-465a1180-ad9d-11ea-8264-5c5a48cb46c2.png">
+  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/84623064-775f5100-af19-11ea-9281-beb4f445a228.png">
+  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/84623064-775f5100-af19-11ea-9281-beb4f445a228.png">
 
 
 
@@ -62,14 +62,14 @@
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/77986659-a589b780-7352-11ea-88f5-9efefad42fba.png">
 
 
-    <title>8. Address Space</title>
+    <title>9. Segmentation</title>
 
     <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/2020/06/8.-address-space/">
+    <link rel="canonical" href="https://hyenakim.github.io/2020/06/9.-segmentation/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -227,15 +227,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      8. Address Space
+      9. Segmentation
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-06-12T09:37:23&#43;09:00">
+      <time itemprop="datePublished" datetime="2020-06-15T09:37:23&#43;09:00">
         
-  June 12, 2020
+  June 15, 2020
 
       </time>
     
@@ -254,148 +254,98 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>#메모리가상화 #주소변환 #동적재배치 #베이스 #바운드레지스터</p>
+              <p>#세그먼트 #세그멘테이션</p>
 
-<p>초기 컴퓨터는 사용자에게 간단한 개념(abstraction)을 제공했다.낮은 번지에는 OS를 올리고, 높은 번지에는 응용프로세스가 실행할 수 있는 메모리 공간을 할당하는 방식으로.. 이경우엔 하나의 프로세스만 사용할 수 있다. 그런데 시간이 지나면서 다음 2가지 이유로 좀 더 발전되었다.</p>
+<p>이전 8. Address Space에서 프로세스 주소공간을 베이스와 바운드 레지스터를 사용하여 배치하는 방법을 배웠다. 그런데 그림을 다시 보면 스택과 힙 사이에 사용되지 않는 큰 공간이 보인다. 이 공간은 낭비될 수 밖에 없을까? 이 점을 해결하기 위한 개념이 바로 <strong>세그멘테이션</strong>이다.</p>
 
-<p><strong>1. 멀티프로그래밍</strong></p>
+<h3 id="세그먼트">🔗 세그먼트</h3>
 
-<p>여러개의 프로세스를 동시에 실행시키는 멀티프로그래밍 환경이 등장했다. 동시에 존재하고, OS가 프로세스간에 자원을 분배하므로 CPU 이용률을 높인다.대표적인 예로 Time Sharing이 있다.</p>
-
-<p><strong>2. Time Sharing</strong></p>
-
-<p>Round Robin 알고리즘으로 Time Sharing이 일어난다. 그런데 물리메모리가 하나의 프로세스만 가질 수 있다면(왼쪽이미지), OS는 메모리를 차지하고 있던 프로세스의 컨텍스트 정보를 모두 디스크에 저장하고 실행시킬 프로세스의 컨텍스트를 디스크에서 가져와 메모리에 올려야하는 큰 오버헤드가 발생한다. 물리메모리 안에 여러프로세스가 공존하는 구조를 생각할 수 있다.(오른쪽이미지)</p>
+<p>세그먼트의 목적은 주소공간을 물리적으로 연속적으로 하지 않겠다는 것이다. 세그먼트 조각으로 나누고 조각단위만 연속적이게끔 한다. 코드, 스택, 힙을 별도의 세그먼트로 정의하고 각 세그먼트끼리만 연속적이면 된다. 그러기 위해선 세그먼트 각각을 위한 베이스와 바운드 레지스터가 필요하다.</p>
 
 <blockquote>
-<p>⚠️ Protection Issue</p>
-
-<p>여러 프로그램이 메모리에 동시에 존재하다보니(오른쪽이미지) 보호가 중요한 문제가 된다. ex) 프로세스C가 B메모리에 접근하려는 경우</p>
+<p>📌 세그먼테이션의 장점
+1. 사용되는 메모리만 물리공간에 할당된다.
+2. 주소공간이 큰 것을 효율적으로 재할당 할 수 있다.</p>
 </blockquote>
 
-<p><img src="https://user-images.githubusercontent.com/37864122/84564518-465a1180-ad9d-11ea-8264-5c5a48cb46c2.png" alt="image" /></p>
+<p>왼쪽은 세그먼트 적용 전, 오른쪽은 적용 후다.
+<img src="https://user-images.githubusercontent.com/37864122/84623064-775f5100-af19-11ea-9281-beb4f445a228.png" width="400" height="400"></p>
 
-<h3 id="address-space-정의">🔗 Address Space 정의</h3>
+<h3 id="세그멘테이션-주소변환">🔗 세그멘테이션 주소변환</h3>
 
-<p>위의 Protection Issue를 해결하기 위해 응용프로그램이 물리메모리에 자기가 어디있는지 몰라도 가상적으로 갖는다고 추상화(abstraction)를 제공해 주기 개념이다.</p>
+<p>아래의 예제로 가상주소에서 물리주소로 변환해 보자.
+<img src="https://user-images.githubusercontent.com/37864122/84623290-ed63b800-af19-11ea-9726-d77e3214d743.png" alt="제목 없음" /></p>
 
-<p><img src="https://user-images.githubusercontent.com/37864122/84557791-daf64c80-ad68-11ea-9b87-19480b1d05e8.png" alt="image" /></p>
+<h4 id="1-fetch-from-address-100">1. Fetch from address 100</h4>
 
-<h3 id="os가-해야할-일">🔗 OS가 해야할 일</h3>
+<p>코드 세그먼트의 100번지 이고 코드 세그먼트의 Base는 32K이다. 물리주소는 Base + Offset 이므로</p>
 
-<p>가상 메모리를 구현해야하는 OS는 어떤 목표를 가져야 할까. 3가지로 나눌 수 있다.</p>
-
-<p><strong>1. 투명성</strong> : 실행중인 프로그램이 자기가 물리메모리 전체를 소유한 것 마냥 느낄 수 있게 해야한다.</p>
-
-<p><strong>2. 효율성</strong> : 가상화를 할때 너무 많은 메모리를 사용하면 안된다. 그러면서도 너무 느리게 실행되서도 안된다. 그래서 다음에 얘기할 TLB 같은 하드웨어의 지원을 받아야 한다.</p>
-
-<p><strong>3. 보호</strong> : OS자신도 그렇고 프로세스들을 보호해야한다.</p>
-
-<blockquote>
-<p>📌 스택과 힙</p>
-
-<p>스택은 함수가 호출될떄 지역변수를 할당할때 컴파일러가 조작한다. 응용프로그램을 짤때 스택을 조작하진 않는다.
-콜이나 리턴으로 함수를 호출, 반환할때 내부적으로 스택을 조작하기 위한 어셈블리 코드를 컴파일러가 넣어준다.
-마찬가지로 지역변수도 메모리가 할당 될때 컴파일러가 스택을 조작한다.</p>
-
-<p>힙의 경우는 malloc이라던지 명시적인 메모리 할당 함수를 통해 메모리에 할당한다.</p>
-</blockquote>
-
-<h3 id="주소-변환">🔗 주소 변환</h3>
-
-<p>여러개의 프로세스가 메모리 자원을 공유하고, OS가 context switch하면서 0번지부터 max까지 자기공간이 있다고 생각하지만 OS가 내부적으로 많은 일을 해야한다.</p>
-
-<p>프로그램 내부에서는 가상주소에 접근하기 때문에 물리메모리로 변환해야한다. 그 작업을 OS가 하는것이다. 메모리를 접근할때마다 <strong>주소변환</strong>이 일어나야하는데, 사실 하드웨어가 주어지는 메카니즘에 의해 변환된다. 그렇다고 하드웨어가 다 해주는게 아니라 도구만 제공해주고 자료구조와 레지스터 세팅은 OS에의해 이루어진다.
-이때 OS가 중요하게 생각해야할 3가지는 다음과 같다.</p>
-
-<ul>
-<li>코드 스택 힙 메모리 영역들에 대해 하나의 address space가 지원되어야 한다.</li>
-<li>메모리 스페이스는 해당 프로세스만 안전하게 접근하게 해야한다.</li>
-<li>이 외에 OS에 필요한 자료구조 등을 효율적으로 해야한다.</li>
-</ul>
-
-<p>간단하게 물리메모리를 만들어보자. 그 전에 3가지 가정이 필요하다.</p>
-
-<pre><code>1. 한프로세스에 대한 address space는 물리적으로 연속되어야 한다.
-2. 한프로세스에 필요한 메모리가 너무 크지 않아야 한다.
-3. 모든 프로세스의 address space는 같은 크기여야 한다.
+<pre><code>32KB + 100 = 32868B
 </code></pre>
 
-<h3 id="동적-재배치">🔗 동적 재배치</h3>
+<h4 id="2-load-from-address-4200">2. Load from address 4200</h4>
 
-<p>하드웨어관점의 주소 변환을 이해해보자. 프로세스들은 각각 address space를 위한 슬롯(한 프로세스가 사용하는 메모리 공간)들의 시작위치가 바뀔 수 있다. 이때 필요한 하드웨어의 도움은 base와 bound 레지스터다. base는 각각의 address space마다 시작점을, bound는 끝지점을 저장한다. 유효한 address space의 시작점부터 끝지점을 명시해 줄 수 있는 레지스터다.</p>
+<p>1번 처럼 34KB + 4200 라고 생각할 수 있지만, 힙은 가상주소에서 4KB부터 시작하기 때문에 Offset은 4200 - 4KB이다. 따라서</p>
 
-<pre><code>physical address = virtual address + base
+<pre><code>34KB + (4200 - 4KB) = 34KB + 104 = 34920B
 </code></pre>
 
-<p>bound address space의 끝지점 이니까 메모리 가상주소가 bound보다 크거나 음수면 보호를 어긴다고 판단할 수 있다.</p>
+<h4 id="3-load-from-address-7kb">3. Load from address 7KB</h4>
 
-<h3 id="요약">✏️ 요약</h3>
+<p>7KB는 세그먼트 밖에 존재한다. offset을 계산해도 3KB(7KB-4KB)이므로 세그먼트 사이즈를 넘어버린다. 따라서 세그먼트 폴트가 발생해 버린다.</p>
 
-<p>가상주소를 위한 하드웨어와 OS의 요구사항을 정리한 표다.</p>
+<h3 id="세그먼트-종류-파악">🔗 세그먼트 종류 파악</h3>
+
+<p>위에서 주소변환 할때 변환할 가상주소가 힙인지, 스텍인지 어떻게 알 수 있을까? 가장 명확한 방법은 가상주소의 몇 비트를 세그먼트를 구분하기 위해 사용하는 것이다.예를들어 14비트중 상위 2비트를 사용한다면 가상주소모양은 다음과 같을 것이다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/37864122/84629209-e5f5dc00-af24-11ea-92ef-044b897eca94.png" alt="image" /></p>
+
+<p>상위 2비트가 00이면 코드, 01이면 힙, 10이면 스택.. 이런방식으로 표현할 수 있겠다.</p>
+
+<h3 id="스택">🔗 스택</h3>
+
+<p>스택 세그먼트는 다른 세그먼트들과 반대로 방향이 확장된다. 그래서 주소변환을 다르게 해야한다. 각 세그먼트가 어느방향으로 자라는지, 방향에 대한 정보를 추가해야한다.</p>
+
+<h3 id="공유-지원">🔗 공유 지원</h3>
+
+<p>세그먼트의 장점을 살려서 세그먼트를 프로세스끼리 공유할수 있게 한다. 대신 Read-only로 읽기만 할 수 있다. 그런 세그먼트로는 코드가 있다.</p>
+
+<p>스택과 공유자원을 포함한 세그먼트 레지스터 값을 나타낸 표이다.</p>
 
 <table>
 <thead>
 <tr>
-<th>하드웨어 요구사항</th>
-<th>내용</th>
+<th align="center">세그먼트</th>
+<th align="center">베이스</th>
+<th align="center">크기</th>
+<th align="center">양수방향으로 증가?</th>
+<th align="center">보호</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>특권모드</td>
-<td>사용자 모드 프로세스가 특권 연산을 실행하는 것을 방지하기 위해 필요</td>
+<td align="center">코드</td>
+<td align="center">32KB</td>
+<td align="center">2KB</td>
+<td align="center">1</td>
+<td align="center">읽기-실행</td>
 </tr>
 
 <tr>
-<td>베이스/바운드 레지스터</td>
-<td>주소 변환과 범위 검사를 지원</td>
+<td align="center">힙</td>
+<td align="center">34KB</td>
+<td align="center">2KB</td>
+<td align="center">1</td>
+<td align="center">읽기-쓰기</td>
 </tr>
 
 <tr>
-<td>가상 주소 변환, 범위 검사 능력</td>
-<td>주소 변환과 범위 검사를 위한 회로</td>
-</tr>
-
-<tr>
-<td>베이스/바운드 갱신 특권 명령어</td>
-<td>프로그램 시작 전에 OS가 베이스와 바운드 레지스터 값을 지정할 수 있어야 한다 (context switch, 프로세스 생성될때 사용)</td>
-</tr>
-
-<tr>
-<td>예외 핸들러 등록을 위한 특권 명령어</td>
-<td>OS가 예외처리 코드를 하드웨어에게 알려줄 수 있어야 한다</td>
-</tr>
-
-<tr>
-<td>예외 발생 기능</td>
-<td>프로세스가 특권 명령 실행을 시도하거나 범위를 벗어난 메모리 접근을 시도할때 예외를 발생시킨다</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<thead>
-<tr>
-<th>OS 요구사항</th>
-<th>내용</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>메모리 관리</td>
-<td>새 프로세스 메모리 할당에 필요, 종료 프로세스로부터 메모리 회수, 빈 공간 리스트를 통한 일반적인 메모리 관리</td>
-</tr>
-
-<tr>
-<td>베이스/바운드 레지스터</td>
-<td>문맥 교환 시 올바른 베이스, 바운드 설정</td>
-</tr>
-
-<tr>
-<td>가상 주소 변환, 범위 검사 능력</td>
-<td>예외 발생할때 실행할 코드</td>
+<td align="center">스택</td>
+<td align="center">28KB</td>
+<td align="center">2KB</td>
+<td align="center">0</td>
+<td align="center">읽기-쓰기</td>
 </tr>
 </tbody>
 </table>
@@ -410,9 +360,9 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/memoryvirtualization/">MemoryVirtualization</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/segment/">Segment</a>
 
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/addressspace/">AddressSpace</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/segmentation/">Segmentation</a>
 
                   </div>
                 
@@ -425,7 +375,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%98%81%EC%97%AD/" data-tooltip="메모리 사용 영역">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/8.-address-space/" data-tooltip="8. Address Space">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -433,7 +383,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/9.-segmentation/" data-tooltip="9. Segmentation">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -483,7 +433,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%98%81%EC%97%AD/" data-tooltip="메모리 사용 영역">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/8.-address-space/" data-tooltip="8. Address Space">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -491,7 +441,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/9.-segmentation/" data-tooltip="9. Segmentation">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>

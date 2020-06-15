@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Segmentation on gpsk-Tech Blog</title>
+    <link>https://hyenakim.github.io/tags/segmentation/</link>
+    <description>Recent content in Segmentation on gpsk-Tech Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Jun 2020 09:37:23 +0900</lastBuildDate>
+    
+	<atom:link href="https://hyenakim.github.io/tags/segmentation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>9. Segmentation</title>
+      <link>https://hyenakim.github.io/2020/06/9.-segmentation/</link>
+      <pubDate>Mon, 15 Jun 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/06/9.-segmentation/</guid>
+      <description>&lt;p&gt;#세그먼트 #세그멘테이션&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
