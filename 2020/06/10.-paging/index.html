@@ -8,25 +8,25 @@
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Hyena Kim">
 <meta name="keywords" content="tech">
-<meta name="description" content="#세그먼트 #세그멘테이션">
+<meta name="description" content="#페이지 #페이지프레임 #PFN #VPN">
 
 
-<meta property="og:description" content="#세그먼트 #세그멘테이션">
+<meta property="og:description" content="#페이지 #페이지프레임 #PFN #VPN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="9. Segmentation">
-<meta name="twitter:title" content="9. Segmentation">
-<meta property="og:url" content="https://hyenakim.github.io/2020/06/9.-segmentation/">
-<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/9.-segmentation/">
+<meta property="og:title" content="10. Paging">
+<meta name="twitter:title" content="10. Paging">
+<meta property="og:url" content="https://hyenakim.github.io/2020/06/10.-paging/">
+<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/10.-paging/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="#세그먼트 #세그멘테이션">
-<meta name="twitter:description" content="#세그먼트 #세그멘테이션">
+<meta property="og:description" content="#페이지 #페이지프레임 #PFN #VPN">
+<meta name="twitter:description" content="#페이지 #페이지프레임 #PFN #VPN">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2020-06-15T09:37:23">
+    <meta property="article:published_time" content="2020-06-17T09:37:23">
   
   
-    <meta property="article:modified_time" content="2020-06-15T09:37:23">
+    <meta property="article:modified_time" content="2020-06-17T09:37:23">
   
   
   
@@ -36,9 +36,7 @@
   
   
     
-      <meta property="article:tag" content="Segment">
-    
-      <meta property="article:tag" content="Segmentation">
+      <meta property="article:tag" content="Paging">
     
   
 
@@ -51,8 +49,8 @@
 
 
 
-  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/84623064-775f5100-af19-11ea-9281-beb4f445a228.png">
-  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/84623064-775f5100-af19-11ea-9281-beb4f445a228.png">
+  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/84896788-82fc7480-b0df-11ea-9ee0-fd99df1c5d21.png">
+  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/84896788-82fc7480-b0df-11ea-9ee0-fd99df1c5d21.png">
 
 
 
@@ -62,14 +60,14 @@
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/77986659-a589b780-7352-11ea-88f5-9efefad42fba.png">
 
 
-    <title>9. Segmentation</title>
+    <title>10. Paging</title>
 
     <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/2020/06/9.-segmentation/">
+    <link rel="canonical" href="https://hyenakim.github.io/2020/06/10.-paging/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -227,15 +225,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      9. Segmentation
+      10. Paging
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-06-15T09:37:23&#43;09:00">
+      <time itemprop="datePublished" datetime="2020-06-17T09:37:23&#43;09:00">
         
-  June 15, 2020
+  June 17, 2020
 
       </time>
     
@@ -254,117 +252,83 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>#세그먼트 #세그멘테이션</p>
+              <p>#페이지 #페이지프레임 #PFN #VPN</p>
 
-<p>이전 8. Address Space에서 프로세스 주소공간을 베이스와 바운드 레지스터를 사용하여 배치하는 방법을 배웠다. 그런데 그림을 다시 보면 스택과 힙 사이에 사용되지 않는 큰 공간이 보인다. 이 공간은 낭비될 수 밖에 없을까? 이 점을 해결하기 위한 개념이 바로 <strong>세그멘테이션</strong>이다.</p>
+<p>운영체제는 메모리공간을 두가지 방법으로 관리해왔다. 첫번째는 세그멘테이션이다. 그런데 세그멘테이션은 단편화문제가 발생한 것을 앞장에서 배웠다. 두번째 방법인 페이징은 프로세스의 주소공간을 가변이 아닌 고정된 크기로 나눈다. 이 고정 크기 단위를 <strong>페이지</strong>라고 부른다. 또 그에 상응하는 물리메모리를 <strong>페이지 프레임</strong>이라 부른다. 그렇다면 이 페이지를 사용해 어떻게 메모리를 가상화 할 수 있을까? 알아보쟝~~</p>
 
-<h3 id="세그먼트">🔗 세그먼트</h3>
+<h3 id="페이징">🔗 페이징</h3>
 
-<p>세그먼트의 목적은 주소공간을 물리적으로 연속적으로 하지 않겠다는 것이다. 세그먼트 조각으로 나누고 조각단위만 연속적이게끔 한다. 코드, 스택, 힙을 별도의 세그먼트로 정의하고 각 세그먼트끼리만 연속적이면 된다. 그러기 위해선 세그먼트 각각을 위한 베이스와 바운드 레지스터가 필요하다.</p>
+<ul>
+<li>메모리를 고정된 크기의 조각들로 자르고, 메모리를 할당할 때 페이지 단위로 할당해 준다.</li>
+</ul>
 
-<blockquote>
-<p>📌 세그먼테이션의 장점
-1. 사용되는 메모리만 물리공간에 할당된다.
-2. 주소공간이 큰 것을 효율적으로 재할당 할 수 있다.</p>
-</blockquote>
+<h4 id="장점">장점</h4>
 
-<p>왼쪽은 세그먼트 적용 전, 오른쪽은 적용 후다.
-<img src="https://user-images.githubusercontent.com/37864122/84623064-775f5100-af19-11ea-9281-beb4f445a228.png" width="400" height="400"></p>
+<ul>
+<li>힙과 스택에 대해 따로 세그멘테이션처럼 관리하지 않아도 된다.</li>
+<li>빈 공간 관리가 단순하다. (free-list)
+<img src="https://user-images.githubusercontent.com/37864122/84896788-82fc7480-b0df-11ea-9ee0-fd99df1c5d21.png" width="300" height="300"></li>
+</ul>
 
-<h3 id="세그멘테이션-주소변환">🔗 세그멘테이션 주소변환</h3>
+<p>하나의 페이지는 물리적으로 연속적이다. 그런데 그림에서 보다시피 가상주소공간의 페이지들은 물리공간에서 연속적이지 않고 뒤죽박죽 섞여있다.</p>
 
-<p>아래의 예제로 가상주소에서 물리주소로 변환해 보자.
-<img src="https://user-images.githubusercontent.com/37864122/84623290-ed63b800-af19-11ea-9726-d77e3214d743.png" alt="제목 없음" /></p>
+<h3 id="주소변환">🔗 주소변환</h3>
 
-<h4 id="1-fetch-from-address-100">1. Fetch from address 100</h4>
+<p>세그먼트에서는 베이스와 바운드 레지스터를 사용해 주소변환을 해왔다. 페이지에서는 가상공간의 페이지 번호에서 물리공간의 페이지 번호로 맵핑해주는 <strong>page table</strong>이 필요하다.</p>
 
-<p>코드 세그먼트의 100번지 이고 코드 세그먼트의 Base는 32K이다. 물리주소는 Base + Offset 이므로</p>
+<h4 id="virtual-address">Virtual address</h4>
 
-<pre><code>32KB + 100 = 32868B
-</code></pre>
+<p>virtual address는 어떻게 구성되어있을까. virtual address를 줄여서 va라고 하겠다. va는 가상주소 0번지부터 max번지까지 numbering이 될텐데 내부적으로는 virtual page number(VPN)와 offset으로 구성되어있다. cpu마다 VPN과 offset을 할당하는 비트수는 다르다. 간단한 예로 6-bit addressing을 보자. 6비트 이므로 주소를 표현하는데 6비트가 사용되는것이다. 2^6만큼의 address를 가질 수 있고, <em>address는 byte마다 할당되므로</em> 64바이트의 주소공간을 갖고있는 셈이다.</p>
 
-<h4 id="2-load-from-address-4200">2. Load from address 4200</h4>
+<p><img src="https://user-images.githubusercontent.com/37864122/84897494-a247d180-b0e0-11ea-884f-0def65db4de6.png" width="200" height="200"></p>
 
-<p>1번 처럼 34KB + 4200 라고 생각할 수 있지만, 힙은 가상주소에서 4KB부터 시작하기 때문에 Offset은 4200 - 4KB이다. 따라서</p>
+<p>예제에서는 2비트를 vpn으로, 4비트를 offset으로 활용했다. 이 구성을 통해 우리가 알 수 있는게 2가지가 있다.
+1. 한 address space는 4개의 page로 구성된다. VPN이 2비트이므로.
+2. 한 페이지 프레임은 offset이 4비트니까 2^4로 16바이트이다.</p>
 
-<pre><code>34KB + (4200 - 4KB) = 34KB + 104 = 34920B
-</code></pre>
+<h3 id="address-21">Address 21</h3>
 
-<h4 id="3-load-from-address-7kb">3. Load from address 7KB</h4>
-
-<p>7KB는 세그먼트 밖에 존재한다. offset을 계산해도 3KB(7KB-4KB)이므로 세그먼트 사이즈를 넘어버린다. 따라서 세그먼트 폴트가 발생해 버린다.</p>
-
-<h3 id="세그먼트-종류-파악">🔗 세그먼트 종류 파악</h3>
-
-<p>위에서 주소변환 할때 변환할 가상주소가 힙인지, 스텍인지 어떻게 알 수 있을까? 가장 명확한 방법은 가상주소의 몇 비트를 세그먼트를 구분하기 위해 사용하는 것이다.예를들어 14비트중 상위 2비트를 사용한다면 가상주소모양은 다음과 같을 것이다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/37864122/84629209-e5f5dc00-af24-11ea-92ef-044b897eca94.png" alt="image" /></p>
-
-<p>상위 2비트가 00이면 코드, 01이면 힙, 10이면 스택.. 이런방식으로 표현할 수 있겠다.</p>
-
-<h3 id="스택">🔗 스택</h3>
-
-<p>스택 세그먼트는 다른 세그먼트들과 반대로 방향이 확장된다. 그래서 주소변환을 다르게 해야한다. 각 세그먼트가 어느방향으로 자라는지, 방향에 대한 정보를 추가해야한다.</p>
-
-<h3 id="공유-지원">🔗 공유 지원</h3>
-
-<p>세그먼트의 장점을 살려서 세그먼트를 프로세스끼리 공유할수 있게 한다. 대신 Read-only로 읽기만 할 수 있다. 그런 세그먼트로는 코드가 있다.</p>
-
-<p>스택과 공유자원을 포함한 세그먼트 레지스터 값을 나타낸 표이다.</p>
-
-<table>
-<thead>
-<tr>
-<th align="center">세그먼트</th>
-<th align="center">베이스</th>
-<th align="center">크기</th>
-<th align="center">양수방향으로 증가?</th>
-<th align="center">보호</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td align="center">코드</td>
-<td align="center">32KB</td>
-<td align="center">2KB</td>
-<td align="center">1</td>
-<td align="center">읽기-실행</td>
-</tr>
-
-<tr>
-<td align="center">힙</td>
-<td align="center">34KB</td>
-<td align="center">2KB</td>
-<td align="center">1</td>
-<td align="center">읽기-쓰기</td>
-</tr>
-
-<tr>
-<td align="center">스택</td>
-<td align="center">28KB</td>
-<td align="center">2KB</td>
-<td align="center">0</td>
-<td align="center">읽기-쓰기</td>
-</tr>
-</tbody>
-</table>
+<p>21을 물리메모리 주소로 바꿔보자. offset은 페이지 내에서 우리가 원하는 위치를 가리키는 정보이다. 한 페이지는 물리메모리에서도 연속하니까 offset은 그대로 유지한다. 그러나 VPN은 virtual page의 number이므로 이를 physical frame의 number(PFN)로 바꿔줘야한다. 그에대한 정보를 갖고있는 곳이 page table이다.
+<img src="https://user-images.githubusercontent.com/37864122/84897965-72e59480-b0e1-11ea-8994-226348517256.png" width="250" height="250"></p>
 
 <blockquote>
-<p>📌 Coarse-grained vs Fine-grained</p>
-
-<p>지금까지 설명한 세그먼트는 대단위(coarse-grained)로 코드, 스택, 힙만을 지원했다. 하지만 이렇게 큰 단위로 공간을 분할하기보단 메모리공간을 더 잘게 쪼게는 fine-grained가 효율적일 수 도있다. 그런데 소단위로 관리하는 경우 모든 세그먼트마다 베이스, 바운드 레지스터가 필요하고 이를 관리하는 세그먼트 table을 또 관리해야하기 때문에 딱히 무엇이 좋다고 정확하게 말할 순 없다.</p>
+<p>그림에서 pfn은 3비트로 구성된것을 볼 수 있다. 이는 물리메모리의 page frame이 8개로 구성되어 가상메모리보다 크다는 것을 알 수 있다.</p>
 </blockquote>
 
-<h3 id="운영체제의-지원">🔗 운영체제의 지원</h3>
+<p>💭 이쯤에서 우리가 궁금해할 점들이 있다.</p>
 
-<p>세그멘테이션은 또 다른 새로운 문제를 제기한다.</p>
+<ul>
+<li>page table의 크기는 얼마일까?</li>
+<li>page table은 어디에 저장되어있는가?</li>
+<li>page table에는 뭐가 쓰여있을까?</li>
+<li>페이징이 시스템을 느리게 하진 않을까?</li>
+</ul>
 
-<ol>
-<li>Context switch시에 세그먼트 레지스터를 잘 저장해야한다.</li>
-<li>미사용 중인 물리메모리의 공간을 관리해야한다. (free-list관리)</li>
-<li>가변적인 크기가 할당되면서 빈 공간의 크기가 다르고 메모리 할당 요청을 충족시키지 못하는 <strong>외부단편화</strong>문제가 발생한다.</li>
-</ol>
+<p>계속 해서 알아보도록 하자.</p>
+
+<h4 id="page-table의-크기">❓ page table의 크기</h4>
+
+<p>32-bit시스템이고 페이지 프레임 사이즈는 4KB라고 가정해보자. 32비트중 20비트가 VPN, 12비트가 offset이다. <em>사실 4KB 페이지 크기를 위해서는 12비트가 필요하다.(1KB면 10비트, 4KB이니까 12비트)</em> 나머지 20비트가 VPN이므로 Page table의 entry개수는 2^20개가된다. 즉, 운영체제가 주소변환을 위해 20비트의 VPN을 대입할 개수가 2^20개라는 것이다.
+page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 index로 사용한다. 따라서 PFN만 저장하게 된다.각 entry는 page table entry(PTE)라고 한다. 각 entry는 PFN이외에 추가적인 정보도 저장한다. 그래서 일반적으로 PTE의 크기가 32비트, 즉 4바이트가 된다. 그런 PTE가 2^20개 있으므로 page table의 전체크기는 4MB라고 짐작할 수 있다.(꽤 큰거)</p>
+
+<p><img src="https://user-images.githubusercontent.com/37864122/84900694-6ebb7600-b0e5-11ea-90e2-803445456871.png" alt="image" /></p>
+
+<h4 id="page-table은-어디에-저장되어있는가">❓ page table은 어디에 저장되어있는가?</h4>
+
+<p>page table은 레지스터처럼 저장하면 너무 크니까 메모리에 존재하고 운영체제가 관리한다.</p>
+
+<h4 id="page-table에는-뭐가-쓰여있을까">❓ page table에는 뭐가 쓰여있을까?</h4>
+
+<p>위에서 언급했듯이 VPN과 PFN을 맵핑하기 위해 PFN과 기타 정보를 갖는 PTE 여러개로 구성되어있다. 기타 정보는 다음과 같다.
+- Valid bit : 현재 맵핑된적이 있는지 없는지
+- Protection bits : 해당 페이지가 읽을 수 있는지, 쓸 수 있는지, 실행될 수 있는지
+- Present bit : 해당 페이지가 메모리에 있는지(스왑 아웃 되었는지.. 스왑은 다다음장에)
+- Dirty bit : 메모리에 맵핑된 후 페이지가 변경되었는지
+- Reference bit : 페이지가 접근되었는지 추적하기 위해 사용(페이지 교체에 중요함.. 페이지 교체도 다다다음장에)</p>
+
+<h4 id="페이징이-시스템을-느리게-하진-않을까">❓ 페이징이 시스템을 느리게 하진 않을까?</h4>
+
+<p>페이징을 지원하기위해 cpu가 메모리에 있는 page table을 가리키기 위한 레지스터가 따로 존재한다. page table base register(ptbr)이라고 한다. 이 ptbr은 페이지 테이블의 시작주소를 저장하고있다. 레지스터를 접근하기 때문에 상당히 느리다고 볼 수 있다. 이 점을 어떻게 해결할지는 다음장에..</p>
               
             </div>
           </div>
@@ -376,9 +340,7 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/segment/">Segment</a>
-
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/segmentation/">Segmentation</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/paging/">Paging</a>
 
                   </div>
                 
@@ -391,7 +353,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/8.-address-space/" data-tooltip="8. Address Space">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/9.-segmentation/" data-tooltip="9. Segmentation">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -399,7 +361,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/10.-paging/" data-tooltip="10. Paging">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -449,7 +411,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/8.-address-space/" data-tooltip="8. Address Space">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/9.-segmentation/" data-tooltip="9. Segmentation">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -457,7 +419,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/10.-paging/" data-tooltip="10. Paging">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>

@@ -6,10 +6,19 @@
     <description>Recent content on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Jun 2020 09:37:23 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jun 2020 09:37:23 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>10. Paging</title>
+      <link>https://hyenakim.github.io/2020/06/10.-paging/</link>
+      <pubDate>Wed, 17 Jun 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/06/10.-paging/</guid>
+      <description>&lt;p&gt;#페이지 #페이지프레임 #PFN #VPN&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>9. Segmentation</title>
