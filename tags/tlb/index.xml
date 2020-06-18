@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TLB on gpsk-Tech Blog</title>
+    <link>https://hyenakim.github.io/tags/tlb/</link>
+    <description>Recent content in TLB on gpsk-Tech Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Jun 2020 09:37:23 +0900</lastBuildDate>
+    
+	<atom:link href="https://hyenakim.github.io/tags/tlb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>11. Translation-Lookaside Buffer</title>
+      <link>https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/</link>
+      <pubDate>Thu, 18 Jun 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/</guid>
+      <description>&lt;p&gt;#TLB&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

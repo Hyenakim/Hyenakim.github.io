@@ -8,25 +8,25 @@
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Hyena Kim">
 <meta name="keywords" content="tech">
-<meta name="description" content="#페이지 #페이지프레임 #PFN #VPN">
+<meta name="description" content="#TLB">
 
 
-<meta property="og:description" content="#페이지 #페이지프레임 #PFN #VPN">
+<meta property="og:description" content="#TLB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="10. Paging">
-<meta name="twitter:title" content="10. Paging">
-<meta property="og:url" content="https://hyenakim.github.io/2020/06/10.-paging/">
-<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/10.-paging/">
+<meta property="og:title" content="11. Translation-Lookaside Buffer">
+<meta name="twitter:title" content="11. Translation-Lookaside Buffer">
+<meta property="og:url" content="https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/">
+<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="#페이지 #페이지프레임 #PFN #VPN">
-<meta name="twitter:description" content="#페이지 #페이지프레임 #PFN #VPN">
+<meta property="og:description" content="#TLB">
+<meta name="twitter:description" content="#TLB">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2020-06-17T09:37:23">
+    <meta property="article:published_time" content="2020-06-18T09:37:23">
   
   
-    <meta property="article:modified_time" content="2020-06-17T09:37:23">
+    <meta property="article:modified_time" content="2020-06-18T09:37:23">
   
   
   
@@ -36,7 +36,7 @@
   
   
     
-      <meta property="article:tag" content="Paging">
+      <meta property="article:tag" content="TLB">
     
   
 
@@ -49,8 +49,8 @@
 
 
 
-  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/84896788-82fc7480-b0df-11ea-9ee0-fd99df1c5d21.png">
-  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/84896788-82fc7480-b0df-11ea-9ee0-fd99df1c5d21.png">
+  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/84965823-ea034300-b14a-11ea-99c2-1c54b0b54ec2.png">
+  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/84965823-ea034300-b14a-11ea-99c2-1c54b0b54ec2.png">
 
 
 
@@ -60,14 +60,14 @@
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/77986659-a589b780-7352-11ea-88f5-9efefad42fba.png">
 
 
-    <title>10. Paging</title>
+    <title>11. Translation-Lookaside Buffer</title>
 
     <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/2020/06/10.-paging/">
+    <link rel="canonical" href="https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -225,15 +225,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      10. Paging
+      11. Translation-Lookaside Buffer
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-06-17T09:37:23&#43;09:00">
+      <time itemprop="datePublished" datetime="2020-06-18T09:37:23&#43;09:00">
         
-  June 17, 2020
+  June 18, 2020
 
       </time>
     
@@ -252,83 +252,122 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>#페이지 #페이지프레임 #PFN #VPN</p>
+              <p>#TLB</p>
 
-<p>운영체제는 메모리공간을 두가지 방법으로 관리해왔다. 첫번째는 세그멘테이션이다. 그런데 세그멘테이션은 단편화문제가 발생한 것을 앞장에서 배웠다. 두번째 방법인 페이징은 프로세스의 주소공간을 가변이 아닌 고정된 크기로 나눈다. 이 고정 크기 단위를 <strong>페이지</strong>라고 부른다. 또 그에 상응하는 물리메모리를 <strong>페이지 프레임</strong>이라 부른다. 그렇다면 이 페이지를 사용해 어떻게 메모리를 가상화 할 수 있을까? 알아보쟝~~</p>
+<p>지난 포스트에서 paging을 배웠다. 주소변환을 하는 과정에서 가상주소의 VPN를 물리주소의 PFN으로 변환하는데 필요한 page table이 필요하고 이를 접근하는데 속도가 느려지는 문제가 있었다. 이번엔 속도를 어떻게 향상시킬지를 알아보자.</p>
 
-<h3 id="페이징">🔗 페이징</h3>
+<h3 id="tlb">🔗 TLB</h3>
 
-<ul>
-<li>메모리를 고정된 크기의 조각들로 자르고, 메모리를 할당할 때 페이지 단위로 할당해 준다.</li>
-</ul>
-
-<h4 id="장점">장점</h4>
-
-<ul>
-<li>힙과 스택에 대해 따로 세그멘테이션처럼 관리하지 않아도 된다.</li>
-<li>빈 공간 관리가 단순하다. (free-list)
-<img src="https://user-images.githubusercontent.com/37864122/84896788-82fc7480-b0df-11ea-9ee0-fd99df1c5d21.png" width="300" height="300"></li>
-</ul>
-
-<p>하나의 페이지는 물리적으로 연속적이다. 그런데 그림에서 보다시피 가상주소공간의 페이지들은 물리공간에서 연속적이지 않고 뒤죽박죽 섞여있다.</p>
-
-<h3 id="주소변환">🔗 주소변환</h3>
-
-<p>세그먼트에서는 베이스와 바운드 레지스터를 사용해 주소변환을 해왔다. 페이지에서는 가상공간의 페이지 번호에서 물리공간의 페이지 번호로 맵핑해주는 <strong>page table</strong>이 필요하다.</p>
-
-<h4 id="virtual-address">Virtual address</h4>
-
-<p>virtual address는 어떻게 구성되어있을까. virtual address를 줄여서 va라고 하겠다. va는 가상주소 0번지부터 max번지까지 numbering이 될텐데 내부적으로는 virtual page number(VPN)와 offset으로 구성되어있다. cpu마다 VPN과 offset을 할당하는 비트수는 다르다. 간단한 예로 6-bit addressing을 보자. 6비트 이므로 주소를 표현하는데 6비트가 사용되는것이다. 2^6만큼의 address를 가질 수 있고, <em>address는 byte마다 할당되므로</em> 64바이트의 주소공간을 갖고있는 셈이다.</p>
-
-<p><img src="https://user-images.githubusercontent.com/37864122/84897494-a247d180-b0e0-11ea-884f-0def65db4de6.png" width="200" height="200"></p>
-
-<p>예제에서는 2비트를 vpn으로, 4비트를 offset으로 활용했다. 이 구성을 통해 우리가 알 수 있는게 2가지가 있다.
-1. 한 address space는 4개의 page로 구성된다. VPN이 2비트이므로.
-2. 한 페이지 프레임은 offset이 4비트니까 2^4로 16바이트이다.</p>
-
-<h3 id="address-21">Address 21</h3>
-
-<p>21을 물리메모리 주소로 바꿔보자. offset은 페이지 내에서 우리가 원하는 위치를 가리키는 정보이다. 한 페이지는 물리메모리에서도 연속하니까 offset은 그대로 유지한다. 그러나 VPN은 virtual page의 number이므로 이를 physical frame의 number(PFN)로 바꿔줘야한다. 그에대한 정보를 갖고있는 곳이 page table이다.
-<img src="https://user-images.githubusercontent.com/37864122/84897965-72e59480-b0e1-11ea-8994-226348517256.png" width="250" height="250"></p>
+<p>주소변환을 빠르게 하기위해 우리는 translation-lookaside buffer 또는 TLB라고 부르는 것을 도입한다.TLB는 cpu에 구현된 mmu의 일부분이며 주소변환에 대한 캐시이다. 캐시는 자주접근하는 메모리를 cpu근처에 저장해놓고 사용하므로 메모리접근 속도를 높이는 것이다.</p>
 
 <blockquote>
-<p>그림에서 pfn은 3비트로 구성된것을 볼 수 있다. 이는 물리메모리의 page frame이 8개로 구성되어 가상메모리보다 크다는 것을 알 수 있다.</p>
+<p>MMU는 주소공간을 지원해주기 위해 하드웨어가 정의하고 있는 것들 모두를 포함하고 있다. 앞에서 살펴본 page table, page entry의 포멧들을 cpu를 정하는데 그것도 mmu의 일부이다. 즉. 모든 메모리와 관련되서 cpu가 해줘야하는 기능들이 mmu이고 mmu는 기본적으로 하드웨어인데, 운영체제가 mmu를 정의를 잘 설정해줘야 의도대로 작동될 수 있다.</p>
 </blockquote>
 
-<p>💭 이쯤에서 우리가 궁금해할 점들이 있다.</p>
+<pre><code class="language-python">VPN = (VirtualAddress &amp; VPN_MASK) &gt;&gt; SHIFT          // VPN을 가져온다.
+(Success, TlbEntry) = TLB_Lookup(VPN)               // VPN이 TLB에 존재하는지 검사
+if(Success == True)                                 // TLB 히트!
+    if(CanAccess(TlbEntry.ProtectBits) == True)     // 해당 페이지에 대한 접근 권한검사
+        offset = VirtualAddress &amp; OFFSET_MASK       // offset 구함
+        PhysAddr = (TlbEntry.PFN &lt;&lt; SHIFT) | offset // offset과 PFN을 합쳐 PA구성
+        Register = AccessMemory(PhysAddr)           // 메모리에 접근
+    else
+        RaiseException(PROTECTION_FAULT)
+else                                                // TLB 미스!
+    PTEAddr = PTBR + (VPN * sizeof(PTE)             // PTE가 있는 주소 구함
+    PTE = AcessMemory(PTEAddr)                      // PTE접근
+    if(PTE.Valid == False)                          // PTE 접근 권한검사
+        RaiseException(SEGMENTATION_FAULT)
+    else if(CanAccess(PTE.ProtectBits) == False)    
+        RaiseException(PROTECTION_FAULT)
+    else
+        TLB_Insert(VPN, PTE.PFN, PTE.ProtectBits)   // TLB에 새로운 VPN entry삽입
+        RetryInstruction()                          // 다시시도
+</code></pre>
+
+<h4 id="example">Example</h4>
+
+<p>TLB 작동과정을 예제로 알아보자. 예제에서는 가상주소 100번지부터 10개의 4바이트 크기의 정수배열이 존재한다. 가상주소공간은 8비트이며, 페이지 크기는 16바이트이다. (페이지 크기로 offset은 4비트를 알 수 있고 따라서 PFN은 4비트다.)</p>
+
+<p><img src="https://user-images.githubusercontent.com/37864122/84965823-ea034300-b14a-11ea-99c2-1c54b0b54ec2.png" width = '300' height = '300'></p>
+
+<p>a[0]부터 a[9]까지 TLB 히트,미스로 나타내보자.</p>
+
+<table>
+<thead>
+<tr>
+<th>a[0]</th>
+<th>a[1]</th>
+<th>a[2]</th>
+<th>a[3]</th>
+<th>a[4]</th>
+<th>a[5]</th>
+<th>a[6]</th>
+<th>a[7]</th>
+<th>a[8]</th>
+<th>a[9]</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>미스</strong></td>
+<td>히트</td>
+<td>히트</td>
+<td><strong>미스</strong></td>
+<td>히트</td>
+<td>히트</td>
+<td>히트</td>
+<td><strong>미스</strong></td>
+<td>히트</td>
+<td>히트</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="tlb미스는-누가-처리할까">❓ TLB미스는 누가 처리할까?</h4>
+
+<p>한가지 방법은 하드웨어(즉 cpu)가 알아서 해주는거다. x86을 쓰는 인텔이나 amd가 이에 해당한다. CISC프로세서들이다. TLB미스가 나면 운영체제에게 묻지않고 알아서 해결한다. 자체적으로 페이지테이블 접근 능력이 필요하다. 반면 RISC는 (CISC보다 최근에 등장) TLB미스를 소프트웨어로 관리한다. 미스가 일어나면 시그널을 발생시켜 운영체제에서 트랩핸들러로 TLB를 갱신한다.</p>
+
+<blockquote>
+<p>CISC는 page table base register(ptbr)로부터 구성된 형태는 multi-level page table(다음장에 나오는)인데, RISC는 cpu에서 page table을 집접 접근하는게 아니기 때문에 어떤 형태든 자유롭게 선택해서 구현이 가능하다.</p>
+</blockquote>
+
+<h3 id="tlb-내용">🔗 TLB 내용</h3>
+
+<p>기본적으로 TLB는 Fully associative하다고 한다. 주소변환을 할때 TLB entry중에 빈공간이 있다면 어느곳이든 들어갈 수 있다. entry가 뒤죽박죽 되어있을텐데 하드웨어는 전체 TLB를 병렬로 찾는다. 언급했듯이 entry에는 VPN, PFN, 다른 비트들이 포함되어 있다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/37864122/84968489-90524700-b151-11ea-8d58-40a2cdd3fec3.png" width = '100' height = '100'>
+위의 그림처럼 TLB가 있다면 두개의 entry가 각각 어떤 프로세스를 위한 항목인지 알 수가 없다. OS는 Context-switch할때 마다 flush해서 valid bit을 모두 0으로 채워야한다. 이는 오버해드가 크다. 따라서 주소공간 식별차 필드를 추가했다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/37864122/84968988-b1676780-b152-11ea-99cb-61130122f2d8.png" width = '100' height='100'>
+위의 경우 프로세스 두개가 같은 물리페이지를 공유하고 있다. 코드 페이지를 공유하는 것은 사용되는 물리페이지 수를 줄일 수 있으므로 유용하고 메모리 부하도 줄일 수 있다.</p>
+
+<h4 id="실제-tlb-구성">실제 TLB 구성</h4>
+
+<p><img src="https://user-images.githubusercontent.com/37864122/84969345-70238780-b153-11ea-92aa-22a609ff4d2c.png" width='100' height = '100'></p>
 
 <ul>
-<li>page table의 크기는 얼마일까?</li>
-<li>page table은 어디에 저장되어있는가?</li>
-<li>page table에는 뭐가 쓰여있을까?</li>
-<li>페이징이 시스템을 느리게 하진 않을까?</li>
+<li>PFN</li>
+<li>VPN</li>
+<li>G (Global bit) : 모든 프로세스들이 공유한다.</li>
+<li>ASID bits : Address space id, asid가 없으면 스케쥴링할때마다 TLB의 모든 내용을 flush해야한다.</li>
+<li>C (Coherence bits) : 하드웨어에 어떻게 캐시되어있는지 판단</li>
+<li>D (Dirty bit) : 페이지가 갱신되면 세팅</li>
+<li>V (Valid bit) : VPN과 PFN이 유효한지</li>
 </ul>
 
-<p>계속 해서 알아보도록 하자.</p>
+<blockquote>
+<p>asid 비트수가 필요한 프로세스 id를 표현하려는 수보다 더 적은데?</p>
 
-<h4 id="page-table의-크기">❓ page table의 크기</h4>
+<p>해결하기 위한 방법 몇가지가 있다.</p>
 
-<p>32-bit시스템이고 페이지 프레임 사이즈는 4KB라고 가정해보자. 32비트중 20비트가 VPN, 12비트가 offset이다. <em>사실 4KB 페이지 크기를 위해서는 12비트가 필요하다.(1KB면 10비트, 4KB이니까 12비트)</em> 나머지 20비트가 VPN이므로 Page table의 entry개수는 2^20개가된다. 즉, 운영체제가 주소변환을 위해 20비트의 VPN을 대입할 개수가 2^20개라는 것이다.
-page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 index로 사용한다. 따라서 PFN만 저장하게 된다.각 entry는 page table entry(PTE)라고 한다. 각 entry는 PFN이외에 추가적인 정보도 저장한다. 그래서 일반적으로 PTE의 크기가 32비트, 즉 4바이트가 된다. 그런 PTE가 2^20개 있으므로 page table의 전체크기는 4MB라고 짐작할 수 있다.(꽤 큰거)</p>
-
-<p><img src="https://user-images.githubusercontent.com/37864122/84900694-6ebb7600-b0e5-11ea-90e2-803445456871.png" alt="image" /></p>
-
-<h4 id="page-table은-어디에-저장되어있는가">❓ page table은 어디에 저장되어있는가?</h4>
-
-<p>page table은 레지스터처럼 저장하면 너무 크니까 메모리에 존재하고 운영체제가 관리한다.</p>
-
-<h4 id="page-table에는-뭐가-쓰여있을까">❓ page table에는 뭐가 쓰여있을까?</h4>
-
-<p>위에서 언급했듯이 VPN과 PFN을 맵핑하기 위해 PFN과 기타 정보를 갖는 PTE 여러개로 구성되어있다. 기타 정보는 다음과 같다.
-- Valid bit : 현재 맵핑된적이 있는지 없는지
-- Protection bits : 해당 페이지가 읽을 수 있는지, 쓸 수 있는지, 실행될 수 있는지
-- Present bit : 해당 페이지가 메모리에 있는지(스왑 아웃 되었는지.. 스왑은 다다음장에)
-- Dirty bit : 메모리에 맵핑된 후 페이지가 변경되었는지
-- Reference bit : 페이지가 접근되었는지 추적하기 위해 사용(페이지 교체에 중요함.. 페이지 교체도 다다다음장에)</p>
-
-<h4 id="페이징이-시스템을-느리게-하진-않을까">❓ 페이징이 시스템을 느리게 하진 않을까?</h4>
-
-<p>페이징을 지원하기위해 cpu가 메모리에 있는 page table을 가리키기 위한 레지스터가 따로 존재한다. page table base register(ptbr)이라고 한다. 이 ptbr은 페이지 테이블의 시작주소를 저장하고있다. 레지스터를 접근하기 때문에 상당히 느리다고 볼 수 있다. 이 점을 어떻게 해결할지는 다음장에..</p>
+<ol>
+<li>pid를 asid비트수에 제한되도록 한다.</li>
+<li>asid는 프로세스 하나당 할당해주고 더 오버되면 asid가 없는것처럼 그냥 동작시킨다.</li>
+<li>동적으로 할당한다. (현재 채택하는 방법)</li>
+</ol>
+</blockquote>
               
             </div>
           </div>
@@ -340,7 +379,7 @@ page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 ind
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/paging/">Paging</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/tlb/">TLB</a>
 
                   </div>
                 
@@ -353,7 +392,7 @@ page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 ind
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/9.-segmentation/" data-tooltip="9. Segmentation">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/10.-paging/" data-tooltip="10. Paging">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -361,7 +400,7 @@ page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 ind
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/" data-tooltip="11. Translation-Lookaside Buffer">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -411,7 +450,7 @@ page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 ind
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/9.-segmentation/" data-tooltip="9. Segmentation">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/10.-paging/" data-tooltip="10. Paging">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -419,7 +458,7 @@ page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 ind
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/" data-tooltip="11. Translation-Lookaside Buffer">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
