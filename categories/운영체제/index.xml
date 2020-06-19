@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>12. Multi-level page tables</title>
+      <link>https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/</link>
+      <pubDate>Thu, 18 Jun 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/</guid>
+      <description>&lt;p&gt;앞선 TLB는 페이징에서 주소변환의 시간단축을 위해 제안되었다. 다음 두번째 페이징의 문제는 바로 page table의 크기이다.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>10. Paging</title>
       <link>https://hyenakim.github.io/2020/06/10.-paging/</link>
       <pubDate>Wed, 17 Jun 2020 09:37:23 +0900</pubDate>

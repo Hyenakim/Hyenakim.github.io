@@ -319,12 +319,15 @@ page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 ind
 
 <h4 id="page-table에는-뭐가-쓰여있을까">❓ page table에는 뭐가 쓰여있을까?</h4>
 
-<p>위에서 언급했듯이 VPN과 PFN을 맵핑하기 위해 PFN과 기타 정보를 갖는 PTE 여러개로 구성되어있다. 기타 정보는 다음과 같다.
-- Valid bit : 현재 맵핑된적이 있는지 없는지
-- Protection bits : 해당 페이지가 읽을 수 있는지, 쓸 수 있는지, 실행될 수 있는지
-- Present bit : 해당 페이지가 메모리에 있는지(스왑 아웃 되었는지.. 스왑은 다다음장에)
-- Dirty bit : 메모리에 맵핑된 후 페이지가 변경되었는지
-- Reference bit : 페이지가 접근되었는지 추적하기 위해 사용(페이지 교체에 중요함.. 페이지 교체도 다다다음장에)</p>
+<p>위에서 언급했듯이 VPN과 PFN을 맵핑하기 위해 PFN과 기타 정보를 갖는 PTE 여러개로 구성되어있다. 기타 정보는 다음과 같다.</p>
+
+<ul>
+<li>Valid bit : 현재 맵핑된적이 있는지 없는지</li>
+<li>Protection bits : 해당 페이지가 읽을 수 있는지, 쓸 수 있는지, 실행될 수 있는지</li>
+<li>Present bit : 해당 페이지가 메모리에 있는지(스왑 아웃 되었는지.. 스왑은 다다음장에)</li>
+<li>Dirty bit : 메모리에 맵핑된 후 페이지가 변경되었는지</li>
+<li>Reference bit : 페이지가 접근되었는지 추적하기 위해 사용(페이지 교체에 중요함.. 페이지 교체도 다다다음장에)</li>
+</ul>
 
 <h4 id="페이징이-시스템을-느리게-하진-않을까">❓ 페이징이 시스템을 느리게 하진 않을까?</h4>
 
@@ -361,7 +364,7 @@ page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 ind
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/" data-tooltip="11. Translation-Lookaside Buffer">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/" data-tooltip="12. Multi-level page tables">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -419,7 +422,7 @@ page table에서 맵핑을 위해 VPN, PFN을 다 저장하지 않고 VPN은 ind
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/" data-tooltip="11. Translation-Lookaside Buffer">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/" data-tooltip="12. Multi-level page tables">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
