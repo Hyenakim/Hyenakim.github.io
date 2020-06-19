@@ -6,10 +6,19 @@
     <description>Recent content in 운영체제 on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 Jun 2020 09:37:23 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2020 09:37:23 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/categories/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>12. Multi-level page tables</title>
+      <link>https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/</link>
+      <pubDate>Fri, 19 Jun 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/</guid>
+      <description>&lt;p&gt;앞선 TLB는 페이징에서 주소변환의 시간단축을 위해 제안되었다. 다음 두번째 페이징의 문제는 바로 page table의 크기이다.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>11. Translation-Lookaside Buffer</title>
@@ -18,15 +27,6 @@
       
       <guid>https://hyenakim.github.io/2020/06/11.-translation-lookaside-buffer/</guid>
       <description>&lt;p&gt;#TLB&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>12. Multi-level page tables</title>
-      <link>https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/</link>
-      <pubDate>Thu, 18 Jun 2020 09:37:23 +0900</pubDate>
-      
-      <guid>https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/</guid>
-      <description>&lt;p&gt;앞선 TLB는 페이징에서 주소변환의 시간단축을 위해 제안되었다. 다음 두번째 페이징의 문제는 바로 page table의 크기이다.&lt;/p&gt;</description>
     </item>
     
     <item>
