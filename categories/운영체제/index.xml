@@ -6,10 +6,19 @@
     <description>Recent content in 운영체제 on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Jun 2020 09:37:23 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2020 09:37:23 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/categories/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>13. Swapping</title>
+      <link>https://hyenakim.github.io/2020/06/13.-swapping/</link>
+      <pubDate>Sat, 20 Jun 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/06/13.-swapping/</guid>
+      <description>&lt;p&gt;#swap-space #swap-in #swap-out&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>12. Multi-level page tables</title>
