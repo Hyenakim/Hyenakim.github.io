@@ -6,10 +6,19 @@
     <description>Recent content in Tags on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jun 2020 09:37:23 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2020 09:37:23 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Concurrency</title>
+      <link>https://hyenakim.github.io/tags/concurrency/</link>
+      <pubDate>Mon, 22 Jun 2020 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/tags/concurrency/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Swapping</title>
@@ -102,7 +111,7 @@
     </item>
     
     <item>
-      <title>BinarySearch</title>
+      <title>binarysearch</title>
       <link>https://hyenakim.github.io/tags/binarysearch/</link>
       <pubDate>Thu, 30 May 2019 19:50:55 +0900</pubDate>
       
@@ -111,7 +120,7 @@
     </item>
     
     <item>
-      <title>ParametricSearch</title>
+      <title>parametricsearch</title>
       <link>https://hyenakim.github.io/tags/parametricsearch/</link>
       <pubDate>Thu, 30 May 2019 19:50:55 +0900</pubDate>
       

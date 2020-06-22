@@ -8,25 +8,25 @@
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Hyena Kim">
 <meta name="keywords" content="tech">
-<meta name="description" content="#swap-space #swap-in #swap-out">
+<meta name="description" content="#경쟁조건 #임계영역 #상호배재 #원자성">
 
 
-<meta property="og:description" content="#swap-space #swap-in #swap-out">
+<meta property="og:description" content="#경쟁조건 #임계영역 #상호배재 #원자성">
 <meta property="og:type" content="article">
-<meta property="og:title" content="13. Swapping">
-<meta name="twitter:title" content="13. Swapping">
-<meta property="og:url" content="https://hyenakim.github.io/2020/06/13.-swapping/">
-<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/13.-swapping/">
+<meta property="og:title" content="15. Concurrency and Threads">
+<meta name="twitter:title" content="15. Concurrency and Threads">
+<meta property="og:url" content="https://hyenakim.github.io/2020/06/15.-concurrency-and-threads/">
+<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/15.-concurrency-and-threads/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="#swap-space #swap-in #swap-out">
-<meta name="twitter:description" content="#swap-space #swap-in #swap-out">
+<meta property="og:description" content="#경쟁조건 #임계영역 #상호배재 #원자성">
+<meta name="twitter:description" content="#경쟁조건 #임계영역 #상호배재 #원자성">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2020-06-20T09:37:23">
+    <meta property="article:published_time" content="2020-06-22T09:37:23">
   
   
-    <meta property="article:modified_time" content="2020-06-20T09:37:23">
+    <meta property="article:modified_time" content="2020-06-22T09:37:23">
   
   
   
@@ -36,7 +36,7 @@
   
   
     
-      <meta property="article:tag" content="Swapping">
+      <meta property="article:tag" content="Concurrency">
     
   
 
@@ -49,8 +49,8 @@
 
 
 
-  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/85197400-b3c8ed80-b31b-11ea-9920-3719d13c3472.png">
-  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/85197400-b3c8ed80-b31b-11ea-9920-3719d13c3472.png">
+  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/85280516-3cce5900-b4c3-11ea-88ae-b1f76187a5b0.png">
+  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/85280516-3cce5900-b4c3-11ea-88ae-b1f76187a5b0.png">
 
 
 
@@ -60,14 +60,14 @@
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/77986659-a589b780-7352-11ea-88f5-9efefad42fba.png">
 
 
-    <title>13. Swapping</title>
+    <title>15. Concurrency and Threads</title>
 
     <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/2020/06/13.-swapping/">
+    <link rel="canonical" href="https://hyenakim.github.io/2020/06/15.-concurrency-and-threads/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -225,15 +225,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      13. Swapping
+      15. Concurrency and Threads
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-06-20T09:37:23&#43;09:00">
+      <time itemprop="datePublished" datetime="2020-06-22T09:37:23&#43;09:00">
         
-  June 20, 2020
+  June 22, 2020
 
       </time>
     
@@ -252,43 +252,67 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>#swap-space #swap-in #swap-out</p>
+              <p>#경쟁조건 #임계영역 #상호배재 #원자성</p>
 
-<h3 id="page-fault">page fault</h3>
+<h3 id="thread-vs-process">thread vs process</h3>
 
-<p>page table entry안에 present bit이 있었다. 1이면 매핑이 유효하다(메모리에 존재한다)는 것이고 0이면 유효하지 않다는 것을 나타낸다. 그런데 0인경우 page fault가 발생한다. 예를들어 P라는 페이지에 접근하려고 한다. 그 경우 P+1페이지도 접근할것이라고 생각하여 os는 둘다 맵핑시켜준다. 이를 <strong>Prefetching</strong>이라고 한다.</p>
+<p>쓰레드는 프로세스처럼 자기만의 PC값과 레지스터 값을 가지고 각각의 스택을 가지고 있다. 즉 각각의 쓰레드는 독립적인 context를 갖고있다. 하지만 프로세스와 달리, 한 프로세스안의 여러 쓰레드들은 메모리공간을 공유한다. 멀티 쓰레드인 경우 주소 공간에 각 쓰레드의 스택이 할당되어 있다.
+<img src = "https://user-images.githubusercontent.com/37864122/85280516-3cce5900-b4c3-11ea-88ae-b1f76187a5b0.png" width = '500' ></p>
 
-<h3 id="swapping">🔗 Swapping</h3>
+<h4 id="1-race-condition">1️⃣ Race Condition</h4>
 
-<p>실제로 물리메모리는 모든 프로세스에게 제공하기엔 부족하다. 물리메모리에서 당장 쓰지 않는 것들은 다른곳에 빼놓는 방법이 필요하다. 운영체제는 그런 저장장치를 사용하여 프로세스마다 큰 address space를 지원해 준다.</p>
+<p>명령어의 실행 순서에 따라 결과가 달라지는 상황을 <strong>race condition(경쟁 조건)</strong>이라고 한다. 스케쥴링에 의해 명령어의 순서가 엉키면 실행할때 마다 다른 결과가 나오게 되버린다.</p>
 
-<h4 id="swap-space">swap space</h4>
+<h4 id="2-critical-section">2️⃣ Critical Section</h4>
 
-<p>그런 용도의 저장공간을 <strong>swap space</strong>라고 하고 디스크에 존재한다. 필요없는 물리메모리는 여기에 저장하고<strong>swap-out</strong> 반대로 필요해서 다시 메모리르 적재시키는 것을 <strong>swap-in</strong>라고 한다. 항상 페이지 크기로 옮긴다.</p>
+<p>위의 race condition이 발생하는 코드부분을 <strong>critical section(임계 영역)</strong>이라고 한다.</p>
 
-<h4 id="present-bit">present bit</h4>
+<h4 id="3-mutual-exclusion">3️⃣ Mutual exclusion</h4>
 
-<p>주소변환할때 필요한 페이지가 어디있는지 알기위해 존재하는 것이 present bit이다. 1인경우 메모리에 존재하는 것이고, 0인경우 메모리에 없고 swap space에 있다는 것을 의미한다.</p>
+<p>위와 같은 상황들을 피하려면 쓰레드는 <strong>mutual exclusion(상호 배제)</strong> 라는 기법을 사용하여 <strong>하나의 쓰레드만이 임계 영역을 진입할 수 있도록 보장시켜야 한다.</strong></p>
 
-<h4 id="page-fault-1">page fault</h4>
+<h4 id="4-atomic">4️⃣ Atomic</h4>
 
-<p>present bit이 0인경우 page fault가 발생한다. 이를 page-fault handler로 해결한다. 이 핸들러는 스왑된 페이지를 swap-in하여 다시 메모리로 적재시킨다. swap sapce에서 원하는 페이지를 어떻게 찾는가? 일반적으로 page table entry(PTE)내의 PFN에다가 swap space안에서의 주소를 적어놓는다. swap space의 오프셋을 적는다고 보면 된다.</p>
+<p>critical section을 atomic하게 만들어 상호 배제를 보장할 수 있다. 하지만 일반적으로 원자성을 보장하는 하드웨어로 모든 명령어를 한줄로 완성시킬 수는 없다. 그러면 어떻게 하나의 쓰레드만 임계영역에 진입하게 멀티 쓰레드 프로그래밍을 할 수 있을까? 운영체제에서 제공하는 대표적인 두가지 Synchronization primitives(동기화 함수)를 알아보자.</p>
 
-<h4 id="page-replacement">🔗 Page Replacement</h4>
+<h4 id="mutex">🔗 Mutex</h4>
 
-<p>swap-out과 swap-in이 반복적으로 일어나면 속도가 굉장히 느려질 수 있다. os는 미리 swap 다 차기 전에 여유를 만들어 놓는다. 그럴때 이제 어떤 순으로 페이지를 쫓아낼지 고민해야한다. 여러가지 페이지 교체 알고리즘이 있다.</p>
+<p>POSIX 쓰레드 라이브러리가 제공하는 mutex락은 임계영역에 대한 상호 배제 기법이다.</p>
 
-<ul>
-<li>FIFO</li>
-<li>LFU(Least-Frequently-Used)</li>
-<li>LRU(Least-Recentlyly-Used)</li>
-</ul>
+<pre><code class="language-c">pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
-<p>LFU와 LRU는 히스토리를 기반으로 결정하는데 이를 저장하는게 만만한 일이 아니다. 현실적으로 LRU,LFU를 정확히 구현하기는 어렵다 그래서 Approxiating LRU라는 방법이 있다. LRU와 비슷한 Clock algorithm이라고 불린다.</p>
+pthread_mutex_lock(&amp;lock);
+counter = counter + 1;  //critical section
+pthread_mutext_unlock(&amp;lock);
+</code></pre>
 
-<p><img src="https://user-images.githubusercontent.com/37864122/85197400-b3c8ed80-b31b-11ea-9920-3719d13c3472.png" width='600'></p>
+<p>trylock은 이미 락이 사용중이면 에러를 반환한다. timedlock은 타임아웃이 끝나거나 락을 획득해야 리턴된다.</p>
 
-<p>eviction(제거)이 일어나야 하는 경우, 시계바늘을 돌리면서 referece bit에서 1을 빼주고 0이되는 경우 eviction(제거)한다. 넣어준 것은 reference bit을 1로 설정해준다.</p>
+<pre><code>pthread_mutex_trylock(pthread_mutex_t *m);
+pthread_mutext_timedlock(pthread_mutext_t *m, struct timespec *abs_timeout);
+</code></pre>
+
+<h4 id="condition-variables">🔗 Condition Variables</h4>
+
+<p>condition variable은 mutex에서 더 추가되어 어떤 상태가 다른 cpu에 의해 바뀌었다는걸 알았을때 다른 쓰레드가 나에게 시그너를 보내 깨워주게 할 수 있다.</p>
+
+<pre><code>pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+
+pthread_mutex_lock(&amp;lock);
+while(ready == 0)
+    pthread_cond_wait(&amp;cond, &amp;lock);    //대기상태
+pthread_mutex_unlock(&amp;lock);
+</code></pre>
+
+<pre><code>pthread_mutex_lock(&amp;lock);
+ready = 1;
+pthread_cond_signal(&amp;cond); //위에껄 ready state로 바꿔줌
+pthread_mutex_unlock(&amp;lock);
+</code></pre>
+
+<p>유의할점 두가지가 있다. 첫째는 시그널을 보내고 ready를 수정할 때 반드시 lock을 가지고 있어야 한다는 점이다. 이를 통해 경재조건을 보장하게 된다.
+둘째는 시그널 대기함수에서는 락을 두번째 인자로 받고있지만 시그널을 보내는 함수에서는 cond만 인자로 받는다. 이유는 시그널 대기함수는 쓰레드를 재우는 것 외에도 락을 반납해야 하기 때문이다.</p>
               
             </div>
           </div>
@@ -300,7 +324,7 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/swapping/">Swapping</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/concurrency/">Concurrency</a>
 
                   </div>
                 
@@ -313,7 +337,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/" data-tooltip="12. Multi-level page tables">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/13.-swapping/" data-tooltip="13. Swapping">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -321,7 +345,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/13.-swapping/" data-tooltip="13. Swapping">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -371,7 +395,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/12.-multi-level-page-tables/" data-tooltip="12. Multi-level page tables">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/13.-swapping/" data-tooltip="13. Swapping">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -379,7 +403,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/13.-swapping/" data-tooltip="13. Swapping">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
