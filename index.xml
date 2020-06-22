@@ -6,10 +6,19 @@
     <description>Recent content on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Jun 2020 09:37:23 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jun 2020 00:00:23 +1000</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>16. Locks</title>
+      <link>https://hyenakim.github.io/2020/06/16.-locks/</link>
+      <pubDate>Tue, 23 Jun 2020 00:00:23 +1000</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/06/16.-locks/</guid>
+      <description>&lt;p&gt;앞서 mutex와 condition variableㅇ로 OS가 제공해주는 락함수를 알아보았다.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>15. Concurrency and Threads</title>
@@ -18,15 +27,6 @@
       
       <guid>https://hyenakim.github.io/2020/06/15.-concurrency-and-threads/</guid>
       <description>&lt;p&gt;#경쟁조건 #임계영역 #상호배재 #원자성&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>13. Swapping</title>
-      <link>https://hyenakim.github.io/2020/06/13.-swapping/</link>
-      <pubDate>Sat, 20 Jun 2020 09:37:23 +0900</pubDate>
-      
-      <guid>https://hyenakim.github.io/2020/06/13.-swapping/</guid>
-      <description>&lt;p&gt;#swap-space #swap-in #swap-out&lt;/p&gt;</description>
     </item>
     
     <item>
