@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>생산자소비자문제 on gpsk-Tech Blog</title>
+    <link>https://hyenakim.github.io/tags/%EC%83%9D%EC%82%B0%EC%9E%90%EC%86%8C%EB%B9%84%EC%9E%90%EB%AC%B8%EC%A0%9C/</link>
+    <description>Recent content in 생산자소비자문제 on gpsk-Tech Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 Jun 2020 06:00:23 +1000</lastBuildDate>
+    
+	<atom:link href="https://hyenakim.github.io/tags/%EC%83%9D%EC%82%B0%EC%9E%90%EC%86%8C%EB%B9%84%EC%9E%90%EB%AC%B8%EC%A0%9C/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>19. Semaphores</title>
+      <link>https://hyenakim.github.io/2020/06/19.-semaphores/</link>
+      <pubDate>Wed, 24 Jun 2020 06:00:23 +1000</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/06/19.-semaphores/</guid>
+      <description>&lt;p&gt;#세마포어&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>18. Condition Variables</title>
+      <link>https://hyenakim.github.io/2020/06/18.-condition-variables/</link>
+      <pubDate>Tue, 23 Jun 2020 06:00:23 +1000</pubDate>
+      
+      <guid>https://hyenakim.github.io/2020/06/18.-condition-variables/</guid>
+      <description>&lt;p&gt;#컨디션변수 #생산자소비자문제&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

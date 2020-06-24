@@ -8,25 +8,25 @@
 <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Hyena Kim">
 <meta name="keywords" content="tech">
-<meta name="description" content="앞서 mutex와 condition variableㅇ로 OS가 제공해주는 락함수를 알아보았다.">
+<meta name="description" content="#세마포어">
 
 
-<meta property="og:description" content="앞서 mutex와 condition variableㅇ로 OS가 제공해주는 락함수를 알아보았다.">
+<meta property="og:description" content="#세마포어">
 <meta property="og:type" content="article">
-<meta property="og:title" content="16. Locks">
-<meta name="twitter:title" content="16. Locks">
-<meta property="og:url" content="https://hyenakim.github.io/2020/06/16.-locks/">
-<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/16.-locks/">
+<meta property="og:title" content="19. Semaphores">
+<meta name="twitter:title" content="19. Semaphores">
+<meta property="og:url" content="https://hyenakim.github.io/2020/06/19.-semaphores/">
+<meta property="twitter:url" content="https://hyenakim.github.io/2020/06/19.-semaphores/">
 <meta property="og:site_name" content="gpsk-Tech Blog">
-<meta property="og:description" content="앞서 mutex와 condition variableㅇ로 OS가 제공해주는 락함수를 알아보았다.">
-<meta name="twitter:description" content="앞서 mutex와 condition variableㅇ로 OS가 제공해주는 락함수를 알아보았다.">
+<meta property="og:description" content="#세마포어">
+<meta name="twitter:description" content="#세마포어">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2020-06-23T00:00:23">
+    <meta property="article:published_time" content="2020-06-24T06:00:23">
   
   
-    <meta property="article:modified_time" content="2020-06-23T00:00:23">
+    <meta property="article:modified_time" content="2020-06-24T06:00:23">
   
   
   
@@ -36,7 +36,7 @@
   
   
     
-      <meta property="article:tag" content="lock">
+      <meta property="article:tag" content="생산자소비자문제">
     
   
 
@@ -49,9 +49,6 @@
 
 
 
-  <meta property="og:image" content="https://user-images.githubusercontent.com/37864122/85303699-cc84ff00-b4e5-11ea-9cd4-10f8ffa282ef.png">
-  <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/85303699-cc84ff00-b4e5-11ea-9cd4-10f8ffa282ef.png">
-
 
 
 
@@ -60,14 +57,14 @@
   <meta property="twitter:image" content="https://user-images.githubusercontent.com/37864122/77986659-a589b780-7352-11ea-88f5-9efefad42fba.png">
 
 
-    <title>16. Locks</title>
+    <title>19. Semaphores</title>
 
     <link rel="icon" href="https://hyenakim.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://hyenakim.github.io/2020/06/16.-locks/">
+    <link rel="canonical" href="https://hyenakim.github.io/2020/06/19.-semaphores/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -225,15 +222,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      16. Locks
+      19. Semaphores
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-06-23T00:00:23&#43;10:00">
+      <time itemprop="datePublished" datetime="2020-06-24T06:00:23&#43;10:00">
         
-  June 23, 2020
+  June 24, 2020
 
       </time>
     
@@ -252,216 +249,161 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>앞서 mutex와 condition variableㅇ로 OS가 제공해주는 락함수를 알아보았다.</p>
+              <p>#세마포어</p>
 
-<h3 id="락의-효과">락의 효과</h3>
-
-<p>앞서 mutex와 condition variableㅇ로 OS가 제공해주는 락함수를 알아보았다. 이번엔 mutex를 어떻게 구현해야 하는지를 알아보도록 하자. 먼저 락을 통해 우리가 무엇을 제공해야 하는지 3가지가 있다.</p>
+<h3 id="semaphores">🔗 Semaphores</h3>
 
 <ul>
-<li>Mutual exclusion (상호배제) : 하나의 쓰레드만 임계구역에 접근하게 하는가</li>
-<li>Fairness (공정성) : 쓰레드들이 락 획득에 대해 공정한 기회가 주어지는가</li>
-<li>Performance (성능) : 락 사용이 시간적으로 오버헤드가 나진 않는가</li>
+<li><p>set_init()의 pahared는 하나의 프로세스내의 쓰레들 간의 동작이면 0, 0이 아닌경우는 프로세스간의 상황을 의미한다.</p>
+
+<pre><code>int sem_init(sem_t *s, int pshared, unsigned int value)
+</code></pre></li>
+
+<li><p>set_wait()은 s를 1 감소시고, s가 음수가 되면 큐에 재운다.</p>
+
+<pre><code>int sem_wait(sem_t *s)
+</code></pre></li>
+
+<li><p>set_post()은 s를 1 증가시키고, 큐에서 깨워준다.</p>
+
+<pre><code>int sem_post(sem_t *s)
+</code></pre>
+
+<h4 id="binary-semaphores">Binary Semaphores</h4>
+
+<pre><code>sem_t m;
+sem_init(&amp;m, 0, 1);
+
+sem_wait(&amp;m);   //1 -&gt; 0
+//critical section  //다른 쓰레드가 0 -&gt; -1를 하고, 큐에 들어간다.
+sem_post(&amp;m);   //-1 -&gt; 0, 큐에 있는걸 깨운다.  
+</code></pre></li>
 </ul>
 
-<h4 id="초기-interrupts">✔️ 초기 Interrupts</h4>
+<h4 id="컨디션-변수로서의-세마포어">컨디션 변수로서의 세마포어</h4>
 
-<p>초창기 단일 프로세스 시스템에서는 인터럽트를 비활성화하는 방식을 사용했다. 단순하지만 프로세스가 독점할 수 있고 멀티 프로세서에서는 사용이 불가능하다.</p>
+<pre><code>sem_t s;
 
-<pre><code>void lock(){
-    DisalbeInterrupts();
+void * child(void * arg){
+    printf(&quot;child\n&quot;);
+    sem_post(&amp;s);
+    return NULL;
 }
-void unlock(){
-    EnalbeInterrupts();
-}
-</code></pre>
-
-<h4 id="spin-lock-with-loads-stores">✔️ Spin Lock with Loads/Stores</h4>
-
-<p>flag변수를로 확인하여 락의 사용 여부를 확인한다. 하지만 이방법은 spin wait으로 시간을 낭비하고, while문이 atomic하지 않다는 문제점이 있다.</p>
-
-<pre><code>typedef struct __lock_t { int flag; } lock_t;
-void init(lock_t *mutex){
-    mutex -&gt; flag = 0; //0이면 사용가능, 1이면 사용 불가능
-}
-void lock(lock_t *mutex){
-    while(mutex-&gt;flag == 1) //플레그를 검사 (Test)
-    ;   //spin-wait
-    mutex-&gt;flag = 1;    //플래그를 1로 설정 (Set)
-}
-void unlock(lock_t *mutex){
-    mutex -&gt; flag = 0;
+int main(int argc, char *argv[]){
+    pthread_t c;
+    sem_init(&amp;s, 0, X); //what should X be?
+    printf(&quot;parent: begin\n&quot;);
+    pthread_create(&amp;c, NULL, child, NULL);
+    sem_wait(&amp;s);
+    printf(&quot;parent: end\n&quot;);
+    return 0;
 }
 </code></pre>
 
-<h4 id="spin-lock-with-test-and-set">✔️ Spin Lock with Test-and-Set</h4>
+<p>위의 코드에서 X에는 어떤수가 와야할까?</p>
 
-<p>앞선 방법의 Test와 Set까지를 원자적으로 수행하는 TestAndSet 어셈블리 명령어를 제공한다.</p>
+<h4 id="생산자-소비자-문제">생산자/소비자 문제</h4>
 
-<pre><code>int TestAndSet(int *old_ptr, int new){
-    int old = *old_ptr; //old_ptr의 이전값을 가져옴
-    *old_ptr = new; //새 값을 저장
-    return old; //이전 값 반환
+<p>이전장의 생산자 소비자 함수를 세마포어 함수로 구현해보자.</p>
+
+<pre><code>sem_t empty, fill;
+sem_t mutex;
+
+void *producer(void *arg){
+    int i;
+    for(int i=0;i&lt;loops;i++){
+        pthread_mutex_lock(&amp;mutex);
+        while(count == MAX)
+            pthread_cond_wait(&amp;empty, &amp;mutex);
+        put(i);
+        pthread_mutex_unlock(&amp;mutex);
+    }
+}
+
+void *consumer(void *arg){
+    int i;
+    for(int i=0;i&lt;loops;i++){
+        pthread_mutex_lock(&amp;mutex);
+        wihle(count == 0)
+            pthread_cond_wait(&amp;fill, &amp;mutex);
+        int tmp = get();
+        pthread_cond_signal(&amp;empty);
+        pthread_mutex_unlock(&amp;mutex);
+        printf(&quot;%d\n&quot;,tmp);
+    }
+}
+
+int main(int argc, char *argv[]){
+    sem_init(&amp;empry, 0, MAX);   
+    sem_init(&amp;full, 0, 0);
+    sem_init(&amp;mutex, 0, 1);
 }
 </code></pre>
 
-<pre><code>typedef struct __lock_t { int flag; } lock_t;
-void init(lock_t *lock){
-    lock -&gt; flag = 0; //0이면 사용가능, 1이면 사용 불가능
+<h4 id="reader-writer-락">Reader/Writer 락</h4>
+
+<p>읽기 락이 쓰기락도 획득하여 모든 읽기가 끝날 때까지 쓰기 쓰레드는 대기해야한다. 이 방법은 몇가지 단점이 있는데 쓰기 쓰레드가 공정성에서 불리하다.</p>
+
+<pre><code>typedef struct _rwlock_t{
+    sem_t lock;
+    sem_t writelock; //하나의 쓰기 또는 다수의 읽기락을 위한 락
+    int readers;
+}rwlock_t;
+void rwlock_init(rwlock_t *rw){
+    rw -&gt; readers = 0;
+    sem_init(&amp;rw-&gt;readers, 0, 1);
+    sem_init(&amp;rw-&gt;writelock, 0, 1);
 }
-void lock(lock_t *lock){
-    while(TestAndSet(&amp;lock -&gt; flag, 1) == 1);
+void rwlock_acquire_readlock(rwlock_t *rw){
+    sem_wait(&amp;rw-&gt;lock);
+    rw-&gt;readers++;
+    if(rw-&gt;readers == 1)
+        sem_wait(&amp;rw-&gt;writelock);   //읽기용 락이 writelock획득
+    sem_post(&amp;rw-&gt;lock);
 }
-void unlock(lock_t *lock){
-    lock -&gt; flag = 0;
+void rwlock_release_readlock(rwlock_t *rw){
+    sem_wait(&amp;rw-&gt;lock);
+    rw-&gt;readers--;
+    if(rw-&gt;readers == 0)
+        sem_wait(&amp;rw-&gt;writelock);   //마지막으로 읽기용 락이 writelock해제
+    sem_post(&amp;rw-&gt;lock);
 }
-</code></pre>
-
-<p>지금까지는 기초적인 락의 형태로, 락을 획득할때 까지 CPU사이클을 소모해야 했다. 하지만 이 방식은 단일 프로세서에서 선점형 스케쥴러가 아니라면 쓰레드가 CPU를 독점할 수 있기 때문에 사용이 불가능 하다.</p>
-
-<h4 id="spin-lock-with-compare-and-swap">✔️ Spin Lock with Compare-and-Swap</h4>
-
-<p>Compare-and-Swap도 Test-and-Set과 같은 instruction인데, 메모리 영역에 대해 기대값과 같으면 새값으로 바꾸는 명령어 이다.</p>
-
-<pre><code>int CompareAndSwap(int *ptr, int expected, int new){
-    int actual = *ptr;  
-    if(actual == expected)  //기대값과 같으면 
-        *ptr = new; //새값으로 바꿈
-    return actual;  //이전 값 반환
+void rwlock_acquire_writelock(rwlock_t *rw){
+    sem_wait(&amp;rw-&gt;writelock);
 }
-</code></pre>
-
-<pre><code>void lock(lock_t *lock){
-    while(CompareAndSwap(&amp;lock -&gt; flag, 0, 1) == 1);
-}
-</code></pre>
-
-<p>이구현은 Test-and-Set과 거의 동일하다. 상호배제는 제공하지만 공정성과 성능에서는 좋지 않다.</p>
-
-<h4 id="ticket-locks">✔️ Ticket Locks</h4>
-
-<p>마지막 하드웨어 기반의 기법은 Fetch-and-Add이다. 이전 기법들과 다른점은 모든 쓰레드들이 각자 순서에 따라 진행된다는 것이다. 이 방법으로 공정성을 보장해 줄 수 있다.</p>
-
-<pre><code>int FetchAndAdd(int *ptr){
-    int old = *ptr; //old_ptr의 이전값을 가져옴
-    *ptr = old + 1; //새 값을 저장
-    return old; //이전 값 반환
+void rwlock_release_writelock(rwlock_t *rw){
+    sem_post(&amp;rw-&gt;writelock);
 }
 </code></pre>
 
-<pre><code>typedef struct __lock_t { int flag; int turn; } lock_t;
-void lock_init(lock_t *lock){
-    lock-&gt;ticket = 0;
-    lock-&gt;turn = 0;
+<h4 id="세마포어-구현">세마포어 구현</h4>
+
+<p>실제 세마포어는 다음과 같이 구현되어있다. 원래 세마포어에서는 세마포어의 음수 값이 대기중인 쓰레드의 수를 나타낸다. 그런데 아래 코드처럼 리눅스에서는 세마포어가 음수가 될수 었다. 구현이 간편해서 그렇다고 한다. 참고로 리눅스는 condition variable이 아닌 futex로 구현되있다.</p>
+
+<pre><code>typedef struct __Sem_t{
+    int value;
+    pthread_cond_t cond;
+    pthread_mutex_t lock;
+}Sem_t;
+void Sem_init(Sem_t *s, int value){
+    s-&gt;value = value;
+    Cond_init(&amp;s-&gt;cond);
+    Mutex_init(&amp;s-&gt;lock);
 }
-void lock(lock_t *lcck){
-    int myturn = FetchAndAdd(&amp;lock -&gt; ticket);  //ticket을 1 증가
-    while(lock -&gt; turn != myturn)
-    ;
+void Sem_wait(Sem_t *s){
+    Mutex_lock(&amp;s-&gt;lock);
+    while(s-&gt;value &lt;= 0)
+        Cond_wait(&amp;s-&gt;cond, &amp;s-&gt;lock);
+    s-&gt;value--;
+    Mutex_unlock(&amp;s-&gt;lock);
 }
-void unlock(lock_t *mutex){
-    FetchAndAdd(&amp;lock -&gt; turn); //turn을 1 증가
-}
-</code></pre>
-
-<p>Ticket lock을 통해 상호배제와 공정성을 해결했다. 하지만 아직 spin을 사용하기 때문에 성능의 문제점이 있다.</p>
-
-<h4 id="locks-with-queues">✔️ Locks with Queues</h4>
-
-<p>성능을 개선하기 위해 어떤 쓰레드가 락을 획득할지를 제어할 수 있어야 한다. 이를 위해 운영체제는 큐를 이용해 대기 쓰레드들을 관리한다. 두개의 함수가 있는데 park()는 호출하는 쓰레드를 잠재우는 함수고, unpark(threadID)은 threadID라는 특정 쓰레드를 깨우는 함수다. 그리고 앞서 배운 Test-and-Set을 활용하여 이 기법을 사용해 보자.</p>
-
-<pre><code>typedef struct __lock_t { 
-    int flag;   //락 변수
-    int guard;  //flag와 큐의 동작을 스핀락으로 보호하는데 사용
-    queue_t *q; 
-} lock_t;
-void lock_init(lock_t *m){
-    m-&gt;flag = 0;
-    m-&gt;guard = 0;
-    queue_init(m-&gt;q);
+void Sem_post(Sem_t *s){
+   Mutex_lock(&amp;s-&gt;lock);
+    s-&gt;value++;
+    Cond_signal(&amp;s-&gt;cond);
+    Mutex_unlock(&amp;s-&gt;lock); 
 }
 </code></pre>
-
-<pre><code>void lock(lock_t *m){
-    while(TestAndSet(&amp;m -&gt; quard, 1) == 1); //guard락 획득
-    if(m -&gt; flag == 0){ //guard는 1, flag는 0인 상태
-        m-&gt;flag = 1;    //락 획득
-        m-&gt;guard = 0; //guard를 풀어줌
-     }else{ //guard는 1, flag도 1인 상태
-        queue_add(m-&gt;q, gettid());
-        m-&gt;guard = 0;   //다른 쓰레드들이 flag를 확인하게 하기 위해 guard를 풀어줌
-        park(); //
-     }
-}
-void unlock(lock_t *m){
-    while(TestAndSet(&amp;m -&gt; quard, 1) == 1); //guard락 획득
-    if(queue_empty(m-&gt;q){   //잠든 쓰레드가 없는 경우
-        m-&gt;flag = 0;
-     }else{ //guard는 1, flag도 1인 상태
-        unpark(queue_remove(M-&gt;q);  
-     }
-     m-&gt;guard = 0;
-}
-</code></pre>
-
-<p>하지만 위의 코드의 lock에는 문제점이 있다. lock에서 park을 하기 전에 다른 쓰레드로 CPU가 할당되어 다른 쓰레드가 그 락을 해제하면 아까 park을 하려한 쓰레드는 park을 마저 수행하여 잠들어버리며 깨어날 방법이 없어진다. 그래서 setpark이라는 시스템콜을 사용하여 lock함수를 개선시킬 수 있다. setpark()은 호출된 이후 park호출전 다른 쓰레드가 이 쓰레드에 대해 unpark을 했었다고 하면 setpark이 이를 인지하고 재우지 않게 한다. (unpark을 했는지는 커널 내 특정 변수에 저장되어 atomic하게 업데이트된다.)</p>
-
-<pre><code>void lock(lock_t *m){
-    while(TestAndSet(&amp;m -&gt; quard, 1) == 1); //guard락 획득
-    if(m -&gt; flag == 0){ //guard는 1, flag는 0인 상태
-        m-&gt;flag = 1;    //락 획득
-        m-&gt;guard = 0; //guard를 풀어줌
-     }else{ //guard는 1, flag도 1인 상태
-        queue_add(m-&gt;q, gettid());
-        setpark();
-        m-&gt;guard = 0;   //다른 쓰레드들이 flag를 확인하게 하기 위해 guard를 풀어줌
-        park();
-     }
-}
-</code></pre>
-
-<p>지금까지 락의 구현의 방법들에 대해 살펴보았다. 각각의 방법들을 평가하여 정리해 보았다.</p>
-
-<table>
-<thead>
-<tr>
-<th>락의 구현방법</th>
-<th>상호 배제</th>
-<th>공정성</th>
-<th>성능</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Test-and-Set</td>
-<td>O</td>
-<td>X</td>
-<td>X</td>
-</tr>
-
-<tr>
-<td>Compare-and-Swap</td>
-<td>O</td>
-<td>X</td>
-<td>X</td>
-</tr>
-
-<tr>
-<td>Fetch-and-Add</td>
-<td>O</td>
-<td>O</td>
-<td>X</td>
-</tr>
-
-<tr>
-<td>Queue</td>
-<td>O</td>
-<td>O</td>
-<td>O</td>
-</tr>
-</tbody>
-</table>
               
             </div>
           </div>
@@ -473,7 +415,7 @@ void unlock(lock_t *m){
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/lock/">lock</a>
+  <a class="tag tag--primary tag--small" href="https://hyenakim.github.io/tags/%EC%83%9D%EC%82%B0%EC%9E%90%EC%86%8C%EB%B9%84%EC%9E%90%EB%AC%B8%EC%A0%9C/">생산자소비자문제</a>
 
                   </div>
                 
@@ -486,7 +428,7 @@ void unlock(lock_t *m){
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/15.-concurrency-and-threads/" data-tooltip="15. Concurrency and Threads">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/18.-condition-variables/" data-tooltip="18. Condition Variables">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -494,7 +436,7 @@ void unlock(lock_t *m){
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/18.-condition-variables/" data-tooltip="18. Condition Variables">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>
@@ -544,7 +486,7 @@ void unlock(lock_t *m){
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/15.-concurrency-and-threads/" data-tooltip="15. Concurrency and Threads">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/18.-condition-variables/" data-tooltip="18. Condition Variables">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -552,7 +494,7 @@ void unlock(lock_t *m){
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://hyenakim.github.io/2020/06/18.-condition-variables/" data-tooltip="18. Condition Variables">
+                <a class="post-action-btn btn btn--disabled">
               
                   <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                   <i class="fa fa-angle-right"></i>

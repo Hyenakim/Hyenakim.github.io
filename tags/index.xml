@@ -6,10 +6,19 @@
     <description>Recent content in Tags on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jun 2020 00:00:23 +1000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2020 06:00:23 +1000</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>생산자소비자문제</title>
+      <link>https://hyenakim.github.io/tags/%EC%83%9D%EC%82%B0%EC%9E%90%EC%86%8C%EB%B9%84%EC%9E%90%EB%AC%B8%EC%A0%9C/</link>
+      <pubDate>Wed, 24 Jun 2020 06:00:23 +1000</pubDate>
+      
+      <guid>https://hyenakim.github.io/tags/%EC%83%9D%EC%82%B0%EC%9E%90%EC%86%8C%EB%B9%84%EC%9E%90%EB%AC%B8%EC%A0%9C/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>lock</title>
