@@ -6,10 +6,19 @@
     <description>Recent content in Categories on gpsk-Tech Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Jun 2020 06:00:23 +1000</lastBuildDate>
+    <lastBuildDate>Mon, 17 May 2021 09:37:23 +0900</lastBuildDate>
     
 	<atom:link href="https://hyenakim.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java</title>
+      <link>https://hyenakim.github.io/categories/java/</link>
+      <pubDate>Mon, 17 May 2021 09:37:23 +0900</pubDate>
+      
+      <guid>https://hyenakim.github.io/categories/java/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>운영체제</title>
@@ -17,15 +26,6 @@
       <pubDate>Wed, 24 Jun 2020 06:00:23 +1000</pubDate>
       
       <guid>https://hyenakim.github.io/categories/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://hyenakim.github.io/categories/java/</link>
-      <pubDate>Thu, 11 Jun 2020 00:37:23 +0900</pubDate>
-      
-      <guid>https://hyenakim.github.io/categories/java/</guid>
       <description></description>
     </item>
     
