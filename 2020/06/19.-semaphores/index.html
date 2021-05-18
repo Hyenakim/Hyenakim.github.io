@@ -97,8 +97,7 @@ if (!doNotTrack) {
 
   <body>
     <div id="blog">
-      
-<header id="header" data-behavior="5">
+      <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="https://hyenakim.github.io/">gpsk-Tech Blog</a>
@@ -116,15 +115,6 @@ if (!doNotTrack) {
     
     </a>
   
-  
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZDLXTYYPL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-XZDLXTYYPL');
-  </script>
 </header>
 
       <nav id="sidebar" data-behavior="5">
@@ -478,6 +468,12 @@ void Sem_post(Sem_t *s){
         
       
       
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
       <li class="post-action">
         
           <a class="post-action-btn btn btn--default" href="#">
@@ -490,6 +486,10 @@ void Sem_post(Sem_t *s){
 </div>
 
             
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
               
             
           </div>
@@ -535,6 +535,12 @@ void Sem_post(Sem_t *s){
         </li>
         
       
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
       
       <li class="post-action">
         
@@ -635,6 +641,28 @@ $(document).ready(function() {
 
 
   
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/hyenakim.github.io\/2020\/06\/19.-semaphores\/';
+          
+            this.page.identifier = '\/2020\/06\/19.-semaphores\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hyenakim';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
     
   
 
